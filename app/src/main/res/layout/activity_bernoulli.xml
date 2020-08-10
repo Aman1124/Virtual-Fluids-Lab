@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Bernoulli">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bernoullisetup"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="100dp"
+        android:id="@+id/experimentSetup"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HO GYA AAJ KA"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:id="@+id/text"
+        android:layout_marginTop="550dp"
+        />
+
+</RelativeLayout>

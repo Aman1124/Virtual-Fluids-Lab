@@ -16,6 +16,7 @@
         android:textSize="18dp"
         android:paddingVertical="15dp"
         android:id="@+id/bernoulli"
+        android:onClick="switchToBernoulli"
         />
 
     <Button
@@ -35,7 +36,7 @@
         android:layout_width="fill_parent"
         android:layout_marginHorizontal="15dp"
         android:layout_height="wrap_content"
-        android:text="Bernoulli's Experiment"
+        android:text="Metacenter"
         android:textSize="18dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
