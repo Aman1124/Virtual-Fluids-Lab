@@ -4,45 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListView">
+    tools:context=".ListView"
+    android:background="@drawable/bubbleback">
 
-    <Button
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="15dp"
         android:layout_height="wrap_content"
-        android:text="Bernoulli's Experiment"
+        android:src="@drawable/appuicrop"
+        android:alpha="0"
+        />
+
+    <ImageView
+        android:layout_width="290sp"
+        android:layout_height="290sp"
+        android:src="@drawable/box"
+        android:translationX="-280sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textSize="18dp"
-        android:paddingVertical="15dp"
-        android:id="@+id/bernoulli"
+        android:layout_marginTop="30sp"
+        android:id="@+id/vNotch"
+        android:alpha="1"
+        />
+
+    <ImageView
+        android:layout_width="290sp"
+        android:layout_height="290sp"
+        android:src="@drawable/box"
+        android:translationX="280sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp"
+        android:id="@+id/metaCenter"
+        android:alpha="1"
+        />
+
+    <ImageView
+        android:layout_width="290sp"
+        android:layout_height="290sp"
+        android:src="@drawable/bernoullibox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp"
+        android:id="@+id/bernoullifloat"
+        android:alpha="1"
+        />
+
+    <ImageView
+        android:id="@+id/drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="1"
+        android:src="@drawable/lowerbox"
+        android:translationY="310dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Introduction"
+        android:textSize="30sp"
+        android:layout_below="@id/bernoullifloat"
+        android:layout_marginTop="65sp"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/introduction"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About Setup"
+        android:textSize="30sp"
+        android:layout_below="@id/introduction"
+        android:layout_marginTop="50sp"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/aboutSetup"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Procedure"
+        android:textSize="30sp"
+        android:layout_below="@id/aboutSetup"
+        android:layout_marginTop="50sp"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/procedure"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simulation"
+        android:textSize="30sp"
+        android:layout_below="@id/procedure"
+        android:layout_marginTop="50sp"
+        android:layout_marginLeft="30sp"
+        android:id="@+id/simulation"
         android:onClick="switchToBernoulli"
         />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="15dp"
-        android:layout_height="wrap_content"
-        android:text="V Notch"
-        android:textSize="18dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:paddingVertical="15dp"
-        android:layout_below="@id/bernoulli"
-        android:id="@+id/vnotch"
-        />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_marginHorizontal="15dp"
-        android:layout_height="wrap_content"
-        android:text="Metacenter"
-        android:textSize="18dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:paddingVertical="15dp"
-        android:layout_below="@id/vnotch"
-        android:id="@+id/metacenter"
-        />
 
 </RelativeLayout>
