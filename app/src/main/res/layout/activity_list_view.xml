@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
     tools:context=".ListView"
-    android:background="@drawable/bubbleback">
+    android:background="@drawable/bubbleback"
+    android:id="@+id/listLayout">
 
 
     <ImageView
@@ -16,53 +18,96 @@
         />
 
     <ImageView
-        android:layout_width="290sp"
-        android:layout_height="290sp"
+        android:layout_width="240dp"
+        android:layout_height="290dp"
         android:src="@drawable/box"
-        android:translationX="-280sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30sp"
+        android:layout_centerHorizontal="false"
+        android:layout_toStartOf="@id/bernoulliFloat"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="35dp"
         android:id="@+id/vNotch"
         android:alpha="1"
         />
 
     <ImageView
-        android:layout_width="290sp"
-        android:layout_height="290sp"
+        android:layout_width="240dp"
+        android:layout_height="290dp"
         android:src="@drawable/box"
-        android:translationX="280sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30sp"
+        android:layout_marginStart="-300dp"
+        android:translationX="-275dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="35dp"
+        android:id="@+id/vNotch1"
+        android:alpha="0"
+        />
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="290dp"
+        android:src="@drawable/box"
+        android:layout_toEndOf="@id/bernoulliFloat"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="-300dp"
         android:id="@+id/metaCenter"
         android:alpha="1"
         />
 
     <ImageView
-        android:layout_width="290sp"
-        android:layout_height="290sp"
+        android:layout_width="240dp"
+        android:layout_height="290dp"
         android:src="@drawable/bernoullibox"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30sp"
-        android:id="@+id/bernoullifloat"
+        android:layout_marginTop="30dp"
+        android:id="@+id/bernoulliFloat"
         android:alpha="1"
         />
 
     <ImageView
         android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:alpha="1"
+        android:clipChildren="false"
+        android:layout_below="@id/bernoulliFloat"
+        android:background="@drawable/lowerbox"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="670dp"
+        />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="1"
-        android:src="@drawable/lowerbox"
-        android:translationY="310dp" />
+        android:text="V Notch"
+        android:textSize="30sp"
+        android:layout_alignTop="@id/vNotch"
+        android:layout_marginTop="110dp"
+        android:layout_alignEnd="@id/vNotch"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="-200dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MetaCenter"
+        android:textSize="30sp"
+        android:layout_alignTop="@id/metaCenter"
+        android:layout_marginTop="110dp"
+        android:layout_alignEnd="@id/metaCenter"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Introduction"
         android:textSize="30sp"
-        android:layout_below="@id/bernoullifloat"
-        android:layout_marginTop="65sp"
-        android:layout_marginLeft="30sp"
+        android:layout_below="@id/bernoulliFloat"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="30dp"
         android:id="@+id/introduction"
         />
 
@@ -73,8 +118,8 @@
         android:text="About Setup"
         android:textSize="30sp"
         android:layout_below="@id/introduction"
-        android:layout_marginTop="50sp"
-        android:layout_marginLeft="30sp"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="30dp"
         android:id="@+id/aboutSetup"
         />
 
@@ -84,8 +129,8 @@
         android:text="Procedure"
         android:textSize="30sp"
         android:layout_below="@id/aboutSetup"
-        android:layout_marginTop="50sp"
-        android:layout_marginLeft="30sp"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="30dp"
         android:id="@+id/procedure"
         />
 
@@ -95,8 +140,8 @@
         android:text="Simulation"
         android:textSize="30sp"
         android:layout_below="@id/procedure"
-        android:layout_marginTop="50sp"
-        android:layout_marginLeft="30sp"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="30dp"
         android:id="@+id/simulation"
         android:onClick="switchToBernoulli"
         />
