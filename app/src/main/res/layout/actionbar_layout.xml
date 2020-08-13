@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_width="match_parent"
+        android:text="Fluids Lab"
+        android:textStyle="bold"
+        android:letterSpacing="0.04"
+        android:fontFamily="@font/station"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:background="#2cc0f4"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>

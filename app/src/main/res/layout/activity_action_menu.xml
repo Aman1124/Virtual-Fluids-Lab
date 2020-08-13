@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".ActionMenu"
+    android:id="@+id/action_menu_presenter"
+    android:clipToPadding="false">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/expanded_menu"
+            android:text=""
+            android:textAlignment="center"
+            android:paddingRight="30sp"
+            android:paddingLeft="30sp"
+            android:textSize="25sp"
+            />
+
+</RelativeLayout>
