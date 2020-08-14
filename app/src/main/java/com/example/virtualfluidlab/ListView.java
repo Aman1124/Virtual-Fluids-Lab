@@ -62,6 +62,7 @@ public class ListView extends AppCompatActivity {
 
     public void switchToBernoulli(View view){
         Intent intent = new Intent(getApplicationContext(),Bernoulli.class);
+        intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
     }
 

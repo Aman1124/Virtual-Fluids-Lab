@@ -96,6 +96,8 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/introduction"
+            android:onClick="switchToBernoulli"
+            android:tag="1"
             />
 
 
@@ -106,7 +108,9 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/aboutSetup"
+            android:onClick="switchToBernoulli"
             android:layout_marginTop="45dp"
+            android:tag="2"
             />
 
         <TextView
@@ -116,7 +120,9 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/procedure"
+            android:onClick="switchToBernoulli"
             android:layout_marginTop="45dp"
+            android:tag="3"
             />
 
         <TextView
@@ -128,6 +134,7 @@
             android:id="@+id/simulation"
             android:onClick="switchToBernoulli"
             android:layout_marginTop="45dp"
+            android:tag="4"
             />
 
         <TextView
@@ -137,7 +144,9 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/observation"
+            android:onClick="switchToBernoulli"
             android:layout_marginTop="45dp"
+            android:tag="5"
             />
 
         <TextView
@@ -147,7 +156,9 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/selfAssessment"
+            android:onClick="switchToBernoulli"
             android:layout_marginTop="45dp"
+            android:tag="6"
             />
 
     </LinearLayout>

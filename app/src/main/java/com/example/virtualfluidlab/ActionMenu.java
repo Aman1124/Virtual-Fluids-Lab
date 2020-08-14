@@ -11,9 +11,9 @@ public class ActionMenu extends AppCompatActivity {
 
     TextView textView;
 
-    String about = "Bhakk bhosdike. Itne bade ho gye ki ab tm about khologe.";
-    String references = "Akshat bhosdike likh ke dega ye. Usi ko jyada chull hai.";
-    String help = "Aatmanirbhar bann bhadwe!!";
+    String about = "About will be updated soon.";
+    String references = "Will be updated.";
+    String help = "Will contact you soon.";
 
     int option;
 
@@ -21,15 +21,15 @@ public class ActionMenu extends AppCompatActivity {
         switch (choice){
             case 1:
                 setTitle("About");
-                //textView.setText(about);
+                textView.setText(about);
                 break;
             case 2:
                 setTitle("References");
-                //textView.setText(references);
+                textView.setText(references);
                 break;
             case 3:
                 setTitle("Help");
-                //textView.setText(help);
+                textView.setText(help);
                 break;
             default:
                 break;

@@ -6,26 +6,83 @@
     android:layout_height="match_parent"
     tools:context=".Bernoulli">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/bernoullisetup"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="100dp"
-        android:id="@+id/experimentSetup"
-        />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/simulation"
+        android:visibility="invisible">
 
-    <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bernoullisetup"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="100dp"
+            android:id="@+id/experimentSetup"
+            />
+
+    </RelativeLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="HO GYA AAJ KA"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        android:id="@+id/text"
-        android:layout_marginTop="550dp"
-        />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/introduction"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aim:"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:id="@+id/heading1"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="normal"
+                android:fontFamily="@font/nunito_semibold"
+                android:textSize="20sp"
+                android:justificationMode="inter_word"
+                android:id="@+id/para1"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Theory:"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:id="@+id/heading2"
+                android:layout_marginTop="15dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="normal"
+                android:fontFamily="@font/nunito_semibold"
+                android:textSize="20sp"
+                android:justificationMode="inter_word"
+                android:id="@+id/para2"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </RelativeLayout>
