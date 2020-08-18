@@ -6,110 +6,128 @@
     android:layout_height="match_parent"
     tools:context=".Bernoulli">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/simulation"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:id="@+id/waterTubes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:paddingLeft="15dp">
+            android:layout_marginTop="55dp"
+            app:layout_constraintEnd_toEndOf="@+id/experimentSetup"
+            app:layout_constraintStart_toStartOf="@+id/experimentSetup"
+            app:layout_constraintTop_toTopOf="@+id/experimentSetup">
 
             <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="15dp"
-                android:progressDrawable="@drawable/blueprogress"
                 android:id="@+id/tube1"
-                />
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="5dp"
+                android:layout_height="115dp"
+                android:layout_marginRight="3dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="5dp"
-                android:progressDrawable="@drawable/blueprogress"
                 android:id="@+id/tube2"
-                />
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="5dp"
+                android:layout_height="115dp"
+                android:layout_marginRight="3dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="5dp"
-                android:progressDrawable="@drawable/blueprogress"
                 android:id="@+id/tube3"
-                />
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="5dp"
+                android:layout_height="115dp"
+                android:layout_marginRight="4dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="5dp"
-                android:progressDrawable="@drawable/blueprogress"
                 android:id="@+id/tube4"
-                />
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="5dp"
+                android:layout_height="115dp"
+                android:layout_marginRight="3dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="5dp"
-                android:progressDrawable="@drawable/blueprogress"
                 android:id="@+id/tube5"
-                />
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="5dp"
+                android:layout_height="115dp"
+                android:layout_marginRight="3dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="5dp"
-                android:progressDrawable="@drawable/blueprogress"
                 android:id="@+id/tube6"
-                />
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="5dp"
+                android:layout_height="115dp"
+                android:layout_marginRight="3dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="5dp"
-                android:progressDrawable="@drawable/blueprogress"
                 android:id="@+id/tube7"
-                />
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="5dp"
+                android:layout_height="115dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/vertical_progressbar" />
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/crossSection"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/waterTubes"
+            android:layout_centerHorizontal="true"
+            android:progress="100"
+            android:progressDrawable="@drawable/blueprogress"
+            app:layout_constraintEnd_toEndOf="@+id/experimentSetup"
+            app:layout_constraintStart_toStartOf="@+id/experimentSetup"
+            app:layout_constraintTop_toBottomOf="@+id/waterTubes" />
+
         <ImageView
+            android:id="@+id/experimentSetup"
             android:layout_width="wrap_content"
-            android:layout_height="500dp"
-            android:src="@drawable/bernoullisetup"
+            android:layout_height="528dp"
+            android:layout_centerHorizontal="true"
             android:scaleX="1.2"
             android:scaleY="1.2"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/waterTubes"
-            android:id="@+id/experimentSetup"
-            />
+            android:src="@drawable/bernoullisetup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/flowRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text=""
             android:layout_centerHorizontal="true"
-            android:textSize="25sp"
+            android:text=""
             android:textAlignment="center"
-            android:layout_marginBottom="55dp"
-            android:id="@+id/flowRate"
-            />
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/experimentSetup"
+            app:layout_constraintTop_toBottomOf="@+id/experimentSetup" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"

@@ -1,25 +1,36 @@
 package com.example.virtualfluidlab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Bernoulli extends AppCompatActivity {
 
-    RelativeLayout simulation;
+    ConstraintLayout simulation;
     LinearLayout introduction;
-    ProgressBar tube1,tube2,tube3,tube4,tube5,tube6,tube7;
+    LinearLayout waterTubes;
+    ProgressBar tube1,tube2,tube3,tube4,tube5,tube6,tube7,crossSection;
 
     TextView para1, para2;
     TextView flowRateText;
+
+    Point size;
+    Display display;
 
     float x1,y1,x2,y2;
     float flowRate;
@@ -75,6 +86,7 @@ public class Bernoulli extends AppCompatActivity {
         tube7.setProgress(tubes[6]);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +94,7 @@ public class Bernoulli extends AppCompatActivity {
 
         simulation = findViewById(R.id.simulation);
         introduction = findViewById(R.id.introduction);
+        waterTubes = findViewById(R.id.waterTubes);
 
         para1 = findViewById(R.id.para1);
         para2 = findViewById(R.id.para2);
@@ -93,6 +106,7 @@ public class Bernoulli extends AppCompatActivity {
         tube5 = findViewById(R.id.tube5);
         tube6 = findViewById(R.id.tube6);
         tube7 = findViewById(R.id.tube7);
+        crossSection = findViewById(R.id.crossSection);
 
         flowRateText = findViewById(R.id.flowRate);
 
@@ -116,6 +130,13 @@ public class Bernoulli extends AppCompatActivity {
                 break;
         }
 
+        size = new Point();
+        display = getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+        Toast.makeText(this,size.x + "x" + size.y, Toast.LENGTH_LONG).show();
+        if(size.y == 2040) {
+            crossSection.animate().translationYBy(-27f).setDuration(1);
+        }
     }
 
     @Override
