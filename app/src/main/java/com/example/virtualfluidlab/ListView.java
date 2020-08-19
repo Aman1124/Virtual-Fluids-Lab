@@ -144,8 +144,12 @@ public class ListView extends AppCompatActivity {
                 actionBar.putExtra("option",2);
                 startActivity(actionBar);
                 break;
-            case R.id.help:
+            case R.id.displayDetails:
                 actionBar.putExtra("option",3);
+                startActivity(actionBar);
+                break;
+            case R.id.help:
+                actionBar.putExtra("option",4);
                 startActivity(actionBar);
                 break;
             default:

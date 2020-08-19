@@ -132,10 +132,16 @@ public class Bernoulli extends AppCompatActivity {
 
         size = new Point();
         display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int densityDpi = (int)(metrics.density * 160f);
         display.getSize(size);
-        Toast.makeText(this,size.x + "x" + size.y, Toast.LENGTH_LONG).show();
         if(size.y == 2040) {
             crossSection.animate().translationYBy(-27f).setDuration(1);
+            waterTubes.animate().translationYBy(-27f).setDuration(1);
+        }
+        else if(size.y >= 2130 && size.y <=2134){
+            crossSection.animate().translationYBy(36f).setDuration(1);
+            waterTubes.animate().translationYBy(36f).setDuration(1);
         }
     }
 
