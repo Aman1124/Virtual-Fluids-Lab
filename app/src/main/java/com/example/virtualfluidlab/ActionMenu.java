@@ -13,11 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class ActionMenu extends AppCompatActivity {
 
     TextView textView;
     LinearLayout waterTubes;
     ProgressBar crossSection;
+    LottieAnimationView robot404, workFromHome;
 
     String about = "About will be updated soon.";
     String references = "Will be updated.";
@@ -34,11 +37,15 @@ public class ActionMenu extends AppCompatActivity {
         switch (choice){
             case 1:
                 setTitle("About");
-                textView.setText(about);
+                //textView.setText(about);
+                robot404.setVisibility(View.VISIBLE);
+                robot404.playAnimation();
                 break;
             case 2:
                 setTitle("References");
-                textView.setText(references);
+                //textView.setText(references);
+                workFromHome.setVisibility(View.VISIBLE);
+                workFromHome.playAnimation();
                 break;
             case 3:
                 setTitle("Display Details");
@@ -54,6 +61,11 @@ public class ActionMenu extends AppCompatActivity {
         }
     }
 
+    public void replayAnimation(View view){
+        LottieAnimationView anim = (LottieAnimationView) view;
+        anim.playAnimation();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +75,8 @@ public class ActionMenu extends AppCompatActivity {
         textView = findViewById(R.id.expanded_menu);
         waterTubes = findViewById(R.id.waterTubes);
         crossSection = findViewById(R.id.crossSection);
+        robot404 = findViewById(R.id.robot404);
+        workFromHome = findViewById(R.id.workFromHome);
 
         Intent intent = getIntent();
         option = intent.getIntExtra("option", 0);

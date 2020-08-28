@@ -20,4 +20,25 @@
             android:textSize="25sp"
             />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/robot404"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/robot404"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            android:visibility="invisible"
+            android:onClick="replayAnimation"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/workFromHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/workfromhome"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            android:visibility="invisible"
+            android:onClick="replayAnimation"/>
+
+
 </RelativeLayout>
