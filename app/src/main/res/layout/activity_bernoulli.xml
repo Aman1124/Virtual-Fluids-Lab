@@ -146,9 +146,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aim:"
+                android:text=""
                 android:textStyle="bold"
-                android:textSize="30sp"
                 android:id="@+id/heading1"
                 />
 
@@ -166,9 +165,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Theory:"
+                android:text=""
                 android:textStyle="bold"
-                android:textSize="30sp"
                 android:id="@+id/heading2"
                 android:layout_marginTop="15dp"
                 />

@@ -26,7 +26,7 @@ public class Bernoulli extends AppCompatActivity {
     LinearLayout waterTubes;
     ProgressBar tube1,tube2,tube3,tube4,tube5,tube6,tube7,crossSection;
 
-    TextView para1, para2;
+    TextView heading1, heading2, para1, para2;
     TextView flowRateText;
 
     Point size;
@@ -53,15 +53,45 @@ public class Bernoulli extends AppCompatActivity {
             "(Note: For horizontal duct/channel the elevation head is same for different sections.)\n" +
             "\n" +
             "The above equation is valid for ideal fluid, when we are working with real fluid the losses (i.e. due to viscosity, friction, openings in duct, bending’s in duct, heat transfer etc.)  need to be taken in account for the equation to validate. \n" +
-            "Bernoulli’s theorem imparts a mathematical means for understanding the fluid mechanics. It has many real-world practical applications, ranging from the aerodynamics of an airplane, calculating wind load on buildings, designing water supply and sewer networks, venturi meters and estimating seepage through soil, etc. Although the expression for Bernoulli’s theorem is simple, the principle involved in the equation plays vital roles in the technological advancements designed to improve the quality of human life.\n";
-    private MotionEvent event;
+            "Bernoulli’s theorem imparts a mathematical means for understanding the fluid mechanics. It has many real-world practical applications, ranging from the aerodynamics of an airplane, calculating wind load on buildings, designing water supply and sewer networks, venturi meters and estimating seepage through soil, etc. Although the expression for Bernoulli’s theorem is simple, the principle involved in the equation plays vital roles in the technological advancements designed to improve the quality of human life.";
 
+    String noteProcedure = "Note: The below mentioned procedure is for hands on Experiment and many of the steps mentioned below are also followed in simulation part of this virtual lab but not all.";
+
+    String procedureSteps = "1.\tFirst of all, make sure that all on/Off switches given on the panel / setup are at OFF position.\n\n" +
+            "2.\tNow close all the valve V1 to V5.\n\n" +
+            "3.\tFill the Sump tank with water.\n\n" +
+            "4.\tOpen by pass valve V2.\n\n" +
+            "5.\tNow Switch ON main power supply and Switch On the pump.\n\n" +
+            "6.\tPartially close by pass valve V2, so as to fill overhead tank and wait until overflow occurs in overhead Tank.\n\n" +
+            "7.\tControl the flow of water through test section with the help of control valve V1 provided at the end of test section.\n\n" +
+            "8.\tMake sure that the water level is maintained in overhead tank i.e. overflow is still occurring. If not partially close the valve V2.\n\n" +
+            "9.\tMeasure flow rate with the help of measuring tank provided in setup and a stop watch.\n\n" +
+            "10.\tMeasure pressure head (i.e. height of water level in tubes) by piezometer tubes.\n\n" +
+            "11.\tRepeat steps 7 to 10 for different flow rates.\n\n" +
+            "12.\tWhen Experiment is over Switch off the Pump.\n\n" +
+            "13.\tTurn off the power supply and drain the water from all the tanks with the help of drain valves (V3, V4, V5).";
+
+    String expSetup1 = "The present experimental set-up for Bernoulli’s Theorem is self-contained re-circulating unit. The set-up accompanies the sump tank, overhead tank, centrifugal Pump for water circulation. Control valve and by-pass valve is provided to regulate the flow of water in constant head tank. A test section made of Perspex, of varying cross section is provided, which is having converging and diverging section. Piezometer tubes are fitted on this test section at specified points to measure pressure heads. The inlet of the conduit is connected to overhead tank. Discharge through test section can be measured with the help of measuring tank and stop watch. A rough 2D fig of the actual setup is shown below with all the components labelled.";
+    String expSetup2 = "The following precautions should be taken while handling the above mentioned setup.\n" +
+            "•\tNever run the apparatus if power supply is less than 200 volts and above 230 volts.\n" +
+            "•\tAlways use clean water.\n" +
+            "•\tKeep apparatus free from dust.\n" +
+            "•\tTo avoid unnecessary clogging of components run the pump at least once in fortnight.\n" +
+            "•\tWhile performing experiment always maintain the water in overhead tank.\n" +
+            "•\tAfter experiment is complete drain the apparatus and Switch Off the power supply.\n" +
+            "•\tAvoid parallax error while noting down the reading from tubes.";
+
+    private MotionEvent event;
 
     public void startSimulation(){
         simulation.setVisibility(View.VISIBLE);
     }
 
     public void openIntroduction(){
+        heading1.setTextSize(30);
+        heading2.setTextSize(30);
+        heading1.setText("Aim:");
+        heading2.setText("Theory:");
         setTitle("Introduction");
         para1.setText(aim);
         para2.setText(theory + theory2);
@@ -69,11 +99,22 @@ public class Bernoulli extends AppCompatActivity {
     }
 
     public void openAboutSetup(){
-
+        setTitle("About Setup");
+        heading1.setVisibility(View.INVISIBLE);
+        heading2.setVisibility(View.INVISIBLE);
+        para1.setText(expSetup1);
+        para2.setText(expSetup2);
+        introduction.setVisibility(View.VISIBLE);
     }
 
     public void openProcedure(){
-
+        setTitle("Procedure");
+        heading1.setVisibility(View.INVISIBLE);
+        heading2.setVisibility(View.INVISIBLE);
+        para1.setTextSize(15);
+        para1.setText(noteProcedure);
+        para2.setText(procedureSteps);
+        introduction.setVisibility(View.VISIBLE);
     }
 
     public void setTubesLevel(){
@@ -86,6 +127,10 @@ public class Bernoulli extends AppCompatActivity {
         tube7.setProgress(tubes[6]);
     }
 
+    public void openSelfAssessment(){
+        Intent intent = new Intent(getApplicationContext(), MCQs.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +143,8 @@ public class Bernoulli extends AppCompatActivity {
 
         para1 = findViewById(R.id.para1);
         para2 = findViewById(R.id.para2);
+        heading1 = findViewById(R.id.heading1);
+        heading2 = findViewById(R.id.heading2);
 
         tube1 = findViewById(R.id.tube1);
         tube2 = findViewById(R.id.tube2);
@@ -125,6 +172,9 @@ public class Bernoulli extends AppCompatActivity {
                 break;
             case 4:
                 startSimulation();
+                break;
+            case 6:
+                openSelfAssessment();
                 break;
             default:
                 break;

@@ -18,13 +18,14 @@ public class MainActivity extends AppCompatActivity {
         Thread timer = new Thread(){
         public void run(){
             try{
-                sleep(6000);
+                sleep(5000);
             }
             catch(InterruptedException e){
                 e.printStackTrace();
             } finally {
                 Intent intent = new Intent(getApplicationContext(), ListView.class);
                 startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
             }
         }
     };
