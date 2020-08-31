@@ -11,7 +11,9 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -125,6 +127,20 @@ public class ListView extends AppCompatActivity {
         displacementX = locationOfBernoulli[0]-locationOfVNotch[0];
         drawer.getLocationInWindow(drawerLocation);
         //Toast.makeText(this,"X: " + locationOfBernoulli[0] + "  X: " + locationOfVNotch[0] + "\nY: " + locationOfBernoulli[1] + "  Y: " + locationOfVNotch[1],Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Log.i("Back","Pressed");
+            Log.i("Drawer Status", Integer.toString(drawerPos));
+            if( drawerPos == 1) {
+                pullDrawer(false);
+                drawerPos = 0;
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
