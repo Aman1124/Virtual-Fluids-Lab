@@ -127,10 +127,6 @@ public class Bernoulli extends AppCompatActivity {
         tube7.setProgress(tubes[6]);
     }
 
-    public void openSelfAssessment(){
-        Intent intent = new Intent(getApplicationContext(), MCQs.class);
-        startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,9 +168,6 @@ public class Bernoulli extends AppCompatActivity {
                 break;
             case 4:
                 startSimulation();
-                break;
-            case 6:
-                openSelfAssessment();
                 break;
             default:
                 break;

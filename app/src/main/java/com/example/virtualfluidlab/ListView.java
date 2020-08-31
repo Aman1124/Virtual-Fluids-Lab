@@ -66,6 +66,11 @@ public class ListView extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openSelfAssessment(View view){
+        Intent intent = new Intent(getApplicationContext(), MCQs.class);
+        startActivity(intent);
+    }
+
     public void switchToVnotch(View view){
 
     }

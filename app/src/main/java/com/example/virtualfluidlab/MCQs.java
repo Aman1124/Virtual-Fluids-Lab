@@ -45,15 +45,6 @@ public class MCQs extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Intent intent = new Intent(getApplicationContext(), ListView.class);
-            startActivity(intent);
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_c_qs);

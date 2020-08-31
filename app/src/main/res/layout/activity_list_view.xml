@@ -156,7 +156,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/selfAssessment"
-            android:onClick="switchToBernoulli"
+            android:onClick="openSelfAssessment"
             android:layout_marginTop="45dp"
             android:tag="6"
             />
