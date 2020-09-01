@@ -18,29 +18,24 @@ public class MCQs extends AppCompatActivity {
     TextView option1, option2, option3, option4;
     ImageView circle1, circle2, circle3, circle4;
     ImageView[] circles;
+    TextView[] optionsText;
 
-    boolean a = true;
 
     String question = "The relation between pressure and velocity in an inviscid, incompressible flow is given by ______";
-    String optionA = "p = constant";
-    String optionB = "p + 0.5ρ*V*V = constant";
-    String optionC = "0.5ρ*V*V = 0";
-    String optionD = "p + 0.5ρ*V*V = 0";
+    String[] options = new String[]{"p = constant", "p + 0.5ρ*V*V = constant", "0.5ρ*V*V = 0", "p + 0.5ρ*V*V = 0"};
 
     public void changeColor(View view){
         TextView textView = (TextView) view;
         int x = Integer.parseInt((String) view.getTag());
-        if(a) {
+        if(x == 2) {
             System.out.println("BLUE");
-            circles[x-1].setBackgroundResource(R.drawable.circle_stroke_blue);
+            circles[x-1].setBackgroundResource(R.drawable.blue_tick);
             textView.setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
-            a = false;
         }
         else {
             System.out.println("RED");
-            circles[x-1].setBackgroundResource(R.drawable.circle_stroke_red);
+            circles[x-1].setBackgroundResource(R.drawable.cross_red_ring);
             textView.setBackgroundResource(R.drawable.rounded_rectangle_stroke_red);
-            a = true;
         }
     }
 
@@ -59,10 +54,12 @@ public class MCQs extends AppCompatActivity {
         option3 = findViewById(R.id.option3);
         option4 = findViewById(R.id.option4);
 
-        option1.setText(optionA);
-        option2.setText(optionB);
-        option3.setText(optionC);
-        option4.setText(optionD);
+        optionsText = new TextView[]{option1, option2, option3, option4};
+
+        optionsText[0].setText(options[0]);
+        optionsText[1].setText(options[1]);
+        optionsText[2].setText(options[2]);
+        optionsText[3].setText(options[3]);
 
         circle1 = findViewById(R.id.circle1);
         circle2 = findViewById(R.id.circle2);
@@ -70,6 +67,5 @@ public class MCQs extends AppCompatActivity {
         circle4 = findViewById(R.id.circle4);
 
         circles = new ImageView[]{circle1, circle2, circle3, circle4};
-
     }
 }
