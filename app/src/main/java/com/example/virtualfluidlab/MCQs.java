@@ -2,10 +2,7 @@ package com.example.virtualfluidlab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +31,7 @@ public class MCQs extends AppCompatActivity {
         }
         else {
             System.out.println("RED");
-            circles[x-1].setBackgroundResource(R.drawable.cross_red_ring);
+            circles[x-1].setBackgroundResource(R.drawable.cross_red);
             textView.setBackgroundResource(R.drawable.rounded_rectangle_stroke_red);
         }
     }
