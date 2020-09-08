@@ -1,10 +1,12 @@
 package com.example.virtualfluidlab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ public class MCQs extends AppCompatActivity {
     TextView option1, option2, option3, option4;
     ImageView circle1, circle2, circle3, circle4;
     ProgressBar timerProgress; TextView timerText;
+    ConstraintLayout resultScreen; TextView scoreText;
     ImageView[] circles;
     TextView[] optionsText;
     boolean pressed = false;
@@ -74,6 +77,12 @@ public class MCQs extends AppCompatActivity {
         LottieAnimationView anim = (LottieAnimationView) view;
         anim.playAnimation();
 
+        if(questionID == 4){
+            resultScreen.setVisibility(View.VISIBLE);
+            int score = calculateScore();
+            scoreText.setText(Integer.toString(score));
+        }
+
         pressed = false;
         resetColor();
 
@@ -107,6 +116,14 @@ public class MCQs extends AppCompatActivity {
         }
     }
 
+    public int calculateScore(){
+        int score = 0;
+        for(int i=0; i<5; i++)
+            if((int)answerStatus[i] == correctAnswer[i])
+                score += 30;
+        return score;
+    }
+
     public void createQuestion(){
         questionText.setText(questions[questionID]);
         optionsText[0].setText(options[questionID][0]);
@@ -118,6 +135,18 @@ public class MCQs extends AppCompatActivity {
         timerText.setText(String.valueOf(questionID + 1));
     }
 
+    public void playAgain(View view){
+        questionID = 0;
+        resetColor();
+        for(int i=0; i<5; i++)
+            answerStatus[i] = 'N';
+        resultScreen.setVisibility(View.INVISIBLE);
+        createQuestion();
+    }
+
+    public void backToDrawer(View view){
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +164,9 @@ public class MCQs extends AppCompatActivity {
         option2 = findViewById(R.id.option2);
         option3 = findViewById(R.id.option3);
         option4 = findViewById(R.id.option4);
+
+        resultScreen = findViewById(R.id.resultScreen);
+        scoreText = findViewById(R.id.scoreText);
 
         optionsText = new TextView[]{option1, option2, option3, option4};
 
