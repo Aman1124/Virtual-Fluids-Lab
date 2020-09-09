@@ -77,7 +77,9 @@ public class MCQs extends AppCompatActivity {
         LottieAnimationView anim = (LottieAnimationView) view;
         anim.playAnimation();
 
-        if(questionID == 4){
+        int tag = Integer.parseInt((String) view.getTag());
+
+        if(questionID == 4 && tag == 1){
             resultScreen.setVisibility(View.VISIBLE);
             int score = calculateScore();
             scoreText.setText(Integer.toString(score));
@@ -85,8 +87,6 @@ public class MCQs extends AppCompatActivity {
 
         pressed = false;
         resetColor();
-
-        int tag = Integer.parseInt((String) view.getTag());
 
         if(tag == 1) {
             if (questionID < 4)

@@ -12,6 +12,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -26,8 +27,10 @@ public class Bernoulli extends AppCompatActivity {
     LinearLayout waterTubes;
     ProgressBar tube1,tube2,tube3,tube4,tube5,tube6,tube7,crossSection;
 
-    TextView heading1, heading2, para1, para2;
+    TextView heading1, heading2, para1, para2, para3;
     TextView flowRateText;
+
+    ImageView labelledDiagram, bernoulliEquation;
 
     Point size;
     Display display;
@@ -42,12 +45,11 @@ public class Bernoulli extends AppCompatActivity {
     String theory = "Energy presents in the form of pressure, velocity, and elevation in fluids with no energy exchange due to viscous dissipation, heat transfer, or shaft work (pump or some other device). The relationship among these three forms of energy was first stated by Daniel Bernoulli (1700-1782), based upon the conservation of energy principle.\n" +
             "Bernoulli’s theorem state that when there is a continuous connection between particles of flowing mass of liquid, the total energy at any section of flow will remain the same provided there is no reduction or addition of energy at any point.\n" +
             "This is the energy equation and is based on the law of conservation of energy. This equation states that at two sections of flow field the total energy remains the same. Provided that there is no loss or gain of energy between the two sections.\n";
-    String theory2 = "For applying Bernoulli’s theorem, the fluid flow should be incompressible, laminar, non-viscous, steady, and irrotational. Also, there should be no heat transfer and work done in fluid flow. The Bernoulli’s equation for flow in a duct/channel in a section is given as: \n" +
-            "           \n" +
-            "     P1 + V12 + Z1 = = P2 + V22 + Z2 \n" +
-            "     ρg    2g                ρg    2g\n" +
-            "\n" +
-            "Where P is the static pressure \n" +
+    String theory2_1 = "For applying Bernoulli’s theorem, the fluid flow should be incompressible, laminar," +
+            " non-viscous, steady, and irrotational. Also, there should be no heat transfer and work done in fluid flow." +
+            " The Bernoulli’s equation for flow in a duct/channel in a section is given as: \n\n";
+
+    String theory2_2 = "\nwhere, P is the static pressure \n" +
             "             V is the velocity of flow\n" +
             "             Z is the elevation head \n" +
             "(Note: For horizontal duct/channel the elevation head is same for different sections.)\n" +
@@ -94,7 +96,10 @@ public class Bernoulli extends AppCompatActivity {
         heading2.setText("Theory:");
         setTitle("Introduction");
         para1.setText(aim);
-        para2.setText(theory + theory2);
+        para2.setText(theory + theory2_1);
+        bernoulliEquation.requestLayout();
+        bernoulliEquation.getLayoutParams().height = 250;
+        para3.setText(theory2_2);
         introduction.setVisibility(View.VISIBLE);
     }
 
@@ -104,6 +109,8 @@ public class Bernoulli extends AppCompatActivity {
         heading2.setVisibility(View.INVISIBLE);
         para1.setText(expSetup1);
         para2.setText(expSetup2);
+        labelledDiagram.requestLayout();
+        labelledDiagram.getLayoutParams().height = 800;
         introduction.setVisibility(View.VISIBLE);
     }
 
@@ -139,8 +146,11 @@ public class Bernoulli extends AppCompatActivity {
 
         para1 = findViewById(R.id.para1);
         para2 = findViewById(R.id.para2);
+        para3 = findViewById(R.id.para3);
         heading1 = findViewById(R.id.heading1);
         heading2 = findViewById(R.id.heading2);
+        labelledDiagram = findViewById(R.id.labelledDiagram);
+        bernoulliEquation = findViewById(R.id.bernoulliEquation);
 
         tube1 = findViewById(R.id.tube1);
         tube2 = findViewById(R.id.tube2);
