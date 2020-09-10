@@ -30,7 +30,7 @@ public class Bernoulli extends AppCompatActivity {
     TextView heading1, heading2, para1, para2, para3;
     TextView flowRateText;
 
-    ImageView labelledDiagram, bernoulliEquation;
+    ImageView labelledDiagram, bernoulliEquation, testSectionData;
 
     Point size;
     Display display;
@@ -98,6 +98,7 @@ public class Bernoulli extends AppCompatActivity {
         para1.setText(aim);
         para2.setText(theory + theory2_1);
         bernoulliEquation.requestLayout();
+        bernoulliEquation.setImageResource(R.drawable.bernoulli_equation);
         bernoulliEquation.getLayoutParams().height = 250;
         para3.setText(theory2_2);
         introduction.setVisibility(View.VISIBLE);
@@ -110,7 +111,11 @@ public class Bernoulli extends AppCompatActivity {
         para1.setText(expSetup1);
         para2.setText(expSetup2);
         labelledDiagram.requestLayout();
+        labelledDiagram.setImageResource(R.drawable.bernoulli_labelled);
         labelledDiagram.getLayoutParams().height = 800;
+        testSectionData.setImageResource(R.drawable.test_section_data);
+        testSectionData.requestLayout();
+        testSectionData.getLayoutParams().height = 650;
         introduction.setVisibility(View.VISIBLE);
     }
 
@@ -151,6 +156,7 @@ public class Bernoulli extends AppCompatActivity {
         heading2 = findViewById(R.id.heading2);
         labelledDiagram = findViewById(R.id.labelledDiagram);
         bernoulliEquation = findViewById(R.id.bernoulliEquation);
+        testSectionData = findViewById(R.id.testSectionData);
 
         tube1 = findViewById(R.id.tube1);
         tube2 = findViewById(R.id.tube2);
