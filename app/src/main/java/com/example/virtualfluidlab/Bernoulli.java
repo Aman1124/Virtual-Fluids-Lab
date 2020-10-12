@@ -123,6 +123,9 @@ public class Bernoulli extends AppCompatActivity {
         setTitle("Procedure");
         heading1.setVisibility(View.INVISIBLE);
         heading2.setVisibility(View.INVISIBLE);
+        testSectionData.setImageResource(R.drawable.bernoulli_labelled);
+        testSectionData.requestLayout();
+        testSectionData.getLayoutParams().height = 800;
         para1.setTextSize(15);
         para1.setText(noteProcedure);
         para2.setText(procedureSteps);
