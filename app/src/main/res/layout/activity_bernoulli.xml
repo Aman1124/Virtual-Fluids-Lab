@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/simulation"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/waterTubes"
@@ -20,7 +20,7 @@
             android:orientation="horizontal"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="@+id/experimentSetup"
             app:layout_constraintStart_toStartOf="@+id/experimentSetup"
             app:layout_constraintTop_toTopOf="@+id/experimentSetup">
@@ -28,63 +28,57 @@
             <ProgressBar
                 android:id="@+id/tube1"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="7dp"
-                android:layout_height="115dp"
-                android:layout_marginRight="1dp"
-                android:progress="0"
+                android:layout_width="10dp"
+                android:layout_height="135dp"
+                android:progress="40"
                 android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
                 android:id="@+id/tube2"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="5dp"
-                android:layout_height="115dp"
-                android:layout_marginRight="3dp"
-                android:progress="0"
+                android:layout_width="10dp"
+                android:layout_height="135dp"
+                android:progress="40"
                 android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
                 android:id="@+id/tube3"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="5dp"
-                android:layout_height="115dp"
-                android:layout_marginRight="4dp"
-                android:progress="0"
+                android:layout_width="10dp"
+                android:layout_height="135dp"
+                android:progress="40"
                 android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
                 android:id="@+id/tube4"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="5dp"
-                android:layout_height="115dp"
-                android:layout_marginRight="3dp"
-                android:progress="0"
+                android:layout_width="10dp"
+                android:layout_height="135dp"
+                android:progress="40"
                 android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
                 android:id="@+id/tube5"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="5dp"
-                android:layout_height="115dp"
-                android:layout_marginRight="3dp"
-                android:progress="0"
+                android:layout_width="10dp"
+                android:layout_height="135dp"
+                android:progress="40"
                 android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
                 android:id="@+id/tube6"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="5dp"
-                android:layout_height="115dp"
-                android:layout_marginRight="3dp"
-                android:progress="0"
+                android:layout_width="10dp"
+                android:layout_height="135dp"
+                android:progress="40"
                 android:progressDrawable="@drawable/vertical_progressbar" />
 
             <ProgressBar
                 android:id="@+id/tube7"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="5dp"
-                android:layout_height="115dp"
-                android:progress="0"
+                android:layout_width="12dp"
+                android:layout_height="135dp"
+                android:progress="40"
                 android:progressDrawable="@drawable/vertical_progressbar" />
 
         </LinearLayout>
@@ -92,7 +86,7 @@
         <ProgressBar
             android:id="@+id/crossSection"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="25dp"
             android:layout_below="@id/waterTubes"
             android:layout_centerHorizontal="true"
@@ -109,7 +103,7 @@
             android:layout_centerHorizontal="true"
             android:scaleX="1.2"
             android:scaleY="1.2"
-            android:src="@drawable/bernoullisetup"
+            android:src="@drawable/bernoullisetup_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

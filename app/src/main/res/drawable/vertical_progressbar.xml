@@ -3,7 +3,7 @@
 
     <item android:id="@android:id/background">
         <shape>
-            <corners android:radius="5dip"/>
+            <corners android:radius="0dip"/>
             <solid android:color="#FFFFFF"/>
         </shape>
     </item>
@@ -12,7 +12,7 @@
             android:clipOrientation="vertical"
             android:gravity="bottom">
             <shape>
-                <corners android:radius="5dip"/>
+                <corners android:radius="0dip"/>
                 <solid android:color="#00a6ff"/>
             </shape>
         </clip>

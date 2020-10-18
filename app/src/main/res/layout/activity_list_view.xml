@@ -90,7 +90,7 @@
         android:id="@+id/optionsLayout">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Introduction"
             android:fontFamily="@font/nunito_semibold"
@@ -102,7 +102,7 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="About Setup"
             android:fontFamily="@font/nunito_semibold"
@@ -114,7 +114,7 @@
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Procedure"
             android:fontFamily="@font/nunito_semibold"
@@ -126,7 +126,7 @@
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Simulation"
             android:fontFamily="@font/nunito_semibold"
@@ -138,7 +138,7 @@
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Observation"
             android:fontFamily="@font/nunito_semibold"
@@ -150,7 +150,7 @@
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Self Assessment"
             android:fontFamily="@font/nunito_semibold"
