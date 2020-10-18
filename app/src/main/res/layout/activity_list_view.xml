@@ -69,11 +69,11 @@
     <ImageView
         android:id="@+id/drawer"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="800dp"
         android:alpha="1"
         android:clipChildren="false"
         android:layout_below="@id/bernoulliFloat"
-        android:background="@drawable/lowerbox"
+        android:background="@drawable/drawer"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="670dp"
         />
@@ -100,6 +100,13 @@
             android:tag="1"
             />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/horiz_line"
+            android:alpha="0.8"
+            android:layout_marginTop="22dp"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -109,8 +116,16 @@
             android:textSize="30sp"
             android:id="@+id/aboutSetup"
             android:onClick="switchToBernoulli"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="22dp"
             android:tag="2"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/horiz_line"
+            android:alpha="0.8"
+            android:layout_marginTop="22dp"
             />
 
         <TextView
@@ -121,8 +136,16 @@
             android:textSize="30sp"
             android:id="@+id/procedure"
             android:onClick="switchToBernoulli"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="22dp"
             android:tag="3"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/horiz_line"
+            android:alpha="0.8"
+            android:layout_marginTop="22dp"
             />
 
         <TextView
@@ -133,8 +156,16 @@
             android:textSize="30sp"
             android:id="@+id/simulation"
             android:onClick="switchToBernoulli"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="22dp"
             android:tag="4"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/horiz_line"
+            android:alpha="0.8"
+            android:layout_marginTop="22dp"
             />
 
         <TextView
@@ -145,8 +176,16 @@
             android:textSize="30sp"
             android:id="@+id/observation"
             android:onClick="switchToBernoulli"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="22dp"
             android:tag="5"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/horiz_line"
+            android:alpha="0.8"
+            android:layout_marginTop="22dp"
             />
 
         <TextView
@@ -157,7 +196,7 @@
             android:textSize="30sp"
             android:id="@+id/selfAssessment"
             android:onClick="openSelfAssessment"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="22dp"
             android:tag="6"
             />
 
