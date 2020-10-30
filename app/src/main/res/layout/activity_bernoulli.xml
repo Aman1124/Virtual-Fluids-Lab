@@ -162,8 +162,8 @@
         <ProgressBar
             android:id="@+id/crossSection"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="100dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_below="@id/waterTubes"
             android:layout_centerHorizontal="true"
             android:progress="0"
@@ -186,7 +186,7 @@
 
         <View
             android:id="@+id/powerButton"
-            android:layout_width="@dimen/_50sdp"
+            android:layout_width="@dimen/_52sdp"
             android:layout_height="@dimen/_40sdp"
             app:layout_constraintLeft_toRightOf="@id/waterTubes"
             app:layout_constraintTop_toTopOf="@id/waterTubes"
@@ -196,7 +196,7 @@
 
         <View
             android:id="@+id/flowRateValve"
-            android:layout_width="@dimen/_23sdp"
+            android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_40sdp"
             app:layout_constraintRight_toRightOf="@id/powerButton"
             app:layout_constraintTop_toTopOf="@id/waterTubes"
@@ -426,8 +426,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="visible"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
             android:scrollbars="vertical">
 
             <TextView
