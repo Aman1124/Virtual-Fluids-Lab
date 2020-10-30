@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 
 import java.security.PublicKey;
+import java.text.AttributedString;
 import java.util.Objects;
 
 public class MCQs extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class MCQs extends AppCompatActivity {
     };
 
     String[][] options = new String[][]{
-            {"p = constant", "p + 0.5ρ*V*V = constant", "0.5ρ*V*V = 0", "p + 0.5ρ*V*V = 0"},
+            {"P = constant", "P + ρV²/2 = constant", "ρV²/2 = 0", "P + ρV²/2 = 0"},
             {"increases", "decreases", "increases then decreases", "decreases then increases"},
             {"Irrotaional", "Viscous", "Inviscid & incompressible", "Compressible"},
             {"Horizontal", "Vertical", "Arbitrary (zig-zag)", "None of the above"},
@@ -82,7 +83,7 @@ public class MCQs extends AppCompatActivity {
         if(questionID == 4 && tag == 1){
             resultScreen.setVisibility(View.VISIBLE);
             int score = calculateScore();
-            scoreText.setText(Integer.toString(score));
+            scoreText.setText(String.valueOf(score));
         }
 
         pressed = false;

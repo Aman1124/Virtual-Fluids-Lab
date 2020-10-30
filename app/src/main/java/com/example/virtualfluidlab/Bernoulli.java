@@ -1,44 +1,75 @@
 package com.example.virtualfluidlab;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.SeekBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 
 public class Bernoulli extends AppCompatActivity {
 
     ConstraintLayout simulation;
-    LinearLayout introduction;
     LinearLayout waterTubes;
-    ProgressBar tube1,tube2,tube3,tube4,tube5,tube6,tube7,crossSection;
+    TableLayout table;
 
+    ScrollView introduction;
+
+    ProgressBar tube1,tube2,tube3,tube4,tube5,tube6,tube7,crossSection;
+    SeekBar flowRateSeekBar;
+
+    TextView height1, height2, height3, height4, height5, height6, height7;
     TextView heading1, heading2, para1, para2, para3;
-    TextView flowRateText;
+    TextView flowRateText, observationCount;
 
     ImageView labelledDiagram, bernoulliEquation, testSectionData;
+    ImageView experimentSetup;
+
+    Button saveButton, deleteButton, resetButton;
 
     Point size;
     Display display;
 
+    SQLiteDatabase observationDatabase;
+    SharedPreferences sharedPreferences;
+
     float x1,y1,x2,y2;
     float flowRate;
-    int[] tubes = new int[7];
-    int choice;
+    float[] tubes = new float[7];
+    int choice, setupId = 2, obsCount = 0, dataSNo = 0;
+    boolean seekBarVisibility = false, tableStatus = false;
 
     String aim = "•\tTo calculate Total Energy at different points of venturi\n" +
             "•\tTo plot the graph between Total Energy, Pressure Energy, Velocity Energy With respect to Distance";
@@ -82,8 +113,6 @@ public class Bernoulli extends AppCompatActivity {
             "•\tWhile performing experiment always maintain the water in overhead tank.\n" +
             "•\tAfter experiment is complete drain the apparatus and Switch Off the power supply.\n" +
             "•\tAvoid parallax error while noting down the reading from tubes.";
-
-    private MotionEvent event;
 
     public void startSimulation(){
         simulation.setVisibility(View.VISIBLE);
@@ -132,15 +161,213 @@ public class Bernoulli extends AppCompatActivity {
         introduction.setVisibility(View.VISIBLE);
     }
 
-    public void setTubesLevel(){
-        tube1.setProgress(tubes[0]);
-        tube2.setProgress(tubes[1]);
-        tube3.setProgress(tubes[2]);
-        tube4.setProgress(tubes[3]);
-        tube5.setProgress(tubes[4]);
-        tube6.setProgress(tubes[5]);
-        tube7.setProgress(tubes[6]);
+    public void openObservation(){
+        try{
+            Cursor c = observationDatabase.rawQuery("SELECT * FROM readings", null);
+            c.moveToFirst();
+            int index = c.getColumnIndex("sn");
+            float d = c.getInt(index);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            resetButton.setVisibility(View.VISIBLE);
+        }catch(Exception e){
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Error 404")
+                    .setMessage("No readings taken")
+                    .show();
+        }
     }
+
+    public void setTubesLevel() {
+        tube1.setProgress(Math.round(tubes[0]));
+        tube2.setProgress(Math.round(tubes[1]));
+        tube3.setProgress(Math.round(tubes[2]));
+        tube4.setProgress(Math.round(tubes[3]));
+        tube5.setProgress(Math.round(tubes[4]));
+        tube6.setProgress(Math.round(tubes[5]));
+        tube7.setProgress(Math.round(tubes[6]));
+    }
+
+    public void setHeightsData() {
+        flowRateText.setText(String.format(Locale.US, "%s = %.5f", "Q", flowRate));
+        height1.setText(String.format(Locale.US, "%.2f", tubes[0]));
+        height2.setText(String.format(Locale.US, "%.2f", tubes[1]));
+        height3.setText(String.format(Locale.US, "%.2f", tubes[2]));
+        height4.setText(String.format(Locale.US, "%.2f", tubes[3]));
+        height5.setText(String.format(Locale.US, "%.2f", tubes[4]));
+        height6.setText(String.format(Locale.US, "%.2f", tubes[5]));
+        height7.setText(String.format(Locale.US, "%.2f", tubes[6]));
+    }
+
+    public void startPump(View view) {
+        if (setupId == 2) {
+            experimentSetup.setImageResource(R.drawable.bernoullisetup_1);
+            int csProgress = crossSection.getProgress();
+            ObjectAnimator animator = ObjectAnimator.ofInt(crossSection, "progress", 0, 100);
+            animator.setDuration(200);
+            animator.setInterpolator(new LinearInterpolator());
+            if(csProgress == 0)
+                animator.start();
+            setupId = 1;
+        } else {
+            experimentSetup.setImageResource(R.drawable.bernoullisetup_2);
+            setupId = 2;
+        }
+    }
+
+    public void changeFlowRate(View view) {
+        if (setupId == 1 && !seekBarVisibility) {
+            flowRateSeekBar.setVisibility(View.VISIBLE);
+            seekBarVisibility = true;
+            flowRateSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    flowRate = (float) (progress * 0.0035597);
+                    tubes[0] = (float) (progress);
+                    tubes[1] = (float) (progress * 0.8);
+                    tubes[2] = (float) (progress * 0.7);
+                    tubes[3] = (float) (progress * 0.5);
+                    tubes[4] = (float) (progress * 0.65);
+                    tubes[5] = (float) (progress * 0.75);
+                    tubes[6] = (float) (progress * 0.95);
+                    setTubesLevel();
+                    setHeightsData();
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                    experimentSetup.setAlpha(0.8f);
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    experimentSetup.setAlpha(1f);
+                    flowRateSeekBar.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+        else if (seekBarVisibility){
+            flowRateSeekBar.setVisibility(View.INVISIBLE);
+            seekBarVisibility = false;
+        }
+    }
+
+    public void saveData(View view){
+        int tag = Integer.parseInt(view.getTag().toString());
+        Log.i("Button Tag", String.valueOf(tag));
+        if (tag == 1){
+            simulation.setVisibility(View.VISIBLE);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            if (obsCount < 10){
+                obsCount += 1; dataSNo += 1;
+                observationDatabase.execSQL("INSERT INTO readings (sn, flowRate, h1, h2, h3, h4, h5, h6, h7) VALUES (" +
+                        String.format(Locale.US, "%d, %f, %f, %f, %f, %f, %f, %f, %f)",
+                                dataSNo, flowRate, tubes[0], tubes[1], tubes[2], tubes[3], tubes[4], tubes[5], tubes[6]));
+            }
+        }
+        else if (tag == 0 && obsCount > 0){
+            observationDatabase.execSQL("DELETE FROM readings WHERE sn = " + (dataSNo));
+            dataSNo -= 1; obsCount -= 1;
+        }
+        else if (tag == 2) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        else if (tag == -1){
+
+        }
+
+        observationCount.setText(String.format("%s of 10", obsCount));
+        sharedPreferences.edit().putInt("serialNo", obsCount).apply();
+
+        if (obsCount == 10) {
+            saveButton.setText("Proceed");
+            saveButton.setTag("2");
+            deleteButton.setText("Reset");
+            deleteButton.setTag("-1");
+        }
+        else {
+            saveButton.setText("Save");
+            saveButton.setTag("1");
+        }
+    }
+
+    public void createObservationTable(){
+        tableStatus = true;
+        Cursor c = observationDatabase.rawQuery("SELECT * FROM readings", null);
+        c.moveToFirst();
+        int flowRateIndex = c.getColumnIndex("flowRate");
+        int[] hIndex = new int[7]; int sno;
+        sno = c.getColumnIndex("sn");
+        hIndex[0] = c.getColumnIndex("h1");
+        hIndex[1] = c.getColumnIndex("h2");
+        hIndex[2] = c.getColumnIndex("h3");
+        hIndex[3] = c.getColumnIndex("h4");
+        hIndex[4] = c.getColumnIndex("h5");
+        hIndex[5] = c.getColumnIndex("h6");
+        hIndex[6] = c.getColumnIndex("h7");
+        try {
+            for (int i = 0; i < 10; i++) {
+                TableRow row = new TableRow(Bernoulli.this);
+                //row.setId(1 + i);
+                for (int j = 0; j < 9; j++) {
+                    float d;
+                    if (j == 0)
+                        d = (float) c.getInt(sno);
+                    else if (j == 1)
+                        d = c.getFloat(flowRateIndex);
+                    else
+                        d = c.getFloat(hIndex[j - 2]);
+                    TextView tv = new TextView(Bernoulli.this);
+                    tv.setTextSize(15);
+                    tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT, 1f));
+                    tv.setText(String.valueOf(d));
+                    row.addView(tv);
+                }
+                table.addView(row);
+                c.moveToNext();
+            }
+        } catch (Exception e) {
+            Log.i("DATA", "No more data found");
+        }
+    }
+
+    public void deleteObservationTable(View view){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Are you sure ?")
+                .setMessage("Do you want to delete observation table ?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        observationDatabase.execSQL("DELETE FROM readings");
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+        sharedPreferences.edit().putInt("serialNo", 1).apply();
+        obsCount = 0;
+        dataSNo = 1;
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        saveButton.setTag("1");
+        if (!tableStatus)
+            createObservationTable();
+        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            table.setVisibility(View.VISIBLE);
+            resetButton.setVisibility(View.VISIBLE);
+            simulation.setVisibility(View.INVISIBLE);
+        }
+        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            table.setVisibility(View.INVISIBLE);
+            resetButton.setVisibility(View.INVISIBLE);
+            simulation.setVisibility(View.VISIBLE);
+        }
+        super.onConfigurationChanged(newConfig);
+    }
+
 
 
     @Override
@@ -151,6 +378,7 @@ public class Bernoulli extends AppCompatActivity {
         simulation = findViewById(R.id.simulation);
         introduction = findViewById(R.id.introduction);
         waterTubes = findViewById(R.id.waterTubes);
+        experimentSetup = findViewById(R.id.experimentSetup);
 
         para1 = findViewById(R.id.para1);
         para2 = findViewById(R.id.para2);
@@ -170,7 +398,34 @@ public class Bernoulli extends AppCompatActivity {
         tube7 = findViewById(R.id.tube7);
         crossSection = findViewById(R.id.crossSection);
 
+        height1 = findViewById(R.id.height1);
+        height2 = findViewById(R.id.height2);
+        height3 = findViewById(R.id.height3);
+        height4 = findViewById(R.id.height4);
+        height5 = findViewById(R.id.height5);
+        height6 = findViewById(R.id.height6);
+        height7 = findViewById(R.id.height7);
+        observationCount = findViewById(R.id.observationCount);
+
         flowRateText = findViewById(R.id.flowRate);
+        flowRateSeekBar = findViewById(R.id.flowRateSeekBar);
+        saveButton = findViewById(R.id.saveButton);
+        deleteButton = findViewById(R.id.deleteButton);
+        resetButton = findViewById(R.id.resetButton);
+
+        table = findViewById(R.id.observationTable);
+
+        try{
+            observationDatabase = this.openOrCreateDatabase("Readings", MODE_PRIVATE, null);
+            observationDatabase.execSQL("CREATE TABLE IF NOT EXISTS readings ( sn INT(2), flowRate FLOAT, h1 FLOAT, h2 FLOAT, h3 FLOAT, h4 FLOAT, h5 FLOAT, h6 FLOAT, h7 FLOAT )");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        sharedPreferences = this.getSharedPreferences("com.example.virtualfluidlab", Context.MODE_PRIVATE);
+        dataSNo = sharedPreferences.getInt("serialNo", 0);
+        obsCount = dataSNo;
+        observationCount.setText(String.format("%s of 10", obsCount));
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choice",0);
@@ -187,6 +442,9 @@ public class Bernoulli extends AppCompatActivity {
                 break;
             case 4:
                 startSimulation();
+                break;
+            case 5:
+                openObservation();
                 break;
             default:
                 break;
@@ -205,11 +463,11 @@ public class Bernoulli extends AppCompatActivity {
             crossSection.animate().translationYBy(36f).setDuration(1);
             waterTubes.animate().translationYBy(36f).setDuration(1);
         }
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        this.event = event;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 x1 = event.getX();

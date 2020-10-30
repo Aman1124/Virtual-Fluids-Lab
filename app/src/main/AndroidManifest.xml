@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MCQs"></activity>
-        <activity android:name=".ActionMenu" />
-        <activity android:name=".Bernoulli" />
-        <activity android:name=".ListView" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MCQs" android:screenOrientation="portrait" />
+        <activity android:name=".ActionMenu" android:screenOrientation="portrait"/>
+        <activity android:name=".Bernoulli" android:configChanges="keyboardHidden|orientation" android:screenOrientation="portrait"/>
+        <activity android:name=".ListView" android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

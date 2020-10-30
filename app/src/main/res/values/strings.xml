@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Virtual Fluid Lab</string>
     <string name="bkgrnd">bkgrnd</string>
+    <array name="options">
+        <item>$$ p+\\frac{1}{2}\\rho v^2 = constant$$</item>
+        <item>$$ \\frac{1}{2}\\rho v^2 = 0$$</item>
+        <item>$$ p+\\frac{1}{2}\\rho v^2 = constant$$</item>
+    </array>
+    <string name="latexString">$$ p+\\frac{1}{2}\\rho v^2 = constant$$</string>
 </resources>
