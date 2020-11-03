@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
+import java.util.TooManyListenersException;
 
 
 public class Bernoulli extends AppCompatActivity {
@@ -66,7 +67,7 @@ public class Bernoulli extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     float x1,y1,x2,y2;
-    float flowRate;
+    double flowRate;
     float[] tubes = new float[7];
     int choice, setupId = 2, obsCount = 0, dataSNo = 0;
     boolean seekBarVisibility = false, tableStatus = false;
@@ -115,6 +116,7 @@ public class Bernoulli extends AppCompatActivity {
             "•\tAvoid parallax error while noting down the reading from tubes.";
 
     public void startSimulation(){
+        setTitle("Simulation");
         simulation.setVisibility(View.VISIBLE);
     }
 
@@ -162,6 +164,7 @@ public class Bernoulli extends AppCompatActivity {
     }
 
     public void openObservation(){
+        setTitle("Observation Table");
         try{
             Cursor c = observationDatabase.rawQuery("SELECT * FROM readings", null);
             c.moveToFirst();
@@ -179,24 +182,24 @@ public class Bernoulli extends AppCompatActivity {
     }
 
     public void setTubesLevel() {
-        tube1.setProgress(Math.round(tubes[0]));
-        tube2.setProgress(Math.round(tubes[1]));
-        tube3.setProgress(Math.round(tubes[2]));
-        tube4.setProgress(Math.round(tubes[3]));
-        tube5.setProgress(Math.round(tubes[4]));
-        tube6.setProgress(Math.round(tubes[5]));
-        tube7.setProgress(Math.round(tubes[6]));
+        tube1.setProgress((int) Math.round(tubes[0]*2.5));
+        tube2.setProgress((int) Math.round(tubes[1]*2.5));
+        tube3.setProgress((int) Math.round(tubes[2]*2.5));
+        tube4.setProgress((int) Math.round(tubes[3]*2.5));
+        tube5.setProgress((int) Math.round(tubes[4]*2.5));
+        tube6.setProgress((int) Math.round(tubes[5]*2.5));
+        tube7.setProgress((int) Math.round(tubes[6]*2.5));
     }
 
     public void setHeightsData() {
-        flowRateText.setText(String.format(Locale.US, "%s = %.5f", "Q", flowRate));
-        height1.setText(String.format(Locale.US, "%.2f", tubes[0]));
-        height2.setText(String.format(Locale.US, "%.2f", tubes[1]));
-        height3.setText(String.format(Locale.US, "%.2f", tubes[2]));
-        height4.setText(String.format(Locale.US, "%.2f", tubes[3]));
-        height5.setText(String.format(Locale.US, "%.2f", tubes[4]));
-        height6.setText(String.format(Locale.US, "%.2f", tubes[5]));
-        height7.setText(String.format(Locale.US, "%.2f", tubes[6]));
+        flowRateText.setText(String.format(Locale.US, "%s = %.6f", "Q", flowRate));
+        height1.setText(String.format(Locale.US, "%.1f", tubes[0]));
+        height2.setText(String.format(Locale.US, "%.1f", tubes[1]));
+        height3.setText(String.format(Locale.US, "%.1f", tubes[2]));
+        height4.setText(String.format(Locale.US, "%.1f", tubes[3]));
+        height5.setText(String.format(Locale.US, "%.1f", tubes[4]));
+        height6.setText(String.format(Locale.US, "%.1f", tubes[5]));
+        height7.setText(String.format(Locale.US, "%.1f", tubes[6]));
     }
 
     public void startPump(View view) {
@@ -222,26 +225,18 @@ public class Bernoulli extends AppCompatActivity {
             flowRateSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    flowRate = (float) (progress * 0.0035597);
-                    tubes[0] = (float) (progress);
-                    tubes[1] = (float) (progress * 0.8);
-                    tubes[2] = (float) (progress * 0.7);
-                    tubes[3] = (float) (progress * 0.5);
-                    tubes[4] = (float) (progress * 0.65);
-                    tubes[5] = (float) (progress * 0.75);
-                    tubes[6] = (float) (progress * 0.95);
+                    flowRate = (progress*0.000003 + 0.0002);
+                    generateTubesHeight(flowRate);
                     setTubesLevel();
                     setHeightsData();
                 }
 
                 @Override
                 public void onStartTrackingTouch(SeekBar seekBar) {
-                    experimentSetup.setAlpha(0.8f);
                 }
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-                    experimentSetup.setAlpha(1f);
                     flowRateSeekBar.setVisibility(View.INVISIBLE);
                 }
             });
@@ -261,7 +256,7 @@ public class Bernoulli extends AppCompatActivity {
             if (obsCount < 10){
                 obsCount += 1; dataSNo += 1;
                 observationDatabase.execSQL("INSERT INTO readings (sn, flowRate, h1, h2, h3, h4, h5, h6, h7) VALUES (" +
-                        String.format(Locale.US, "%d, %f, %f, %f, %f, %f, %f, %f, %f)",
+                        String.format(Locale.US, "%d, %.6f, %.1f, %.1f, %.1f, %.1f, %.1f, %.1f, %.1f)",
                                 dataSNo, flowRate, tubes[0], tubes[1], tubes[2], tubes[3], tubes[4], tubes[5], tubes[6]));
             }
         }
@@ -348,10 +343,51 @@ public class Bernoulli extends AppCompatActivity {
         sharedPreferences.edit().putInt("serialNo", 1).apply();
         obsCount = 0;
         dataSNo = 1;
+
+        observationCount.setText(String.format("%s of 10", obsCount));
+        sharedPreferences.edit().putInt("serialNo", obsCount).apply();
+    }
+
+    public void generateTubesHeight(double Q){
+        //double Qr = 0.0005, Ql = 0.0002;
+
+        //double[] hr = new double[]{12.8, 13.2, 17.4, 78.5, 39.5, 33.6, 30.8};
+        //double[] hl = new double[]{0.2, 0.5, 3.3, 5.4, 6.5, 6.0, 5.0};
+
+        double[] A = new double[]{0.000616, 0.000452, 0.000314, 0.000201, 0.000314, 0.000452, 0.000616};
+
+        double[] m = new double[]{42877, 44690, 420.07, 15389, 130914, 111810, 94121};
+        double[] m1 = new double[]{42877, 44690, 70715, 412177, 130914, 111810, 94121};
+
+        double[] c = new double[]{7.2104, 7.8178, -3.2277, -2.5909, 20.249, 16.52, 12.49};
+        double[] c1 = new double[]{7.2104, 7.8178, 17.94, 120.15, 20.249, 16.52, 12.49};
+
+        double[] H = new double[7];
+        double[] h = new double[7];
+
+        for(int i = 0; i<7 ; i++){
+            if( Q < 0.0003)
+                h[i] = m[i]*Q - c[i];
+            else
+                h[i] = m1[i]*Q - c1[i];
+            H[i] = 34 - (100*Q*Q)/(19.62*A[i]*A[i]);
+            H[i] = H[i]*(1-h[i]/100);
+            tubes[i] = (float) (H[i]);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(setupId == 1)
+            Toast.makeText(this, "Turn OFF the power", Toast.LENGTH_SHORT).show();
+        else
+            super.onBackPressed();
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        setupId = 2;
+        experimentSetup.setImageResource(R.drawable.bernoullisetup_2);
         saveButton.setTag("1");
         if (!tableStatus)
             createObservationTable();
@@ -367,8 +403,6 @@ public class Bernoulli extends AppCompatActivity {
         }
         super.onConfigurationChanged(newConfig);
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -453,54 +487,6 @@ public class Bernoulli extends AppCompatActivity {
         size = new Point();
         display = getWindowManager().getDefaultDisplay();
         display.getSize(size);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x1 = event.getX();
-                y1 = event.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = event.getX();
-                y2 = event.getY();
-                float deltaX = x2 -x1;
-                if(deltaX > 0 && (y2 > 960 || y1 > 960) && Math.abs(deltaX) > 150){
-                    flowRate += deltaX/100;
-                    if (tubes[0] <= 100){
-                        tubes[0] += 7;
-                        tubes[1] += 5;
-                        tubes[2] += 3;
-                        tubes[3] += 1;
-                        tubes[4] = tubes[2];
-                        tubes[5] = tubes[1];
-                        tubes[6] = tubes[0];
-                        flowRateText.setText(Float.toString(flowRate));
-                        if(tubes[0] >= 100)
-                            flowRateText.setText("!!WARNING!!\nTubes will overflow");
-                    }
-                    setTubesLevel();
-                }
-                if(deltaX < 0 && (y2 > 960 || y1 > 960) && Math.abs(deltaX) > 150){
-                    flowRate += deltaX/100;
-                    if (tubes[0] > 0){
-                        tubes[0] -= 7;
-                        tubes[1] -= 5;
-                        tubes[2] -= 3;
-                        tubes[3] -= 1;
-                        tubes[4] = tubes[2];
-                        tubes[5] = tubes[1];
-                        tubes[6] = tubes[0];
-                        flowRateText.setText(Float.toString(flowRate));
-                        if(tubes[0] <= 0)
-                            flowRateText.setText("!!WARNING!!\nFlow rate very small");
-                    }
-                    setTubesLevel();
-                }
-                break;
-        }
-        return super.onTouchEvent(event);
     }
 
 }

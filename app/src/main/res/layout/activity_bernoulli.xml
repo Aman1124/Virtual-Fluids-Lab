@@ -30,49 +30,49 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="Q"
+                    android:text="Q (m³/s)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="h1"
+                    android:text="h1 (cm)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="h2"
+                    android:text="h2 (cm)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="h3"
+                    android:text="h3 (cm)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="h4"
+                    android:text="h4 (cm)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="h5"
+                    android:text="h5 (cm)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="h6"
+                    android:text="h6 (cm)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="h7"
+                    android:text="h7 (cm)"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 

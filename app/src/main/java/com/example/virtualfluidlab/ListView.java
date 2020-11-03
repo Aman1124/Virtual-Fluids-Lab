@@ -59,7 +59,7 @@ public class ListView extends AppCompatActivity {
     float displacementX;
     long duration = 200;
     private float x1,x2,y1,y2;
-    static final int MIN_DISTANCE = 150;
+    static final int MIN_DISTANCE = 120;
 
 
     public void switchToBernoulli(View view){
