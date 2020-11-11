@@ -226,6 +226,25 @@
             android:text="Q = "
             android:textSize="20sp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m³/s"
+            android:textSize="15sp"
+            android:layout_marginStart="@dimen/_3sdp"
+            app:layout_constraintLeft_toRightOf="@id/flowRate"
+            app:layout_constraintBottom_toBottomOf="@id/flowRate"/>
+
+        <TextView
+            android:id="@+id/unitNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Note: All heights are in cm)"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dataTable"/>
+
         <TableLayout
             android:id="@+id/dataTable"
             android:layout_width="match_parent"
@@ -383,7 +402,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/deleteButton"
-            app:layout_constraintTop_toTopOf="@id/deleteButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="15sp"

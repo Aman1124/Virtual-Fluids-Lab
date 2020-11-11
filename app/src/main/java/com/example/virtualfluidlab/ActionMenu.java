@@ -18,13 +18,36 @@ import com.airbnb.lottie.LottieAnimationView;
 public class ActionMenu extends AppCompatActivity {
 
     TextView textView;
-    LinearLayout waterTubes;
-    ProgressBar crossSection;
+
     LottieAnimationView robot404, workFromHome;
 
-    String about = "About will be updated soon.";
-    String references = "Will be updated.";
-    String help = "Will contact you soon.";
+    String about = "This app has been developed by 3rd year B.Tech students from Mechanical Engineering " +
+            "at IIT Patna. This is a virtual lab for experiments of fluid mechanics. " +
+            "Our aim is to help students who may not have access to physical apparatus seeing the current scenario " +
+            "and will help them in understanding concepts via performing experiments virtually.This app contains " +
+            "all the steps a student usually executes while performing experiment physically and therefore is easy " +
+            "to understand. Also it contains self assessment section for every experiment which has few MCQs questions " +
+            "to test their basic understanding of the experiment.\n" +
+            "\nTeam:\n" +
+            "Aman Kumar: (App development)\n" +
+            "Akshat Jain (Content writing) \n" +
+            "Ashutosh Anand: (SVG and data generation)\n" +
+            "Ashutosh Maurya: (ANSYS simulation)\n" +
+            "Diptanil Sarkar: (Designing of app elements)\n" +
+            "\nMentors:\n" +
+            "Dr. Mohd. Kaleem Khan\n" +
+            "Dr. Manabendra Pathak\n" +
+            "Dr. Ashwani Assam";
+
+    String references = "1. Bernoulli's Experiment: KC Lab Manual";
+
+    String help = "In case you are facing any difficulty or have any suggestion regarding the app, you can mail to any one of us:\n\n" +
+            "1. Aman Kumar (1801me06@iitp.ac.in)\n" +
+            "2. Akshat Jain (1801me05@iitp.ac.in)\n" +
+            "3. Ashutosh Anand (1801me15@iitp.ac.in)\n" +
+            "4. Ashutosh Maurya (1801me16@iitp.ac.in)\n" +
+            "5. Diptanil Sarkar (1801me21@iitp.ac.in)";
+
     String displayDetailsText = "";
 
     Point size;
@@ -37,15 +60,15 @@ public class ActionMenu extends AppCompatActivity {
         switch (choice){
             case 1:
                 setTitle("About");
-                //textView.setText(about);
-                robot404.setVisibility(View.VISIBLE);
-                robot404.playAnimation();
+                textView.setText(about);
+//                robot404.setVisibility(View.VISIBLE);
+//                robot404.playAnimation();
                 break;
             case 2:
                 setTitle("References");
-                //textView.setText(references);
-                workFromHome.setVisibility(View.VISIBLE);
-                workFromHome.playAnimation();
+                textView.setText(references);
+//                workFromHome.setVisibility(View.VISIBLE);
+//                workFromHome.playAnimation();
                 break;
             case 3:
                 setTitle("Display Details");
@@ -55,6 +78,7 @@ public class ActionMenu extends AppCompatActivity {
             case 4:
                 setTitle("Help");
                 textView.setText(help);
+                workFromHome.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
@@ -73,9 +97,7 @@ public class ActionMenu extends AppCompatActivity {
         setContentView(R.layout.activity_action_menu);
 
         textView = findViewById(R.id.expanded_menu);
-        waterTubes = findViewById(R.id.waterTubes);
-        crossSection = findViewById(R.id.crossSection);
-        robot404 = findViewById(R.id.robot404);
+        //robot404 = findViewById(R.id.robot404);
         workFromHome = findViewById(R.id.workFromHome);
 
         Intent intent = getIntent();

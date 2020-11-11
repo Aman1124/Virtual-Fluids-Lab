@@ -70,7 +70,7 @@ public class Bernoulli extends AppCompatActivity {
     double flowRate;
     float[] tubes = new float[7];
     int choice, setupId = 2, obsCount = 0, dataSNo = 0;
-    boolean seekBarVisibility = false, tableStatus = false;
+    boolean seekBarVisibility = false, tableStatus = false, firstTime = true;
 
     String aim = "•\tTo calculate Total Energy at different points of venturi\n" +
             "•\tTo plot the graph between Total Energy, Pressure Energy, Velocity Energy With respect to Distance";
@@ -211,6 +211,12 @@ public class Bernoulli extends AppCompatActivity {
             animator.setInterpolator(new LinearInterpolator());
             if(csProgress == 0)
                 animator.start();
+            if (firstTime){
+                generateTubesHeight(0);
+                setTubesLevel();
+                setHeightsData();
+                firstTime = false;
+            }
             setupId = 1;
         } else {
             experimentSetup.setImageResource(R.drawable.bernoullisetup_2);
@@ -357,7 +363,7 @@ public class Bernoulli extends AppCompatActivity {
         double[] A = new double[]{0.000616, 0.000452, 0.000314, 0.000201, 0.000314, 0.000452, 0.000616};
 
         double[] m = new double[]{42877, 44690, 420.07, 15389, 130914, 111810, 94121};
-        double[] m1 = new double[]{42877, 44690, 70715, 412177, 130914, 111810, 94121};
+        double[] m1 = new double[]{42877, 44690, 70815, 412177, 130914, 111810, 94121};
 
         double[] c = new double[]{7.2104, 7.8178, -3.2277, -2.5909, 20.249, 16.52, 12.49};
         double[] c1 = new double[]{7.2104, 7.8178, 17.94, 120.15, 20.249, 16.52, 12.49};
@@ -365,14 +371,20 @@ public class Bernoulli extends AppCompatActivity {
         double[] H = new double[7];
         double[] h = new double[7];
 
-        for(int i = 0; i<7 ; i++){
-            if( Q < 0.0003)
-                h[i] = m[i]*Q - c[i];
-            else
-                h[i] = m1[i]*Q - c1[i];
-            H[i] = 34 - (100*Q*Q)/(19.62*A[i]*A[i]);
-            H[i] = H[i]*(1-h[i]/100);
-            tubes[i] = (float) (H[i]);
+        if(Q == 0) {
+            for (int i=0;i<7;i++)
+                tubes[i] = (float) 34;
+        }
+        else{
+            for(int i = 0; i<7 ; i++){
+                if( Q < 0.0003)
+                    h[i] = m[i]*Q - c[i];
+                else
+                    h[i] = m1[i]*Q - c1[i];
+                H[i] = 34 - (100*Q*Q)/(19.62*A[i]*A[i]);
+                H[i] = H[i]*(1-h[i]/100);
+                tubes[i] = (float) (H[i]);
+            }
         }
     }
 

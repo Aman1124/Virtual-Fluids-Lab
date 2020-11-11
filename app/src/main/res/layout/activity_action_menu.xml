@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -8,37 +8,58 @@
     android:id="@+id/action_menu_presenter"
     android:clipToPadding="false">
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:id="@+id/expanded_menu"
-            android:text=""
-            android:textAlignment="center"
-            android:paddingRight="30sp"
-            android:paddingLeft="30sp"
-            android:textSize="25sp"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/robot404"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:lottie_rawRes="@raw/robot404"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="false"
-            android:visibility="invisible"
-            android:onClick="replayAnimation"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/workFromHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:lottie_rawRes="@raw/workfromhome"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="false"
-            android:visibility="invisible"
-            android:onClick="replayAnimation"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:id="@+id/expanded_menu"
+                            android:text=""
+                            android:textSize="17sp"
+                            android:justificationMode="inter_word"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"/>
+
+<!--                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/robot404"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:lottie_rawRes="@raw/robot404"
+                            app:lottie_autoPlay="false"
+                            app:lottie_loop="false"
+                            android:visibility="invisible"
+                            android:onClick="replayAnimation"/>-->
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/workFromHome"
+                            android:layout_width="@dimen/_150sdp"
+                            android:layout_height="@dimen/_150sdp"
+                            app:layout_constraintTop_toBottomOf="@id/expanded_menu"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:lottie_rawRes="@raw/workfromhome"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="false"
+                            android:visibility="invisible"
+                            android:onClick="replayAnimation"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</RelativeLayout>
+        </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
