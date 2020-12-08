@@ -31,7 +31,7 @@ public class MCQs extends AppCompatActivity {
 
 
     String[] questions = new String[]{
-            "The relation between pressure and velocity in an inviscid, incompressible flow is given by ______",
+            "The relation between pressure and velocity in an inviscid, incompressible flow for same datum height is given by ______",
             "In the Venturi Section of the setup, the pressure of the fluid ______",
             "Bernoulli’s equation is applicable only for which flow?",
             "Energy line in plot of Energy vs position of holes for inviscid & incompressible fluid will be ________",

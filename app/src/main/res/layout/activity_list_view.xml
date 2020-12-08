@@ -52,7 +52,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="-300dp"
-        android:id="@+id/metaCenter"
+        android:id="@+id/pitotFloat"
         android:alpha="1"
         />
 
@@ -96,7 +96,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/introduction"
-            android:onClick="switchToBernoulli"
+            android:onClick="openExperiment"
             android:tag="1"
             />
 
@@ -115,7 +115,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/aboutSetup"
-            android:onClick="switchToBernoulli"
+            android:onClick="openExperiment"
             android:layout_marginTop="22dp"
             android:tag="2"
             />
@@ -135,7 +135,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/procedure"
-            android:onClick="switchToBernoulli"
+            android:onClick="openExperiment"
             android:layout_marginTop="22dp"
             android:tag="3"
             />
@@ -155,7 +155,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/simulation"
-            android:onClick="switchToBernoulli"
+            android:onClick="openExperiment"
             android:layout_marginTop="22dp"
             android:tag="4"
             />
@@ -175,7 +175,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:textSize="30sp"
             android:id="@+id/observation"
-            android:onClick="switchToBernoulli"
+            android:onClick="openExperiment"
             android:layout_marginTop="22dp"
             android:tag="5"
             />

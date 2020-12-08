@@ -192,7 +192,7 @@ public class Bernoulli extends AppCompatActivity {
     }
 
     public void setHeightsData() {
-        flowRateText.setText(String.format(Locale.US, "%s = %.6f", "Q", flowRate));
+        flowRateText.setText(String.format(Locale.US, "%s = %.3f", "Q", flowRate*1000));
         height1.setText(String.format(Locale.US, "%.1f", tubes[0]));
         height2.setText(String.format(Locale.US, "%.1f", tubes[1]));
         height3.setText(String.format(Locale.US, "%.1f", tubes[2]));

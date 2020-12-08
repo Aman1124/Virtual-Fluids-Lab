@@ -59,7 +59,7 @@ public class ListView extends AppCompatActivity {
     float displacementX;
     long duration = 200;
     private float x1,x2,y1,y2;
-    static final int MIN_DISTANCE = 120;
+    static final int MIN_DISTANCE = 300;
 
 
     public void switchToBernoulli(View view){
@@ -73,16 +73,27 @@ public class ListView extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void switchToVnotch(View view){
-
+    public void switchToPitot(View view){
+        Intent intent = new Intent(getApplicationContext(),Pitot_Tube.class);
+        intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
+        startActivity(intent);
     }
 
     public void switchToMetacenter(View view){
 
     }
 
+    public void openExperiment(View view){
+        if(scroll == 1)
+            switchToMetacenter(view);
+        else if(scroll == 2)
+            switchToBernoulli(view);
+        else if(scroll == 3)
+            switchToPitot(view);
+    }
 
     public void scrollFloatBox(boolean direction){
+        //True: left to right movement
         if (drawerPos == 0) {
             if (direction && (scroll == 2 || scroll == 3)) {
                 bernoulli.animate().translationXBy(displacementX).setDuration(duration);
@@ -193,7 +204,7 @@ public class ListView extends AppCompatActivity {
 
         bernoulli = findViewById(R.id.bernoulliFloat);
         vNotch = findViewById(R.id.vNotch);
-        metaCenter = findViewById(R.id.metaCenter);
+        metaCenter = findViewById(R.id.pitotFloat);
         drawer = findViewById(R.id.drawer);
 
         listLayout = findViewById(R.id.listLayout);
@@ -245,6 +256,7 @@ public class ListView extends AppCompatActivity {
                 }
                 break;
         }
+        //Toast.makeText(this, "X:"+ (x2-x1) + "  Y:" + (y2-y1), Toast.LENGTH_SHORT).show();
         return super.onTouchEvent(event);
     }
 }

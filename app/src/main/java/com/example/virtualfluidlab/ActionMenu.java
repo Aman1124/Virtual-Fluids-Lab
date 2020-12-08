@@ -30,10 +30,10 @@ public class ActionMenu extends AppCompatActivity {
             "to test their basic understanding of the experiment.\n" +
             "\nTeam:\n" +
             "Aman Kumar: (App development)\n" +
-            "Akshat Jain (Content writing) \n" +
-            "Ashutosh Anand: (SVG and data generation)\n" +
+            "Akshat Jain: (Content writing) \n" +
+            "Ashutosh Anand: (Data generation)\n" +
             "Ashutosh Maurya: (ANSYS simulation)\n" +
-            "Diptanil Sarkar: (Designing of app elements)\n" +
+            "Diptanil Sarkar: (Designing)\n" +
             "\nMentors:\n" +
             "Dr. Mohd. Kaleem Khan\n" +
             "Dr. Manabendra Pathak\n" +
