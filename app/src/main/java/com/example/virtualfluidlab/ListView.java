@@ -46,7 +46,7 @@ public class ListView extends AppCompatActivity {
     LinearLayout optionsLayout;
 
     ImageView bernoulli;
-    ImageView vNotch;
+    ImageView vNotch, vNotch1, exp5;
     ImageView metaCenter;
     ImageView drawer;
 
@@ -95,17 +95,21 @@ public class ListView extends AppCompatActivity {
     public void scrollFloatBox(boolean direction){
         //True: left to right movement
         if (drawerPos == 0) {
-            if (direction && (scroll == 2 || scroll == 3)) {
+            if (direction && (scroll == 2 || scroll == 3 || scroll == 1 || scroll == 4)) {
                 bernoulli.animate().translationXBy(displacementX).setDuration(duration);
                 vNotch.animate().translationXBy(displacementX).setDuration(duration);
+                vNotch1.animate().translationXBy(displacementX).setDuration(duration);
+                exp5.animate().translationXBy(displacementX).setDuration(duration);
                 metaCenter.animate().translationXBy(displacementX).setDuration(duration);
-                if (scroll > 1)
+                if (scroll >= 1)
                     scroll -= 1;
-            } else if (!direction && (scroll == 2 || scroll == 1)) {
+            } else if (!direction && (scroll == 3 || scroll == 2 || scroll == 1 || scroll == 0)) {
                 bernoulli.animate().translationXBy(-displacementX).setDuration(duration);
                 vNotch.animate().translationXBy(-displacementX).setDuration(duration);
+                vNotch1.animate().translationXBy(-displacementX).setDuration(duration);
+                exp5.animate().translationXBy(-displacementX).setDuration(duration);
                 metaCenter.animate().translationXBy(-displacementX).setDuration(duration);
-                if (scroll < 3)
+                if (scroll <= 3)
                     scroll += 1;
             }
         }
@@ -204,7 +208,9 @@ public class ListView extends AppCompatActivity {
 
         bernoulli = findViewById(R.id.bernoulliFloat);
         vNotch = findViewById(R.id.vNotch);
+        vNotch1 = findViewById(R.id.vNotch1);
         metaCenter = findViewById(R.id.pitotFloat);
+        exp5 = findViewById(R.id.experiment5);
         drawer = findViewById(R.id.drawer);
 
         listLayout = findViewById(R.id.listLayout);
