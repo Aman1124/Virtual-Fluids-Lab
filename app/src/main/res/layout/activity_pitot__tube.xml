@@ -94,4 +94,153 @@
 
     </ScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/simulation">
+
+        <ProgressBar
+            android:id="@+id/pitot_test_section"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/_51sdp"
+            android:layout_height="@dimen/_11sdp"
+            android:progressDrawable="@drawable/blueprogress"
+            android:progress="100"
+            app:layout_constraintLeft_toLeftOf="@id/pitot_apparatus"
+            app:layout_constraintRight_toRightOf="@id/pitot_apparatus"
+            app:layout_constraintTop_toTopOf="@id/flowRateValve"
+            android:layout_marginTop="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_50sdp" />
+
+        <ProgressBar
+            android:id="@+id/static_tube"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/vertical_progressbar"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_190sdp"
+            android:progress="0"
+            app:layout_constraintTop_toTopOf="@id/pitot_apparatus"
+            app:layout_constraintRight_toRightOf="@id/pitot_apparatus"
+            android:layout_marginEnd="@dimen/_122sdp"
+            android:layout_marginTop="@dimen/_40sdp"/>
+
+        <ProgressBar
+            android:id="@+id/dynamic_tube"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/vertical_progressbar"
+            android:layout_width="@dimen/_11sdp"
+            android:layout_height="@dimen/_190sdp"
+            android:progress="0"
+            app:layout_constraintTop_toTopOf="@id/pitot_apparatus"
+            app:layout_constraintLeft_toRightOf="@id/static_tube"
+            android:layout_marginEnd="@dimen/_125sdp"
+            android:layout_marginTop="@dimen/_40sdp"/>
+
+        <ImageView
+            android:id="@+id/pitot_apparatus"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_320sdp"
+            android:src="@drawable/pitot_tube"
+            android:layout_marginTop="@dimen/_25sdp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:background="#FF0000"
+            android:alpha="0.25"
+            android:id="@+id/flowRateValve"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintTop_toTopOf="@id/pitot_apparatus"
+            app:layout_constraintLeft_toRightOf="@id/dynamic_tube"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:onClick="changeFlowRate"/>
+
+        <SeekBar
+            android:id="@+id/flowRateSeekBar"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@id/flowRateValve"
+            app:layout_constraintStart_toStartOf="@+id/flowRateValve"
+            app:layout_constraintEnd_toEndOf="@id/flowRateValve"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:rotation="270"
+            android:visibility="invisible"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/pitot_apparatus">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Q (L/s)"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="h1 (cm)"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="h2 (cm)"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/flowRateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/static_height_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/dynamic_height_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </RelativeLayout>

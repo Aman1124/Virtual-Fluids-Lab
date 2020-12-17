@@ -1,23 +1,35 @@
 package com.example.virtualfluidlab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 public class Pitot_Tube extends AppCompatActivity {
 
     TextView heading1, heading2, para1, para2, para3;
+    TextView flowRateText, static_pressText, dynamic_pressText;
 
     ImageView pitot_labelledDiagram, pitot_Equation, pitot_testSectionData;
+    SeekBar flowRateSeekBar;
+    ProgressBar static_press_bar, dynamic_press_bar;
 
     ScrollView introduction;
+    ConstraintLayout simulation;
 
     int choice;
+    float[] height = new float[2];
+    double flowRate;
+    boolean flowBar_visibility = false;
 
     String aim = "•\tTo find the point velocity at center of a tube for different flow rate.\n" +
                  "•\tTo find the coefficient of pitot tube.\n" +
@@ -102,11 +114,58 @@ public class Pitot_Tube extends AppCompatActivity {
     }
 
     public void startSimulation(){
-
+        setTitle("Simulation");
+        simulation.setVisibility(View.VISIBLE);
     }
 
     public void openObservation(){
 
+    }
+
+    public void changeFlowRate(View view){
+        if(!flowBar_visibility){
+            flowRateSeekBar.setVisibility(View.VISIBLE);
+            flowBar_visibility = true;
+            flowRateSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    flowRate = (progress*0.000003 + 0.0002);
+                    generateTubesHeight(progress);
+                    setTubesLevel();
+                    setObservationData();
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    flowRateSeekBar.setVisibility(View.INVISIBLE);
+                    flowBar_visibility = false;
+                }
+            });
+        }
+        else if(flowBar_visibility){
+            flowRateSeekBar.setVisibility(View.INVISIBLE);
+            flowBar_visibility = false;
+        }
+    }
+
+    public void generateTubesHeight(double flowRate){
+        height[0] = (float) flowRate - 20;
+        height[1] = (float) flowRate - 5;
+    }
+
+    public void setTubesLevel(){
+        static_press_bar.setProgress((int)height[0]);
+        dynamic_press_bar.setProgress((int)height[1]);
+    }
+
+    public void setObservationData(){
+        flowRateText.setText(String.format(Locale.US, "%.3f", flowRate*1000));
+        static_pressText.setText(String.format(Locale.US, "%.1f", height[0]));
+        dynamic_pressText.setText(String.format(Locale.US, "%.1f", height[1]));
     }
 
     @Override
@@ -120,11 +179,20 @@ public class Pitot_Tube extends AppCompatActivity {
         heading1 = findViewById(R.id.pitot_heading1);
         heading2 = findViewById(R.id.pitot_heading2);
 
+        flowRateText = findViewById(R.id.flowRateText);
+        static_pressText = findViewById(R.id.static_height_text);
+        dynamic_pressText = findViewById(R.id.dynamic_height_text);
+
         introduction = findViewById(R.id.pitot_introduction);
 
         pitot_labelledDiagram = findViewById(R.id.pitot_labelledDiagram);
         pitot_Equation = findViewById(R.id.pitot_Equation);
         pitot_testSectionData = findViewById(R.id.pitot_testSectionData);
+        flowRateSeekBar = findViewById(R.id.flowRateSeekBar);
+        static_press_bar = findViewById(R.id.static_tube);
+        dynamic_press_bar = findViewById(R.id.dynamic_tube);
+
+        simulation = findViewById(R.id.simulation);
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choice",0);
