@@ -21,13 +21,14 @@ public class MCQs extends AppCompatActivity {
 
     TextView questionText;
     TextView option1, option2, option3, option4;
+    TextView completion, correctQs, wrongQs;
     ImageView circle1, circle2, circle3, circle4;
     ProgressBar timerProgress; TextView timerText;
     ConstraintLayout resultScreen; TextView scoreText;
     ImageView[] circles;
     TextView[] optionsText;
     boolean pressed = false;
-    int questionID = 0;
+    int questionID = 0, correct = 0, wrong = 0;
 
 
     String[] questions = new String[]{
@@ -54,9 +55,11 @@ public class MCQs extends AppCompatActivity {
         int x = Integer.parseInt((String) view.getTag());
         if(!pressed) {
             if (x == correctAnswer[questionID]) {
+                correct += 1;
                 circles[x - 1].setBackgroundResource(R.drawable.blue_tick);
                 textView.setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
             } else {
+                wrong += 1;
                 circles[x - 1].setBackgroundResource(R.drawable.cross_red);
                 textView.setBackgroundResource(R.drawable.rounded_rectangle_stroke_red);
                 circles[correctAnswer[questionID] - 1].setBackgroundResource(R.drawable.blue_tick);
@@ -81,9 +84,13 @@ public class MCQs extends AppCompatActivity {
         int tag = Integer.parseInt((String) view.getTag());
 
         if(questionID == 4 && tag == 1){
+            System.out.println("Correct = " + correct + "  Wrong = " + wrong);
             resultScreen.setVisibility(View.VISIBLE);
             int score = calculateScore();
             scoreText.setText(String.valueOf(score));
+            correctQs.setText(String.valueOf(correct));
+            wrongQs.setText(String.valueOf(wrong));
+            completion.setText(String.format("%s%%", (correct + wrong) * 20));
         }
 
         pressed = false;
@@ -120,8 +127,9 @@ public class MCQs extends AppCompatActivity {
     public int calculateScore(){
         int score = 0;
         for(int i=0; i<5; i++)
-            if((int)answerStatus[i] == correctAnswer[i])
+            if((int)answerStatus[i] == correctAnswer[i]) {
                 score += 30;
+            }
         return score;
     }
 
@@ -160,11 +168,14 @@ public class MCQs extends AppCompatActivity {
         timerProgress = findViewById(R.id.timerProgress);
         timerText = findViewById(R.id.timerText);
 
-
         option1 = findViewById(R.id.option1);
         option2 = findViewById(R.id.option2);
         option3 = findViewById(R.id.option3);
         option4 = findViewById(R.id.option4);
+
+        completion = findViewById(R.id.percent_complete);
+        correctQs = findViewById(R.id.correct_questions);
+        wrongQs = findViewById(R.id.wrong_questions);
 
         resultScreen = findViewById(R.id.resultScreen);
         scoreText = findViewById(R.id.scoreText);

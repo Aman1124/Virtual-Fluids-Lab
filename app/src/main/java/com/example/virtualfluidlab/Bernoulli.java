@@ -244,6 +244,7 @@ public class Bernoulli extends AppCompatActivity {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     flowRateSeekBar.setVisibility(View.INVISIBLE);
+                    seekBarVisibility = false;
                 }
             });
         }

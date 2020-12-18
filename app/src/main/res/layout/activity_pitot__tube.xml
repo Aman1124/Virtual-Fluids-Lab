@@ -97,7 +97,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/simulation">
+        android:id="@+id/simulation"
+        android:visibility="invisible">
 
         <ProgressBar
             android:id="@+id/pitot_test_section"
@@ -140,7 +141,7 @@
             android:id="@+id/pitot_apparatus"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_320sdp"
-            android:src="@drawable/pitot_tube"
+            android:src="@drawable/pitot_tube_off"
             android:layout_marginTop="@dimen/_25sdp"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -155,6 +156,17 @@
             android:layout_marginTop="@dimen/_100sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:onClick="changeFlowRate"/>
+
+        <View
+            android:background="#FF0000"
+            android:alpha="0.25"
+            android:id="@+id/power_button"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_32sdp"
+            app:layout_constraintBottom_toBottomOf="@id/pitot_test_section"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:onClick="powerUp"/>
 
         <SeekBar
             android:id="@+id/flowRateSeekBar"

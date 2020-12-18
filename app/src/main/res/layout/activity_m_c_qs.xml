@@ -234,19 +234,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/rounded_rectangle_1"
+        android:background="#16ebfe"
         android:id="@+id/resultScreen"
         android:visibility="invisible">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="@dimen/_500sdp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_310sdp"
             android:background="@drawable/rounded_rectangle_2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/detailsRect"
-            app:layout_constraintBottom_toTopOf="@id/detailsRect"
             android:id="@+id/backRect"/>
 
         <ImageView
@@ -312,15 +316,133 @@
             android:layout_marginBottom="7dp"
             android:layout_marginLeft="3dp"/>
 
-        <ImageView
-            android:layout_width="320dp"
-            android:layout_height="150dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_120sdp"
             android:background="@drawable/rounded_rectangle_1_grad"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/detailsRect"/>
+            app:layout_constraintTop_toBottomOf="@id/backRect"
+            app:layout_constraintBottom_toBottomOf="@id/backRect"
+            android:id="@+id/detailsRect">
+
+            <ImageView
+                android:id="@+id/point1"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_11sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/blue_dot"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"/>
+
+            <TextView
+                android:id="@+id/percent_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/point1"
+                app:layout_constraintTop_toTopOf="@id/point1"
+                app:layout_constraintBottom_toBottomOf="@id/point1"
+                android:text="0%"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#2AC4F5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/percent_complete"
+                app:layout_constraintLeft_toLeftOf="@id/percent_complete"
+                android:text="Completion"/>
+
+            <ImageView
+                android:id="@+id/point2"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_11sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/blue_dot"
+                android:layout_marginEnd="@dimen/_70sdp"
+                android:layout_marginTop="@dimen/_20sdp"/>
+
+            <TextView
+                android:id="@+id/total_questions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/point2"
+                app:layout_constraintTop_toTopOf="@id/point2"
+                app:layout_constraintBottom_toBottomOf="@id/point2"
+                android:text="05"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#2AC4F5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/total_questions"
+                app:layout_constraintLeft_toLeftOf="@id/total_questions"
+                android:text="Questions"/>
+
+            <ImageView
+                android:id="@+id/point3"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_11sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/green_dot"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_35sdp"/>
+
+            <TextView
+                android:id="@+id/correct_questions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/point3"
+                app:layout_constraintTop_toTopOf="@id/point3"
+                app:layout_constraintBottom_toBottomOf="@id/point3"
+                android:text="00"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#42fc9e"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/correct_questions"
+                app:layout_constraintLeft_toLeftOf="@id/correct_questions"
+                android:text="Correct"/>
+
+            <ImageView
+                android:id="@+id/point4"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_11sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/red_dot"
+                android:layout_marginEnd="@dimen/_70sdp"
+                android:layout_marginBottom="@dimen/_35sdp"/>
+
+            <TextView
+                android:id="@+id/wrong_questions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/point4"
+                app:layout_constraintTop_toTopOf="@id/point4"
+                app:layout_constraintBottom_toBottomOf="@id/point4"
+                android:text="00"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#E74C3C"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/wrong_questions"
+                app:layout_constraintLeft_toLeftOf="@id/wrong_questions"
+                android:text="Wrong"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:layout_width="wrap_content"

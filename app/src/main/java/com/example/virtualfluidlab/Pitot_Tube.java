@@ -19,7 +19,7 @@ public class Pitot_Tube extends AppCompatActivity {
     TextView heading1, heading2, para1, para2, para3;
     TextView flowRateText, static_pressText, dynamic_pressText;
 
-    ImageView pitot_labelledDiagram, pitot_Equation, pitot_testSectionData;
+    ImageView pitot_labelledDiagram, pitot_Equation, pitot_testSectionData, pitot_apparatus;
     SeekBar flowRateSeekBar;
     ProgressBar static_press_bar, dynamic_press_bar;
 
@@ -29,7 +29,7 @@ public class Pitot_Tube extends AppCompatActivity {
     int choice;
     float[] height = new float[2];
     double flowRate;
-    boolean flowBar_visibility = false;
+    boolean flowBar_visibility = false, power = false;
 
     String aim = "•\tTo find the point velocity at center of a tube for different flow rate.\n" +
                  "•\tTo find the coefficient of pitot tube.\n" +
@@ -123,7 +123,7 @@ public class Pitot_Tube extends AppCompatActivity {
     }
 
     public void changeFlowRate(View view){
-        if(!flowBar_visibility){
+        if(power && !flowBar_visibility){
             flowRateSeekBar.setVisibility(View.VISIBLE);
             flowBar_visibility = true;
             flowRateSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -149,6 +149,17 @@ public class Pitot_Tube extends AppCompatActivity {
         else if(flowBar_visibility){
             flowRateSeekBar.setVisibility(View.INVISIBLE);
             flowBar_visibility = false;
+        }
+    }
+
+    public void powerUp(View view){
+        if(!power){
+            pitot_apparatus.setImageResource(R.drawable.pitot_tube_on);
+            power = true;
+        }
+        else{
+            pitot_apparatus.setImageResource(R.drawable.pitot_tube_off);
+            power = false;
         }
     }
 
@@ -191,6 +202,7 @@ public class Pitot_Tube extends AppCompatActivity {
         flowRateSeekBar = findViewById(R.id.flowRateSeekBar);
         static_press_bar = findViewById(R.id.static_tube);
         dynamic_press_bar = findViewById(R.id.dynamic_tube);
+        pitot_apparatus = findViewById(R.id.pitot_apparatus);
 
         simulation = findViewById(R.id.simulation);
 
@@ -217,4 +229,5 @@ public class Pitot_Tube extends AppCompatActivity {
                 break;
         }
     }
+
 }
