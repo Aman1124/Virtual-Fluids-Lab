@@ -24,12 +24,12 @@ public class Pitot_Tube extends AppCompatActivity {
     ProgressBar static_press_bar, dynamic_press_bar;
 
     ScrollView introduction;
-    ConstraintLayout simulation;
+    ConstraintLayout simulation, testSection_popUp;
 
     int choice;
     float[] height = new float[2];
     double flowRate;
-    boolean flowBar_visibility = false, power = false;
+    boolean flowBar_visibility = false, power = false, ts_popUp_visibility = false;
 
     String aim = "•\tTo find the point velocity at center of a tube for different flow rate.\n" +
                  "•\tTo find the coefficient of pitot tube.\n" +
@@ -179,6 +179,17 @@ public class Pitot_Tube extends AppCompatActivity {
         dynamic_pressText.setText(String.format(Locale.US, "%.1f", height[1]));
     }
 
+    public void openTestSectionPopUp(View view){
+        if(!ts_popUp_visibility) {
+            testSection_popUp.setVisibility(View.VISIBLE);
+            ts_popUp_visibility = true;
+        }
+        else{
+            testSection_popUp.setVisibility(View.INVISIBLE);
+            ts_popUp_visibility = false;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,6 +216,7 @@ public class Pitot_Tube extends AppCompatActivity {
         pitot_apparatus = findViewById(R.id.pitot_apparatus);
 
         simulation = findViewById(R.id.simulation);
+        testSection_popUp = findViewById(R.id.testSection_popUp);
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choice",0);

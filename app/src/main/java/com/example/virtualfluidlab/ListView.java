@@ -3,6 +3,7 @@ package com.example.virtualfluidlab;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.database.MergeCursor;
@@ -47,9 +48,10 @@ public class ListView extends AppCompatActivity {
 
     ImageView bernoulli;
     ImageView vNotch, vNotch1, exp5;
-    ImageView metaCenter;
+    ImageView pitotFloat;
     ImageView drawer;
 
+    ImageView[] floatBoxes;
 
     int[] locationOfBernoulli = new int[2];
     int[] locationOfVNotch = new int[2];
@@ -59,7 +61,7 @@ public class ListView extends AppCompatActivity {
     float displacementX;
     long duration = 200;
     private float x1,x2,y1,y2;
-    static final int MIN_DISTANCE = 300;
+    static final int MIN_DISTANCE = 200;
 
 
     public void switchToBernoulli(View view){
@@ -95,22 +97,30 @@ public class ListView extends AppCompatActivity {
     public void scrollFloatBox(boolean direction){
         //True: left to right movement
         if (drawerPos == 0) {
-            if (direction && (scroll == 2 || scroll == 3 || scroll == 1 || scroll == 4)) {
+            if (direction && scroll > 0) {
                 bernoulli.animate().translationXBy(displacementX).setDuration(duration);
                 vNotch.animate().translationXBy(displacementX).setDuration(duration);
                 vNotch1.animate().translationXBy(displacementX).setDuration(duration);
                 exp5.animate().translationXBy(displacementX).setDuration(duration);
-                metaCenter.animate().translationXBy(displacementX).setDuration(duration);
+                pitotFloat.animate().translationXBy(displacementX).setDuration(duration);
                 if (scroll >= 1)
                     scroll -= 1;
-            } else if (!direction && (scroll == 3 || scroll == 2 || scroll == 1 || scroll == 0)) {
+//                floatBoxes[scroll].animate().scaleX(1f).scaleY(1f).setDuration(duration);
+//                for(int i=0; i<5; i++)
+//                    if(i!=scroll)
+//                        floatBoxes[i].animate().scaleX(0.9f).scaleY(0.9f).setDuration(duration);
+            } else if (!direction && scroll < 4) {
                 bernoulli.animate().translationXBy(-displacementX).setDuration(duration);
                 vNotch.animate().translationXBy(-displacementX).setDuration(duration);
                 vNotch1.animate().translationXBy(-displacementX).setDuration(duration);
                 exp5.animate().translationXBy(-displacementX).setDuration(duration);
-                metaCenter.animate().translationXBy(-displacementX).setDuration(duration);
+                pitotFloat.animate().translationXBy(-displacementX).setDuration(duration);
                 if (scroll <= 3)
                     scroll += 1;
+//                floatBoxes[scroll].animate().scaleX(1f).scaleY(1f).setDuration(duration);
+//                for(int i=0; i<5; i++)
+//                    if(i!=scroll)
+//                        floatBoxes[i].animate().scaleX(0.9f).scaleY(0.9f).setDuration(duration);
             }
         }
     }
@@ -121,7 +131,7 @@ public class ListView extends AppCompatActivity {
             optionsLayout.animate().translationYBy(-2.2f*locationOfBernoulli[1]).setDuration(duration);
             bernoulli.animate().alpha(0.45f).setDuration(duration);
             vNotch.animate().alpha(0.45f).setDuration(duration);
-            metaCenter.animate().alpha(0.45f).setDuration(duration);
+            pitotFloat.animate().alpha(0.45f).setDuration(duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
         }
@@ -130,7 +140,7 @@ public class ListView extends AppCompatActivity {
             optionsLayout.animate().translationYBy(2.2f*locationOfBernoulli[1]).setDuration(duration);
             bernoulli.animate().alpha(1f).setDuration(duration);
             vNotch.animate().alpha(1f).setDuration(duration);
-            metaCenter.animate().alpha(1f).setDuration(duration);
+            pitotFloat.animate().alpha(1f).setDuration(duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
         }
@@ -209,9 +219,11 @@ public class ListView extends AppCompatActivity {
         bernoulli = findViewById(R.id.bernoulliFloat);
         vNotch = findViewById(R.id.vNotch);
         vNotch1 = findViewById(R.id.vNotch1);
-        metaCenter = findViewById(R.id.pitotFloat);
+        pitotFloat = findViewById(R.id.pitotFloat);
         exp5 = findViewById(R.id.experiment5);
         drawer = findViewById(R.id.drawer);
+
+        floatBoxes = new ImageView[]{vNotch1, vNotch, bernoulli, pitotFloat, exp5};
 
         listLayout = findViewById(R.id.listLayout);
         optionsLayout = findViewById(R.id.optionsLayout);
@@ -224,7 +236,7 @@ public class ListView extends AppCompatActivity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
+    public boolean dispatchTouchEvent(MotionEvent event)
     {
         switch(event.getAction())
         {
@@ -263,6 +275,6 @@ public class ListView extends AppCompatActivity {
                 break;
         }
         //Toast.makeText(this, "X:"+ (x2-x1) + "  Y:" + (y2-y1), Toast.LENGTH_SHORT).show();
-        return super.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
     }
 }

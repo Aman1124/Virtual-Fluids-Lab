@@ -168,6 +168,17 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:onClick="powerUp"/>
 
+        <View
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_75sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#ff0000"
+            android:alpha="0.25"
+            android:layout_marginStart="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_90sdp"
+            android:onClick="openTestSectionPopUp"/>
+
         <SeekBar
             android:id="@+id/flowRateSeekBar"
             android:layout_width="@dimen/_100sdp"
@@ -251,7 +262,66 @@
 
         </TableLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/testSection_popUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="invisible">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:alpha="0.25"
+                android:onClick="openTestSectionPopUp"/>
+
+            <ImageView
+                android:id="@+id/pop_up_bg"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp"
+                android:background="#fff"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:alpha="1"/>
+
+            <ImageView
+                android:id="@+id/pop_up_pitot_test_section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pitot_test_section"
+                app:layout_constraintTop_toTopOf="@id/pop_up_bg"
+                app:layout_constraintStart_toStartOf="@id/pop_up_bg"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"/>
+
+            <ImageView
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_150sdp"
+                app:layout_constraintStart_toEndOf="@id/pop_up_pitot_test_section"
+                app:layout_constraintEnd_toEndOf="@id/pop_up_bg"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pop_up_pitot_test_section"
+                app:layout_constraintBottom_toBottomOf="@id/pop_up_bg"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="10.0 cm"
+                android:textSize="25sp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

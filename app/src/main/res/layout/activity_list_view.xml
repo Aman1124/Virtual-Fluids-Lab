@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/appuicrop"
-        android:alpha="0"
-        />
+        android:alpha="0" />
 
     <ImageView
         android:layout_width="240dp"
@@ -27,9 +26,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="35dp"
         android:id="@+id/vNotch"
-        android:alpha="1"
-        />
-
+        android:alpha="1" />
 
     <ImageView
         android:id="@+id/vNotch1"
@@ -52,8 +49,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginEnd="-300dp"
         android:id="@+id/pitotFloat"
-        android:alpha="1"
-        />
+        android:alpha="1" />
 
     <ImageView
         android:id="@+id/experiment5"
@@ -65,7 +61,6 @@
         android:alpha="1"
         android:src="@drawable/box" />
 
-
     <ImageView
         android:layout_width="240dp"
         android:layout_height="290dp"
@@ -73,8 +68,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:id="@+id/bernoulliFloat"
-        android:alpha="1"
-        />
+        android:alpha="1" />
+
 
     <ImageView
         android:id="@+id/drawer"
@@ -85,8 +80,7 @@
         android:layout_below="@id/bernoulliFloat"
         android:background="@drawable/drawer"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="670dp"
-        />
+        android:layout_marginBottom="670dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,16 +101,14 @@
             android:textSize="30sp"
             android:id="@+id/introduction"
             android:onClick="openExperiment"
-            android:tag="1"
-            />
+            android:tag="1" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2.5dp"
             android:background="@drawable/horiz_line"
             android:alpha="0.8"
-            android:layout_marginTop="22dp"
-            />
+            android:layout_marginTop="22dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -127,16 +119,14 @@
             android:id="@+id/aboutSetup"
             android:onClick="openExperiment"
             android:layout_marginTop="22dp"
-            android:tag="2"
-            />
+            android:tag="2" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2.5dp"
             android:background="@drawable/horiz_line"
             android:alpha="0.8"
-            android:layout_marginTop="22dp"
-            />
+            android:layout_marginTop="22dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -147,16 +137,14 @@
             android:id="@+id/procedure"
             android:onClick="openExperiment"
             android:layout_marginTop="22dp"
-            android:tag="3"
-            />
+            android:tag="3" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2.5dp"
             android:background="@drawable/horiz_line"
             android:alpha="0.8"
-            android:layout_marginTop="22dp"
-            />
+            android:layout_marginTop="22dp" />
 
         <TextView
             android:layout_width="match_parent"
