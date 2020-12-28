@@ -463,6 +463,7 @@
                 android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
                 android:textSize="20sp"
+                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
                 android:id="@+id/para1"
                 />
@@ -497,6 +498,7 @@
                 android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
                 android:textSize="20sp"
+                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
                 android:id="@+id/para2"
                 />
@@ -515,6 +517,7 @@
                 android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
                 android:textSize="20sp"
+                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
                 android:paddingBottom="15dp"
                 android:id="@+id/para3"

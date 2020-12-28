@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/about"
-        android:title="About">
-    </item>
+    <group>
 
-    <item android:id="@+id/references"
-        android:title="References">
-    </item>
+        <item
+            android:id="@+id/home"
+            android:title="Home"
+            android:icon="@drawable/home_icon"/>
 
-    <item android:id="@+id/displayDetails"
-        android:title="Display Details">
-    </item>
+        <item android:id="@+id/references"
+            android:title="References"
+            android:icon="@drawable/reference_icon">
 
-    <item android:id="@+id/help"
-        android:title="Help">
+        </item>
+
+        <item android:id="@+id/displayDetails"
+            android:title="Display Details"
+            android:icon="@drawable/display_icon"/>
+
+        <item android:id="@+id/about"
+            android:title="About"
+            android:icon="@drawable/info_icon"/>
+
+    </group>
+
+    <item android:title="Communicate">
+
+        <menu>
+
+            <item android:id="@+id/help"
+                android:title="Contact Us"
+                android:icon="@drawable/mail_icon"/>
+
+        </menu>
+
     </item>
 
 </menu>

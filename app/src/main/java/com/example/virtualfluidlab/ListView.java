@@ -2,8 +2,13 @@ package com.example.virtualfluidlab;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.database.MergeCursor;
@@ -20,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -30,9 +36,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
+import com.google.android.material.navigation.NavigationView;
 
-public class ListView extends AppCompatActivity {
+import java.util.List;
+import java.util.TooManyListenersException;
+
+public class ListView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView introduction;
     TextView aboutSetup;
@@ -41,10 +50,12 @@ public class ListView extends AppCompatActivity {
     TextView observationTable;
     TextView selfAssessment;
 
-
+    DrawerLayout drawerLayout;
     RelativeLayout listLayout;
     RelativeLayout action_menu;
     LinearLayout optionsLayout;
+
+    NavigationView navigationView;
 
     ImageView bernoulli;
     ImageView vNotch, vNotch1, exp5;
@@ -159,6 +170,10 @@ public class ListView extends AppCompatActivity {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             Log.i("Back","Pressed");
             Log.i("Drawer Status", Integer.toString(drawerPos));
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
             if( drawerPos == 1) {
                 pullDrawer(false);
                 drawerPos = 0;
@@ -166,42 +181,6 @@ public class ListView extends AppCompatActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        Intent actionBar = new Intent(getApplicationContext(), ActionMenu.class);
-        switch(item.getItemId()){
-            case R.id.about:
-                actionBar.putExtra("option",1);
-                startActivity(actionBar);
-                break;
-            case R.id.references:
-                actionBar.putExtra("option",2);
-                startActivity(actionBar);
-                break;
-            case R.id.displayDetails:
-                actionBar.putExtra("option",3);
-                startActivity(actionBar);
-                break;
-            case R.id.help:
-                actionBar.putExtra("option",4);
-                startActivity(actionBar);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -216,6 +195,9 @@ public class ListView extends AppCompatActivity {
         observationTable = findViewById(R.id.observation);
         selfAssessment = findViewById(R.id.selfAssessment);
 
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+
         bernoulli = findViewById(R.id.bernoulliFloat);
         vNotch = findViewById(R.id.vNotch);
         vNotch1 = findViewById(R.id.vNotch1);
@@ -229,9 +211,19 @@ public class ListView extends AppCompatActivity {
         optionsLayout = findViewById(R.id.optionsLayout);
         action_menu = findViewById(R.id.action_menu_presenter);
 
-        setTitle("Fluids Lab");
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
+//        setTitle("Fluids Lab");
+//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, 0, 0);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -250,12 +242,12 @@ public class ListView extends AppCompatActivity {
                 y2 = event.getY();
                 float deltaX = x2 - x1;
                 float deltaY = y2 - y1;
-                if (Math.abs(deltaX) > MIN_DISTANCE && deltaX > 0)
+                if (Math.abs(deltaX) > MIN_DISTANCE && deltaX > 0 && x1>20 && !drawerLayout.isDrawerOpen(GravityCompat.START))
                 {
                     //getCoordinate();
                     scrollFloatBox(true);
                 }
-                else if (Math.abs(deltaX) > MIN_DISTANCE && deltaX < 0)
+                else if (Math.abs(deltaX) > MIN_DISTANCE && deltaX < 0 && x1>20 && !drawerLayout.isDrawerOpen(GravityCompat.START))
                 {
                     //getCoordinate();
                     scrollFloatBox(false);
@@ -276,5 +268,36 @@ public class ListView extends AppCompatActivity {
         }
         //Toast.makeText(this, "X:"+ (x2-x1) + "  Y:" + (y2-y1), Toast.LENGTH_SHORT).show();
         return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        Intent actionBar = new Intent(getApplicationContext(), ActionMenu.class);
+
+        switch (menuItem.getItemId()){
+            case R.id.home:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.references:
+                actionBar.putExtra("option",2);
+                startActivity(actionBar);
+                break;
+            case R.id.displayDetails:
+                actionBar.putExtra("option",3);
+                startActivity(actionBar);
+                break;
+            case R.id.help:
+                actionBar.putExtra("option",4);
+                startActivity(actionBar);
+                break;
+            case R.id.about:
+                actionBar.putExtra("option",1);
+                startActivity(actionBar);
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

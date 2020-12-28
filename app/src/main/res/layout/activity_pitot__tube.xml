@@ -36,6 +36,7 @@
                 android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
                 android:textSize="20sp"
+                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
                 android:id="@+id/pitot_para1"
                 />
@@ -68,6 +69,7 @@
                 android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
                 android:textSize="20sp"
+                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
                 android:id="@+id/pitot_para2"
                 />
@@ -85,6 +87,7 @@
                 android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
                 android:textSize="20sp"
+                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
                 android:paddingBottom="15dp"
                 android:id="@+id/pitot_para3"
@@ -303,22 +306,34 @@
                 android:layout_marginTop="@dimen/_15sdp"/>
 
             <ImageView
-                android:layout_width="@dimen/_5sdp"
+                android:id="@+id/pitot_test_section_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pitot_test_section_pin"
+                app:layout_constraintStart_toStartOf="@id/pop_up_pitot_test_section"
+                app:layout_constraintEnd_toEndOf="@id/pop_up_pitot_test_section"
+                app:layout_constraintBottom_toBottomOf="@id/pop_up_pitot_test_section"
+                android:layout_marginEnd="@dimen/_17sdp"
+                android:layout_marginBottom="@dimen/_16sdp"/>
+
+            <android.widget.VerticalSeekBar
+                android:id="@+id/needleHeightSeekBar"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_150sdp"
-                app:layout_constraintStart_toEndOf="@id/pop_up_pitot_test_section"
                 app:layout_constraintEnd_toEndOf="@id/pop_up_bg"
+                app:layout_constraintStart_toEndOf="@id/pop_up_pitot_test_section"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:background="#000"/>
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
+                android:id="@+id/needleHeightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/pop_up_pitot_test_section"
                 app:layout_constraintBottom_toBottomOf="@id/pop_up_bg"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:text="10.0 cm"
+                android:text="0 cm"
                 android:textSize="25sp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.VerticalSeekBar;
 
 import java.util.Locale;
 
@@ -18,9 +19,13 @@ public class Pitot_Tube extends AppCompatActivity {
 
     TextView heading1, heading2, para1, para2, para3;
     TextView flowRateText, static_pressText, dynamic_pressText;
+    TextView needleHeightTextView;
 
     ImageView pitot_labelledDiagram, pitot_Equation, pitot_testSectionData, pitot_apparatus;
+    ImageView pitot_test_section_pin;
+
     SeekBar flowRateSeekBar;
+    VerticalSeekBar needleHeightSeekBar;
     ProgressBar static_press_bar, dynamic_press_bar;
 
     ScrollView introduction;
@@ -183,6 +188,24 @@ public class Pitot_Tube extends AppCompatActivity {
         if(!ts_popUp_visibility) {
             testSection_popUp.setVisibility(View.VISIBLE);
             ts_popUp_visibility = true;
+            needleHeightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    float pin_height = (progress - 50f) / 5f;
+                    needleHeightTextView.setText(String.format("%s cm", pin_height));
+                    pitot_test_section_pin.animate().x(-pin_height);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
         }
         else{
             testSection_popUp.setVisibility(View.INVISIBLE);
@@ -210,7 +233,13 @@ public class Pitot_Tube extends AppCompatActivity {
         pitot_labelledDiagram = findViewById(R.id.pitot_labelledDiagram);
         pitot_Equation = findViewById(R.id.pitot_Equation);
         pitot_testSectionData = findViewById(R.id.pitot_testSectionData);
+        pitot_test_section_pin = findViewById(R.id.pitot_test_section_pin);
+
         flowRateSeekBar = findViewById(R.id.flowRateSeekBar);
+        needleHeightSeekBar = (VerticalSeekBar) findViewById(R.id.needleHeightSeekBar);
+        needleHeightSeekBar.setProgress(50);
+        needleHeightTextView = findViewById(R.id.needleHeightTextView);
+
         static_press_bar = findViewById(R.id.static_tube);
         dynamic_press_bar = findViewById(R.id.dynamic_tube);
         pitot_apparatus = findViewById(R.id.pitot_apparatus);

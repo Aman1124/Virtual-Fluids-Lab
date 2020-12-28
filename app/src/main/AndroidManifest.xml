@@ -23,7 +23,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ListView"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
