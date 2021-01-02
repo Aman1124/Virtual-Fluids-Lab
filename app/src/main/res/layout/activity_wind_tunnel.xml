@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WindTunnel">
+
+    <ScrollView
+        android:id="@+id/windTunnel_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Aim:"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aimText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="0.85"
+                    android:text=""
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Theory:"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="intro_para"
+                        android:tag="1"
+                        android:text="Drag Forces"
+                        android:textSize="25sp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:id="@+id/para1_arrow"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/arrow_head" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/para1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="0.85"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="intro_para"
+                        android:tag="2"
+                        android:text="Flow Type"
+                        android:textSize="25sp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:id="@+id/para2_arrow"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/arrow_head" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/para2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="0.85"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="intro_para"
+                        android:tag="3"
+                        android:text="Boundary Layer"
+                        android:textSize="25sp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:id="@+id/para3_arrow"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/arrow_head" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/para3"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="0.85"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="intro_para"
+                        android:tag="4"
+                        android:text="Boundary Layer Manipulation"
+                        android:textSize="25sp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:id="@+id/para4_arrow"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/arrow_head" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/para4"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="0.85"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/windTunnel_aboutSetup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About Setup:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/aboutSetupPara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/windTunnel_procedure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Procedure:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/procedurePara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

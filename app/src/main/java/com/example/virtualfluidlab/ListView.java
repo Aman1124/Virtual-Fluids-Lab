@@ -5,41 +5,22 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.database.MergeCursor;
-import android.graphics.Point;
-import android.os.Build;
-import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.List;
-import java.util.TooManyListenersException;
 
 public class ListView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -58,7 +39,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
 
     ImageView bernoulli;
-    ImageView vNotch, vNotch1, exp5;
+    ImageView wind_tunnel_float, vNotch1, centerOfPressFloat;
     ImageView pitotFloat;
     ImageView drawer;
 
@@ -83,6 +64,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 
     public void openSelfAssessment(View view){
         Intent intent = new Intent(getApplicationContext(), MCQs.class);
+        intent.putExtra("choice", scroll);
         startActivity(intent);
     }
 
@@ -92,17 +74,27 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
     }
 
-    public void switchToMetacenter(View view){
+    public void switchToWindTunnel(View view){
+        Intent intent = new Intent(getApplicationContext(),WindTunnel.class);
+        intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
+        startActivity(intent);
+    }
 
+    public void switchToCenterofPress(View view){
+        Intent intent = new Intent(getApplicationContext(),CenterOfPressure.class);
+        intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
+        startActivity(intent);
     }
 
     public void openExperiment(View view){
         if(scroll == 1)
-            switchToMetacenter(view);
+            switchToWindTunnel(view);
         else if(scroll == 2)
             switchToBernoulli(view);
         else if(scroll == 3)
             switchToPitot(view);
+        else if (scroll == 4)
+            switchToCenterofPress(view);
     }
 
     public void scrollFloatBox(boolean direction){
@@ -110,9 +102,9 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         if (drawerPos == 0) {
             if (direction && scroll > 0) {
                 bernoulli.animate().translationXBy(displacementX).setDuration(duration);
-                vNotch.animate().translationXBy(displacementX).setDuration(duration);
+                wind_tunnel_float.animate().translationXBy(displacementX).setDuration(duration);
                 vNotch1.animate().translationXBy(displacementX).setDuration(duration);
-                exp5.animate().translationXBy(displacementX).setDuration(duration);
+                centerOfPressFloat.animate().translationXBy(displacementX).setDuration(duration);
                 pitotFloat.animate().translationXBy(displacementX).setDuration(duration);
                 if (scroll >= 1)
                     scroll -= 1;
@@ -122,9 +114,9 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 //                        floatBoxes[i].animate().scaleX(0.9f).scaleY(0.9f).setDuration(duration);
             } else if (!direction && scroll < 4) {
                 bernoulli.animate().translationXBy(-displacementX).setDuration(duration);
-                vNotch.animate().translationXBy(-displacementX).setDuration(duration);
+                wind_tunnel_float.animate().translationXBy(-displacementX).setDuration(duration);
                 vNotch1.animate().translationXBy(-displacementX).setDuration(duration);
-                exp5.animate().translationXBy(-displacementX).setDuration(duration);
+                centerOfPressFloat.animate().translationXBy(-displacementX).setDuration(duration);
                 pitotFloat.animate().translationXBy(-displacementX).setDuration(duration);
                 if (scroll <= 3)
                     scroll += 1;
@@ -141,7 +133,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
             drawer.animate().translationYBy(-2.2f*locationOfBernoulli[1]).setDuration(duration);
             optionsLayout.animate().translationYBy(-2.2f*locationOfBernoulli[1]).setDuration(duration);
             bernoulli.animate().alpha(0.45f).setDuration(duration);
-            vNotch.animate().alpha(0.45f).setDuration(duration);
+            wind_tunnel_float.animate().alpha(0.45f).setDuration(duration);
             pitotFloat.animate().alpha(0.45f).setDuration(duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
@@ -150,7 +142,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
             drawer.animate().translationYBy(2.2f*locationOfBernoulli[1]).setDuration(duration);
             optionsLayout.animate().translationYBy(2.2f*locationOfBernoulli[1]).setDuration(duration);
             bernoulli.animate().alpha(1f).setDuration(duration);
-            vNotch.animate().alpha(1f).setDuration(duration);
+            wind_tunnel_float.animate().alpha(1f).setDuration(duration);
             pitotFloat.animate().alpha(1f).setDuration(duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
@@ -159,7 +151,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 
     public void getCoordinate(){
         bernoulli.getLocationInWindow(locationOfBernoulli);
-        vNotch.getLocationInWindow(locationOfVNotch);
+        wind_tunnel_float.getLocationInWindow(locationOfVNotch);
         displacementX = locationOfBernoulli[0]-locationOfVNotch[0];
         drawer.getLocationInWindow(drawerLocation);
         //Toast.makeText(this,"X: " + locationOfBernoulli[0] + "  X: " + locationOfVNotch[0] + "\nY: " + locationOfBernoulli[1] + "  Y: " + locationOfVNotch[1],Toast.LENGTH_SHORT).show();
@@ -199,13 +191,13 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         navigationView = findViewById(R.id.nav_view);
 
         bernoulli = findViewById(R.id.bernoulliFloat);
-        vNotch = findViewById(R.id.vNotch);
+        wind_tunnel_float = findViewById(R.id.wind_tunnel_float);
         vNotch1 = findViewById(R.id.vNotch1);
         pitotFloat = findViewById(R.id.pitotFloat);
-        exp5 = findViewById(R.id.experiment5);
+        centerOfPressFloat = findViewById(R.id.centerOfPressFloat);
         drawer = findViewById(R.id.drawer);
 
-        floatBoxes = new ImageView[]{vNotch1, vNotch, bernoulli, pitotFloat, exp5};
+        floatBoxes = new ImageView[]{vNotch1, wind_tunnel_float, bernoulli, pitotFloat, centerOfPressFloat};
 
         listLayout = findViewById(R.id.listLayout);
         optionsLayout = findViewById(R.id.optionsLayout);
@@ -215,7 +207,15 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 //        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 //        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
 
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
+        setTitle("Fluids Lab");
+        drawerLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, 0, 0);

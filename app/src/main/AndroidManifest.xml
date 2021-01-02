@@ -9,7 +9,10 @@
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pitot_Tube"
+        <activity android:name=".CenterOfPressure"></activity>
+        <activity android:name=".WindTunnel" />
+        <activity
+            android:name=".Pitot_Tube"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MCQs"
@@ -24,7 +27,7 @@
         <activity
             android:name=".ListView"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

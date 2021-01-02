@@ -1,6 +1,7 @@
 package com.example.virtualfluidlab;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -103,7 +104,15 @@ public class Bernoulli extends AppCompatActivity {
             "10.\tMeasure pressure head (i.e. height of water level in tubes) by piezometer tubes.\n\n" +
             "11.\tRepeat steps 7 to 10 for different flow rates.\n\n" +
             "12.\tWhen Experiment is over Switch off the Pump.\n\n" +
-            "13.\tTurn off the power supply and drain the water from all the tanks with the help of drain valves (V3, V4, V5).";
+            "13.\tTurn off the power supply and drain the water from all the tanks with the help of drain valves (V3, V4, V5).\n" +
+            "\nIn the simulation section, the following steps are to be followed:\n" +
+            "1. Turn the Power button ON.\n" +
+            "2. To take readings, we have to change the flow rate. To change flow rate, tap on Valve V1. A slider will appear on screen.\n" +
+            "3. Alter the height of the slider to change the flow rate. The flow rate(Q) is displayed just below the simulation diagram.\n" +
+            "4. The water level corresponding to each tube is shown in the simulation and the each height is shown below the diagram.\n" +
+            "5. The water levels can be recorded by tapping the save button. We can save 10 readings for 10 different flow rates.\n" +
+            "6. To access the readings you have taken, close the simulation by tapping the back button. Make sure to turn off the power button before leaving the simulation.\n" +
+            "7. Press on Observation to access the observation table of the readings you have taken.";
 
     String expSetup1 = "The present experimental set-up for Bernoulli’s Theorem is self-contained re-circulating unit. The set-up accompanies the sump tank, overhead tank, centrifugal Pump for water circulation. Control valve and by-pass valve is provided to regulate the flow of water in constant head tank. A test section made of Perspex, of varying cross section is provided, which is having converging and diverging section. Piezometer tubes are fitted on this test section at specified points to measure pressure heads. The inlet of the conduit is connected to overhead tank. Discharge through test section can be measured with the help of measuring tank and stop watch. A rough 2D fig of the actual setup is shown below with all the components labelled.";
     String expSetup2 = "The following precautions should be taken while handling the above mentioned setup.\n" +

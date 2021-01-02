@@ -3,6 +3,7 @@ package com.example.virtualfluidlab;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -23,38 +24,119 @@ public class MCQs extends AppCompatActivity {
     TextView option1, option2, option3, option4;
     TextView completion, correctQs, wrongQs;
     ImageView circle1, circle2, circle3, circle4;
-    ProgressBar timerProgress; TextView timerText;
-    ConstraintLayout resultScreen; TextView scoreText;
+    ProgressBar timerProgress;
+    TextView timerText;
+    ConstraintLayout resultScreen;
+    TextView scoreText;
     ImageView[] circles;
     TextView[] optionsText;
     boolean pressed = false;
-    int questionID = 0, correct = 0, wrong = 0;
+    int expNo, questionID = 0, correct = 0, wrong = 0;
 
+    /*
+        0 -- Reynolds number
+        1 -- Wind Tunnel
+        2 -- Bernoulli
+        3 -- Pitot Tube
+        4 -- Center of Pressure
+    */
 
-    String[] questions = new String[]{
-            "The relation between pressure and velocity in an inviscid, incompressible flow for same datum height is given by ______",
-            "In the Venturi Section of the setup, the pressure of the fluid ______",
-            "Bernoulli’s equation is applicable only for which flow?",
-            "Energy line in plot of Energy vs position of holes for inviscid & incompressible fluid will be ________",
-            "Bernoulli’s principle is derived from which of the following?"
+    String[][] questions = new String[][]{
+            {   //Reynolds
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+            },
+            {   //Wind Tunnel
+                    "Frictional drag is due to ___",
+                    "Which is more dominant in low velocity ?",
+                    "Pressure drag is due to ___",
+                    "Air is not blown but get sucked by fan. Why?",
+                    "Diffuser is longer than contraction nozzle. Why?"
+            },
+            {   //Bernoulli
+                    "The relation between pressure and velocity in an inviscid, incompressible flow for same datum height is given by ______",
+                    "In the Venturi Section of the setup, the pressure of the fluid ______",
+                    "Bernoulli’s equation is applicable only for which flow?",
+                    "Energy line in plot of Energy vs position of holes for inviscid & incompressible fluid will be ________",
+                    "Bernoulli’s principle is derived from which of the following?"
+            },
+            {   //Pitot Tube
+                    "Dynamic pressure is:",
+                    "For laminar flow velocity profile is ___",
+                    "Average value of Coefficient of discharge of a cylindrical pipe is ___",
+                    "Total pressure at a point",
+                    "For flow in cylindrical pipe, volume flow rate ___"
+            },
+            {   //Center of Pressure
+                    "Fluid pressure always acts ___",
+                    "",
+                    "",
+                    "",
+                    ""
+            }
     };
 
-    String[][] options = new String[][]{
-            {"P = constant", "P + ρV²/2 = constant", "ρV²/2 = 0", "P + ρV²/2 = 0"},
-            {"increases", "decreases", "increases then decreases", "decreases then increases"},
-            {"Irrotaional", "Viscous", "Inviscid & incompressible", "Compressible"},
-            {"Horizontal", "Vertical", "Arbitrary (zig-zag)", "None of the above"},
-            {"Conservation of mass", "Conservation of energy", "Conservation of motion", "Conservation of force"}
+    String[][][] options = new String[][][]{
+            {   //Reynolds
+                    {"", "", "", ""},
+                    {"", "", "", ""},
+                    {"", "", "", ""},
+                    {"", "", "", ""},
+                    {"", "", "", ""}
+            },
+            {   //Wind Tunnel
+                    {"Velocity of fluid", "Density of fluid", "Viscosity of fluid", "All"},
+                    {"Frictional drag", "Pressure drag", "Both", "None"},
+                    {"Velocity difference", "Flow separation", "Turbulence in flow", "All"},
+                    {"This is just a convention.", "Blowing fan can’t provide enough speed", "Blowing can introduce turbulence", "None"},
+                    {"Suction fan require this type of construction.", "Power required by fan in this type of construction is less.", "Turbulence can be introduced in pitot tube due to backflow.", "All"}
+            },
+            {   //Bernoulli
+                    {"P = constant", "P + ρV²/2 = constant", "ρV²/2 = 0", "P + ρV²/2 = 0"},
+                    {"increases", "decreases", "increases then decreases", "decreases then increases"},
+                    {"Irrotaional", "Viscous", "Inviscid & incompressible", "Compressible"},
+                    {"Horizontal", "Vertical", "Arbitrary (zig-zag)", "None of the above"},
+                    {"Conservation of mass", "Conservation of energy", "Conservation of motion", "Conservation of force"}
+            },
+            {   //Pitot Tube
+                    {"ρV²/2", "P + ρV²/2", "P - ρV²/2", "None of above"},
+                    {"Parabolic", "Circular", "Elliptic", "Linear combination of all above"},
+                    {"0.836", "0.843", "0.855", "0.872"},
+                    {"< static pressure", ">= static pressure", "= static pressure", "None"},
+                    {"is more in turbulent flow", "is more in laminar flow", "does not depend on flow type", "None"}
+            },
+            {   //Center of Pressure
+                    {"Normal to surface", "Tangent to surface", "At 45 ⁰ from Normal", "None"},
+                    {"", "", "", ""},
+                    {"", "", "", ""},
+                    {"", "", "", ""},
+                    {"", "", "", ""}
+            }
     };
 
-    int[] correctAnswer = new int[]{2, 4, 3, 1, 2};
-    char[] answerStatus = new char[]{'N', 'N', 'N', 'N', 'N'};
+    int[][] correctAnswer = new int[][]{
+            {1, 1, 1, 1, 1}, //reynolds
+            {3, 2, 2, 3, 3}, //wind tunnel
+            {2, 4, 3, 1, 2}, //bernoulli
+            {1, 1, 3, 2, 1}, //pitot
+            {1, 1, 1, 1, 1}  //center of pressure
+    };
+    char[][] answerStatus = new char[][]{
+            {'N', 'N', 'N', 'N', 'N'}, //reynolds
+            {'N', 'N', 'N', 'N', 'N'}, //wind tunnel
+            {'N', 'N', 'N', 'N', 'N'}, //bernoulli
+            {'N', 'N', 'N', 'N', 'N'}, //pitot
+            {'N', 'N', 'N', 'N', 'N'}  //center of pressure
+    };
 
-    public void changeColor(View view){
+    public void changeColor(View view) {
         TextView textView = (TextView) view;
         int x = Integer.parseInt((String) view.getTag());
-        if(!pressed) {
-            if (x == correctAnswer[questionID]) {
+        if (!pressed) {
+            if (x == correctAnswer[expNo][questionID]) {
                 correct += 1;
                 circles[x - 1].setBackgroundResource(R.drawable.blue_tick);
                 textView.setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
@@ -62,28 +144,28 @@ public class MCQs extends AppCompatActivity {
                 wrong += 1;
                 circles[x - 1].setBackgroundResource(R.drawable.cross_red);
                 textView.setBackgroundResource(R.drawable.rounded_rectangle_stroke_red);
-                circles[correctAnswer[questionID] - 1].setBackgroundResource(R.drawable.blue_tick);
-                optionsText[correctAnswer[questionID] - 1].setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
+                circles[correctAnswer[expNo][questionID] - 1].setBackgroundResource(R.drawable.blue_tick);
+                optionsText[correctAnswer[expNo][questionID] - 1].setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
             }
-            answerStatus[questionID] = (char)x;
+            answerStatus[expNo][questionID] = (char) x;
             pressed = true;
         }
     }
 
-    public void resetColor(){
-        for(int i=0;i<4;i++){
+    public void resetColor() {
+        for (int i = 0; i < 4; i++) {
             optionsText[i].setBackgroundResource(R.drawable.rounded_rectangle_stroke);
             circles[i].setBackgroundResource(R.drawable.circle_stroke);
         }
     }
 
-    public void changeQuestion(View view){
+    public void changeQuestion(View view) {
         LottieAnimationView anim = (LottieAnimationView) view;
         anim.playAnimation();
 
         int tag = Integer.parseInt((String) view.getTag());
 
-        if(questionID == 4 && tag == 1){
+        if (questionID == 4 && tag == 1) {
             System.out.println("Correct = " + correct + "  Wrong = " + wrong);
             resultScreen.setVisibility(View.VISIBLE);
             int score = calculateScore();
@@ -96,27 +178,26 @@ public class MCQs extends AppCompatActivity {
         pressed = false;
         resetColor();
 
-        if(tag == 1) {
+        if (tag == 1) {
             if (questionID < 4)
                 questionID++;
-        }
-        else{
-            if(questionID > 0)
+        } else {
+            if (questionID > 0)
                 questionID--;
         }
         createQuestion();
         checkAnswered();
     }
 
-    public void checkAnswered(){
-        if(answerStatus[questionID] != 'N') {
-            int x = answerStatus[questionID];
+    public void checkAnswered() {
+        if (answerStatus[expNo][questionID] != 'N') {
+            int x = answerStatus[expNo][questionID];
             resetColor();
-            if (x != correctAnswer[questionID]) {
+            if (x != correctAnswer[expNo][questionID]) {
                 circles[x - 1].setBackgroundResource(R.drawable.cross_red);
                 optionsText[x - 1].setBackgroundResource(R.drawable.rounded_rectangle_stroke_red);
-                circles[correctAnswer[questionID] - 1].setBackgroundResource(R.drawable.blue_tick);
-                optionsText[correctAnswer[questionID] - 1].setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
+                circles[correctAnswer[expNo][questionID] - 1].setBackgroundResource(R.drawable.blue_tick);
+                optionsText[correctAnswer[expNo][questionID] - 1].setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
             } else {
                 circles[x - 1].setBackgroundResource(R.drawable.blue_tick);
                 optionsText[x - 1].setBackgroundResource(R.drawable.rounded_rectangle_stroke_blue);
@@ -124,36 +205,36 @@ public class MCQs extends AppCompatActivity {
         }
     }
 
-    public int calculateScore(){
+    public int calculateScore() {
         int score = 0;
-        for(int i=0; i<5; i++)
-            if((int)answerStatus[i] == correctAnswer[i]) {
+        for (int i = 0; i < 5; i++)
+            if ((int) answerStatus[expNo][i] == correctAnswer[expNo][i]) {
                 score += 30;
             }
         return score;
     }
 
-    public void createQuestion(){
-        questionText.setText(questions[questionID]);
-        optionsText[0].setText(options[questionID][0]);
-        optionsText[1].setText(options[questionID][1]);
-        optionsText[2].setText(options[questionID][2]);
-        optionsText[3].setText(options[questionID][3]);
+    public void createQuestion() {
+        questionText.setText(questions[expNo][questionID]);
+        optionsText[0].setText(options[expNo][questionID][0]);
+        optionsText[1].setText(options[expNo][questionID][1]);
+        optionsText[2].setText(options[expNo][questionID][2]);
+        optionsText[3].setText(options[expNo][questionID][3]);
 
-        timerProgress.setProgress((questionID+1)*20);
+        timerProgress.setProgress((questionID + 1) * 20);
         timerText.setText(String.valueOf(questionID + 1));
     }
 
-    public void playAgain(View view){
+    public void playAgain(View view) {
         questionID = 0;
         resetColor();
-        for(int i=0; i<5; i++)
-            answerStatus[i] = 'N';
+        for (int i = 0; i < 5; i++)
+            answerStatus[expNo][i] = 'N';
         resultScreen.setVisibility(View.INVISIBLE);
         createQuestion();
     }
 
-    public void backToDrawer(View view){
+    public void backToDrawer(View view) {
         super.onBackPressed();
     }
 
@@ -181,6 +262,9 @@ public class MCQs extends AppCompatActivity {
         scoreText = findViewById(R.id.scoreText);
 
         optionsText = new TextView[]{option1, option2, option3, option4};
+
+        Intent intent = getIntent();
+        expNo = intent.getIntExtra("choice",2);
 
         createQuestion();
 

@@ -8,4 +8,13 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="ToolbarFont" parent="Widget.AppCompat.Light.ActionBar">
+        <item name="colorPrimary">#2cc0f4</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
 </resources>

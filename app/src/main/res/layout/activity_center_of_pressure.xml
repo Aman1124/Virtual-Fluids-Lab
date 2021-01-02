@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CenterOfPressure">
+
+    <ScrollView
+        android:id="@+id/cop_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aim:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/cop_aimPara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Theory:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/cop_theoryPara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/cop_aboutSetup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About Setup:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/cop_aboutSetupPara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#905040"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/cop_procedure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Procedure:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/cop_procedurePara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

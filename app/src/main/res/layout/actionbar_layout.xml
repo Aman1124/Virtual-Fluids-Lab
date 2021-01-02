@@ -13,7 +13,7 @@
         android:textStyle="bold"
         android:letterSpacing="0.04"
         android:fontFamily="@font/station"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textAlignment="center"
         android:background="#2cc0f4"
         android:layout_height="wrap_content"

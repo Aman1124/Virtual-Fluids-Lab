@@ -37,23 +37,11 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
+                android:theme="@style/ToolbarFont"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:background="#2cc0f4"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fluids Lab"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.04"
-                    android:fontFamily="@font/station"
-                    android:textSize="30sp"
-                    android:textAlignment="center" />
-
-            </androidx.appcompat.widget.Toolbar>
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -71,7 +59,7 @@
             android:src="@drawable/appuicrop" />
 
         <ImageView
-            android:id="@+id/vNotch"
+            android:id="@+id/wind_tunnel_float"
             android:layout_width="240dp"
             android:layout_height="290dp"
             android:layout_centerHorizontal="false"
@@ -80,13 +68,13 @@
             android:layout_marginEnd="35dp"
             android:layout_toStartOf="@id/bernoulliFloat"
             android:alpha="1"
-            android:src="@drawable/box" />
+            android:src="@drawable/wind_tunnel_box" />
 
         <ImageView
             android:id="@+id/vNotch1"
             android:layout_width="240dp"
             android:layout_height="290dp"
-            android:layout_alignEnd="@+id/vNotch"
+            android:layout_alignEnd="@+id/wind_tunnel_float"
             android:layout_centerHorizontal="false"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="275dp"
@@ -106,14 +94,14 @@
             android:src="@drawable/pitot_tube_box" />
 
         <ImageView
-            android:id="@+id/experiment5"
+            android:id="@+id/centerOfPressFloat"
             android:layout_width="240dp"
             android:layout_height="290dp"
             android:layout_alignStart="@+id/pitotFloat"
             android:layout_marginStart="275dp"
             android:layout_marginTop="30dp"
             android:alpha="1"
-            android:src="@drawable/box" />
+            android:src="@drawable/center_of_press_box" />
 
         <ImageView
             android:id="@+id/bernoulliFloat"
