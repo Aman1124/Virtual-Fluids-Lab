@@ -41,6 +41,8 @@ public class ActionMenu extends AppCompatActivity {
 
     String references = "1. Bernoulli's Experiment: KC Lab Manual";
 
+    String additional_res = "";
+
     String help = "In case you are facing any difficulty or have any suggestion regarding the app, you can mail to any one of us:\n\n" +
             "1. Aman Kumar (1801me06@iitp.ac.in)\n" +
             "2. Akshat Jain (1801me05@iitp.ac.in)\n" +
@@ -71,11 +73,15 @@ public class ActionMenu extends AppCompatActivity {
 //                workFromHome.playAnimation();
                 break;
             case 3:
+                setTitle("Additional Resources");
+                textView.setText(additional_res);
+                break;
+            case 4:
                 setTitle("Display Details");
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
                 textView.setText(displayDetailsText);
                 break;
-            case 4:
+            case 5:
                 setTitle("Help");
                 textView.setText(help);
                 workFromHome.setVisibility(View.VISIBLE);

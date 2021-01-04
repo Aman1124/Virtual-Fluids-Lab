@@ -10,9 +10,11 @@
 
         <item android:id="@+id/references"
             android:title="References"
-            android:icon="@drawable/reference_icon">
+            android:icon="@drawable/reference_icon"/>
 
-        </item>
+        <item android:id="@+id/additional_resources"
+            android:title="Additional Resources"
+            android:icon="@drawable/link_logo" />
 
         <item android:id="@+id/displayDetails"
             android:title="Display Details"

@@ -283,12 +283,16 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
                 actionBar.putExtra("option",2);
                 startActivity(actionBar);
                 break;
+            case R.id.additional_resources:
+                actionBar.putExtra("option", 3);
+                startActivity(actionBar);
+                break;
             case R.id.displayDetails:
-                actionBar.putExtra("option",3);
+                actionBar.putExtra("option",4);
                 startActivity(actionBar);
                 break;
             case R.id.help:
-                actionBar.putExtra("option",4);
+                actionBar.putExtra("option",5);
                 startActivity(actionBar);
                 break;
             case R.id.about:
