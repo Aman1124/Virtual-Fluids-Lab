@@ -39,7 +39,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
 
     ImageView bernoulli;
-    ImageView wind_tunnel_float, vNotch1, centerOfPressFloat;
+    ImageView wind_tunnel_float, reynolds_float, centerOfPressFloat;
     ImageView pitotFloat;
     ImageView drawer;
 
@@ -56,15 +56,15 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
     static final int MIN_DISTANCE = 200;
 
 
-    public void switchToBernoulli(View view){
-        Intent intent = new Intent(getApplicationContext(),Bernoulli.class);
+    public void switchToReynolds(View view){
+        Intent intent = new Intent(getApplicationContext(), ReynoldsNumber.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
     }
 
-    public void openSelfAssessment(View view){
-        Intent intent = new Intent(getApplicationContext(), MCQs.class);
-        intent.putExtra("choice", scroll);
+    public void switchToBernoulli(View view){
+        Intent intent = new Intent(getApplicationContext(),Bernoulli.class);
+        intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
     }
 
@@ -86,8 +86,16 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
     }
 
+    public void openSelfAssessment(View view){
+        Intent intent = new Intent(getApplicationContext(), MCQs.class);
+        intent.putExtra("choice", scroll);
+        startActivity(intent);
+    }
+
     public void openExperiment(View view){
-        if(scroll == 1)
+        if(scroll == 0)
+            switchToReynolds(view);
+        else if(scroll == 1)
             switchToWindTunnel(view);
         else if(scroll == 2)
             switchToBernoulli(view);
@@ -103,7 +111,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
             if (direction && scroll > 0) {
                 bernoulli.animate().translationXBy(displacementX).setDuration(duration);
                 wind_tunnel_float.animate().translationXBy(displacementX).setDuration(duration);
-                vNotch1.animate().translationXBy(displacementX).setDuration(duration);
+                reynolds_float.animate().translationXBy(displacementX).setDuration(duration);
                 centerOfPressFloat.animate().translationXBy(displacementX).setDuration(duration);
                 pitotFloat.animate().translationXBy(displacementX).setDuration(duration);
                 if (scroll >= 1)
@@ -115,7 +123,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
             } else if (!direction && scroll < 4) {
                 bernoulli.animate().translationXBy(-displacementX).setDuration(duration);
                 wind_tunnel_float.animate().translationXBy(-displacementX).setDuration(duration);
-                vNotch1.animate().translationXBy(-displacementX).setDuration(duration);
+                reynolds_float.animate().translationXBy(-displacementX).setDuration(duration);
                 centerOfPressFloat.animate().translationXBy(-displacementX).setDuration(duration);
                 pitotFloat.animate().translationXBy(-displacementX).setDuration(duration);
                 if (scroll <= 3)
@@ -192,12 +200,12 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 
         bernoulli = findViewById(R.id.bernoulliFloat);
         wind_tunnel_float = findViewById(R.id.wind_tunnel_float);
-        vNotch1 = findViewById(R.id.vNotch1);
+        reynolds_float = findViewById(R.id.reynolds_float);
         pitotFloat = findViewById(R.id.pitotFloat);
         centerOfPressFloat = findViewById(R.id.centerOfPressFloat);
         drawer = findViewById(R.id.drawer);
 
-        floatBoxes = new ImageView[]{vNotch1, wind_tunnel_float, bernoulli, pitotFloat, centerOfPressFloat};
+        floatBoxes = new ImageView[]{reynolds_float, wind_tunnel_float, bernoulli, pitotFloat, centerOfPressFloat};
 
         listLayout = findViewById(R.id.listLayout);
         optionsLayout = findViewById(R.id.optionsLayout);

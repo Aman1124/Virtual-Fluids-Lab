@@ -1,6 +1,7 @@
 package com.example.virtualfluidlab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class WindTunnel extends AppCompatActivity {
     ImageView[] para_arrow;
 
     ScrollView introduction, aboutSetup, procedure;
+    ConstraintLayout simulation;
 
     LinearLayout.LayoutParams openParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     LinearLayout.LayoutParams closeParams = new LinearLayout.LayoutParams(0, 0);
@@ -132,6 +134,7 @@ public class WindTunnel extends AppCompatActivity {
 
     public void startSimulation(){
         setTitle("Simulation");
+        simulation.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -157,6 +160,8 @@ public class WindTunnel extends AppCompatActivity {
         para2_arrow = findViewById(R.id.para2_arrow);
         para3_arrow = findViewById(R.id.para3_arrow);
         para4_arrow = findViewById(R.id.para4_arrow);
+
+        simulation = findViewById(R.id.windTunnel_simulation);
 
         para_arrow = new ImageView[]{para1_arrow, para2_arrow, para3_arrow, para4_arrow};
 

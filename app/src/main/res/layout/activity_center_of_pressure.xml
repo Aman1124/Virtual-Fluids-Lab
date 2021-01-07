@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".CenterOfPressure">
 
     <ScrollView
@@ -23,10 +24,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Aim:"
+                android:fontFamily="@font/nunito_semibold"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cop_aimPara"
@@ -37,15 +39,16 @@
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
                 android:textSize="20sp"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Theory:"
+                android:fontFamily="@font/nunito_semibold"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cop_theoryPara"
@@ -56,7 +59,7 @@
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
                 android:textSize="20sp"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -80,10 +83,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="About Setup:"
+                android:fontFamily="@font/nunito_semibold"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cop_aboutSetupPara"
@@ -94,12 +98,12 @@
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
                 android:textSize="20sp"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#905040"/>
+                android:background="#905040" />
 
         </LinearLayout>
 
@@ -122,10 +126,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Procedure:"
+                android:fontFamily="@font/nunito_semibold"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cop_procedurePara"
@@ -136,10 +141,145 @@
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
                 android:textSize="20sp"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cop_simulation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_240sdp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/cop_apparatus"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/cop_tank_waterLevel"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_122sdp"
+            android:layout_marginBottom="70dp"
+            android:alpha="0.75"
+            android:progress="15"
+            android:progressDrawable="@drawable/vertical_progressbar"
+            app:layout_constraintBottom_toBottomOf="@id/cop_apparatus_diagram"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/cop_apparatus_diagram"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_240sdp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/cop_apparatus_wc"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/cop_weights_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_240sdp"
+            app:layout_constraintStart_toStartOf="@id/cop_apparatus_diagram"
+            app:layout_constraintTop_toTopOf="@id/cop_apparatus_diagram" />
+
+        <ImageView
+            android:id="@+id/cop_compass_outer_ring"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/cop_compass_ring"
+            app:layout_constraintTop_toTopOf="@id/cop_apparatus_diagram"
+            app:layout_constraintBottom_toTopOf="@id/cop_apparatus_diagram"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/_82sdp" />
+
+        <ImageView
+            android:id="@+id/cop_compass_inner_ring"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/cop_compass_ring"
+            app:layout_constraintTop_toTopOf="@id/cop_compass_outer_ring"
+            app:layout_constraintBottom_toBottomOf="@id/cop_compass_outer_ring"
+            app:layout_constraintStart_toStartOf="@id/cop_compass_outer_ring"
+            app:layout_constraintEnd_toEndOf="@id/cop_compass_outer_ring"/>
+
+        <ImageView
+            android:id="@+id/cop_compass_bubble"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            app:layout_constraintTop_toTopOf="@id/cop_compass_outer_ring"
+            app:layout_constraintBottom_toBottomOf="@id/cop_compass_outer_ring"
+            app:layout_constraintStart_toStartOf="@id/cop_compass_outer_ring"
+            android:src="@drawable/circle"
+            app:tint="@color/colorPrimary"
+            android:layout_marginStart="29dp"/>
+
+        <ImageButton
+            android:id="@+id/cop_inc_weight_button"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:src="@drawable/add_symbol"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cop_apparatus_diagram"
+            android:onClick="changeWeight"
+            android:tag="1"/>
+
+        <ImageButton
+            android:id="@+id/cop_dec_weight_button"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/subtract_symbol"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cop_inc_weight_button"
+            android:onClick="changeWeight"
+            android:tag="-1"/>
+
+
+        <Button
+            android:id="@+id/cop_valve_V1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="110dp"
+            android:tag="0"
+            android:text="V1"
+            app:layout_constraintBottom_toBottomOf="@id/cop_apparatus_diagram"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/cop_addWater_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:text="Add Water"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/cop_apparatus_diagram"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageButton
+            android:id="@+id/cop_add_water"
+            android:layout_width="@dimen/_41sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/fill_color_icon"
+            android:clickable="false"
+            android:tag="1"
+            app:layout_constraintBottom_toBottomOf="@id/cop_addWater_text"
+            app:layout_constraintStart_toEndOf="@id/cop_addWater_text"
+            app:layout_constraintTop_toTopOf="@id/cop_addWater_text" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CenterOfPressure"></activity>
+        <activity android:name=".ReynoldsNumber"></activity>
+        <activity android:name=".CenterOfPressure" />
         <activity android:name=".WindTunnel" />
         <activity
             android:name=".Pitot_Tube"
