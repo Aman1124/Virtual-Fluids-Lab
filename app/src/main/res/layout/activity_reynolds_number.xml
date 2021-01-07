@@ -163,5 +163,176 @@
 
     </ScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/reynolds_simulation"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/reynolds_narrowTube"
+            android:layout_width="@dimen/_135sdp"
+            android:layout_height="@dimen/_10sdp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginBottom="70dp"
+            android:progressDrawable="@drawable/blueprogress"
+            android:progress="0"
+            app:layout_constraintStart_toStartOf="@id/reynolds_apparatus"
+            app:layout_constraintTop_toTopOf="@id/reynolds_apparatus"
+            android:layout_marginTop="@dimen/_129sdp"
+            android:layout_marginStart="@dimen/_115sdp"/>
+
+        <ProgressBar
+            android:id="@+id/reynolds_exitTap"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_19sdp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginBottom="70dp"
+            android:progressDrawable="@drawable/vertical_progressbar"
+            android:rotation="180"
+            android:progress="0"
+            app:layout_constraintEnd_toEndOf="@id/reynolds_apparatus"
+            app:layout_constraintTop_toTopOf="@id/reynolds_apparatus"
+            android:layout_marginTop="@dimen/_139sdp"
+            android:layout_marginEnd="@dimen/_3sdp"/>
+
+        <ImageView
+            android:id="@+id/reynolds_apparatus"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_330sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/reynolds_apparatus"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zoomed view of narrow tube"
+            android:textSize="13sp"
+            app:layout_constraintTop_toTopOf="@id/reynolds_tube_zoomView"
+            app:layout_constraintBottom_toTopOf="@id/reynolds_tube_zoomView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <ImageView
+            android:id="@+id/reynolds_tube_zoomView"
+            android:layout_width="@dimen/_240sdp"
+            android:layout_height="@dimen/_47sdp"
+            android:src="@drawable/reynolds_tube_zoomview"
+            app:layout_constraintTop_toBottomOf="@id/reynolds_apparatus"
+            app:layout_constraintLeft_toLeftOf="@id/reynolds_apparatus"
+            app:layout_constraintRight_toRightOf="@id/reynolds_apparatus"
+            android:layout_marginTop="15dp"/>
+
+        <android.widget.VerticalSeekBar
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_90sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/reynolds_apparatus"
+            android:layout_marginEnd="44dp"
+            android:layout_marginTop="25dp"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/reynolds_saveButton"
+            app:layout_constraintTop_toBottomOf="@id/reynolds_tube_zoomView"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="R1(cm)"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="R2(cm)"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="Time(s)"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/reynolds_deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:fontFamily="@font/nunito_semibold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/reynolds_saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:fontFamily="@font/nunito_semibold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 of 10"
+            android:textSize="20sp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="#909090"
+            app:layout_constraintBottom_toBottomOf="@id/reynolds_saveButton"
+            app:layout_constraintTop_toTopOf="@id/reynolds_saveButton"
+            app:layout_constraintLeft_toRightOf="@id/reynolds_deleteButton"
+            app:layout_constraintRight_toLeftOf="@id/reynolds_saveButton"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

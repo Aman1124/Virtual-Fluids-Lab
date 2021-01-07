@@ -15,6 +15,7 @@ public class ReynoldsNumber extends AppCompatActivity {
 
     int choice;
     ScrollView introductionView, aboutSetupView, procedureView;
+    ConstraintLayout simulationView;
     TextView rey_aimPara, rey_theoryPara1, rey_theoryPara2;
     TextView rey_aboutSetup, rey_procedure;
     MathJaxWebView rey_theoryFormula;
@@ -77,6 +78,7 @@ public class ReynoldsNumber extends AppCompatActivity {
 
     public void startSimulation(){
         setTitle("Simulation");
+        simulationView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -96,7 +98,7 @@ public class ReynoldsNumber extends AppCompatActivity {
         procedureView = findViewById(R.id.reynolds_procedure);
         rey_procedure = findViewById(R.id.reynolds_procedurePara);
 
-
+        simulationView = findViewById(R.id.reynolds_simulation);
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choice",0);
