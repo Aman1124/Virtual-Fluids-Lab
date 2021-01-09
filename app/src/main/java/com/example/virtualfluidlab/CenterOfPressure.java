@@ -21,11 +21,14 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.VerticalSeekBar;
 
+import com.example.virtualfluidlab.view.MathJaxWebView;
+
 import java.util.concurrent.TimeUnit;
 
 public class CenterOfPressure extends AppCompatActivity {
 
     TextView aimText, theoryText, aboutSetupText, procedureText;
+    MathJaxWebView theoryFormulasText;
     ScrollView introduction, aboutSetup, procedure;
     ImageView weightsView, compassBubbleView;
     ConstraintLayout simulation;
@@ -68,6 +71,29 @@ public class CenterOfPressure extends AppCompatActivity {
             "\n" +
             "If a rectangular surface of length a and width b is vertically immersed in the fluid, you can measure the total force acting on the surface with the aid of the torque acting on the same surface:\n";
 
+    String theoryFormulas = "<p \n align=\"justify\" style=\"font-family: Arial Rounded MT; font-size: 20px; font-style:bold; font-weight: 400;color:#707070;\">\n" +
+            "\\[T_t = wAx’(K-(h-h_o))\\]\n" +
+            "Centre of pressure of the force (in m):\n" +
+            "\\[h_o={ I_G \\over {A*x’}}+x’\\]\n" +
+            "We can calculate it under two conditions,<br><br>\n" +
+            "<b><u>Condition-1:</b></u> Surface is fully submerged in water(h>b)<br><br>\n" +
+            "Center of Gravity (in m): \\[CG = {b\\over 2}\\]<br>\n" +
+            "Area of the quadrant (in m2): \\[A={a*b}\\]<br>\n" +
+            "Depth of the center of gravity from the liquid surface (in m): \\[x’={h\\over 1000} – CG\\]<br>\n" +
+            "Moment of inertia for the rectangular surface (in m4): \\[I_G = {ab^3\\over 12}\\]\n" +
+            "<b><u>Condition-2:</b></u> Surface is partially submerged in water(h&ltb)<br><br>\n" +
+            "Center of Gravity (in m): \\[CG = {h\\over 2000}\\]<br>\n" +
+            "Area of the quadrant (in m2): \\[A={a*h\\over 1000}\\]<br>\n" +
+            "Depth of the center of gravity from the liquid surface (in m): \\[x’={h\\over 2000} \\]<br>\n" +
+            "Moment of inertia for the rectangular surface (in m4): \n" +
+            "\\[I_G = {a\\over 12} * ({h\\over 1000})^3 \\]\n" +
+            "We can measure the theoretical force acting on the submerged surface with the aid of torque, \n" +
+            "which can be compared to the real force acting on the surface. The real force on the quadrant would be equal to the weight applied.<br> \n" +
+            "Therefore, \n" +
+            "Actual force acting on the surface in (\\(kg-m/sec^2 \\)) <b>\\[F_a = {w*g\\over 1000}\\]</b>\n" +
+            "And theoretical force(\\(kg-m/sec^2\\)) can be calculated by \\[F_t = {T_t\\over L}\\]\n" +
+            "</p>";
+
     String setup = "To calculate the static thrust exerted by a fluid on a submerged surface, this hydrostatic pressure apparatus was developed to allow the determined magnitude and location of this force to be compared with the theory. \n" +
             "The apparatus consists of a manufactured quadrant mounted on a balanced arm, pivoting on the tip of the knife. The knife-edge of the quadrant coincides with the center of the arc. Thus, when submerged, only the tension on the rectangular end face gives rise to a moment along the knife edge of the hydrostatic force acting on the quadrant. A balancing pan for the supplied weight and an adjustable counter balance are built into the balance arm.\n" +
             "This assembly is placed on the top of an acrylic tank that can be levelled by adjusting screw feet. A spirit level is given on the quadrant's top surface to show that the balance arm is or is not horizontal. Water is fed to the top of the tank and can be drained by a valve on the side of the tank.\n";
@@ -91,6 +117,7 @@ public class CenterOfPressure extends AppCompatActivity {
         introduction.setVisibility(View.VISIBLE);
         aimText.setText(aim);
         theoryText.setText(theory);
+        theoryFormulasText.setText(theoryFormulas);
     }
 
     public void openAboutSetup(){
@@ -170,6 +197,7 @@ public class CenterOfPressure extends AppCompatActivity {
 
         aimText = findViewById(R.id.cop_aimPara);
         theoryText = findViewById(R.id.cop_theoryPara);
+        theoryFormulasText = findViewById(R.id.cop_theory_formulas);
         aboutSetupText = findViewById(R.id.cop_aboutSetupPara);
         procedureText = findViewById(R.id.cop_procedurePara);
 

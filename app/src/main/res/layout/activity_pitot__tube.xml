@@ -10,69 +10,66 @@
         android:id="@+id/pitot_introduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible"
             android:paddingLeft="@dimen/_12sdp"
             android:paddingRight="@dimen/_12sdp"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            android:visibility="visible">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textStyle="bold"
                 android:id="@+id/pitot_heading1"
-                />
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textStyle="normal"
-                android:fontFamily="@font/nunito_semibold"
-                android:textSize="20sp"
-                android:lineSpacingMultiplier="0.85"
-                android:justificationMode="inter_word"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/pitot_para1"
-                />
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textStyle="bold"
-                android:id="@+id/pitot_heading2"
-                android:layout_marginTop="15dp"
-                />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/pitot_labelledDiagram"
-                android:paddingBottom="25dp"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/pitot_testSectionData"
-                android:paddingBottom="25dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
-                android:textSize="20sp"
-                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/pitot_heading2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text=""
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/pitot_labelledDiagram"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/pitot_tube_labelled"
+                android:paddingBottom="25dp" />
+
+            <ImageView
+                android:id="@+id/pitot_testSectionData"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingBottom="25dp" />
+
+            <TextView
                 android:id="@+id/pitot_para2"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
             <com.example.virtualfluidlab.view.MathJaxWebView
                 android:id="@+id/pitot_webView"
@@ -80,32 +77,31 @@
                 android:layout_height="0dp" />
 
             <ImageView
+                android:id="@+id/pitot_Equation"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/pitot_Equation"
-                android:paddingBottom="25dp"/>
+                android:paddingBottom="25dp" />
 
             <TextView
+                android:id="@+id/pitot_para3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textStyle="normal"
                 android:fontFamily="@font/nunito_semibold"
-                android:textSize="20sp"
-                android:lineSpacingMultiplier="0.85"
                 android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
                 android:paddingBottom="15dp"
-                android:id="@+id/pitot_para3"
-                />
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/simulation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/simulation"
         android:visibility="invisible">
 
         <ProgressBar
@@ -113,90 +109,90 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="@dimen/_51sdp"
             android:layout_height="@dimen/_11sdp"
-            android:progressDrawable="@drawable/blueprogress"
+            android:layout_marginTop="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
             android:progress="100"
+            android:progressDrawable="@drawable/blueprogress"
             app:layout_constraintLeft_toLeftOf="@id/pitot_apparatus"
             app:layout_constraintRight_toRightOf="@id/pitot_apparatus"
-            app:layout_constraintTop_toTopOf="@id/flowRateValve"
-            android:layout_marginTop="@dimen/_23sdp"
-            android:layout_marginEnd="@dimen/_50sdp" />
+            app:layout_constraintTop_toTopOf="@id/flowRateValve" />
 
         <ProgressBar
             android:id="@+id/static_tube"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/vertical_progressbar"
             android:layout_width="@dimen/_12sdp"
             android:layout_height="@dimen/_190sdp"
-            android:progress="0"
-            app:layout_constraintTop_toTopOf="@id/pitot_apparatus"
-            app:layout_constraintRight_toRightOf="@id/pitot_apparatus"
+            android:layout_marginTop="@dimen/_40sdp"
             android:layout_marginEnd="@dimen/_122sdp"
-            android:layout_marginTop="@dimen/_40sdp"/>
+            android:progress="0"
+            android:progressDrawable="@drawable/vertical_progressbar"
+            app:layout_constraintRight_toRightOf="@id/pitot_apparatus"
+            app:layout_constraintTop_toTopOf="@id/pitot_apparatus" />
 
         <ProgressBar
             android:id="@+id/dynamic_tube"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/vertical_progressbar"
             android:layout_width="@dimen/_11sdp"
             android:layout_height="@dimen/_190sdp"
-            android:progress="0"
-            app:layout_constraintTop_toTopOf="@id/pitot_apparatus"
-            app:layout_constraintLeft_toRightOf="@id/static_tube"
+            android:layout_marginTop="@dimen/_40sdp"
             android:layout_marginEnd="@dimen/_125sdp"
-            android:layout_marginTop="@dimen/_40sdp"/>
+            android:progress="0"
+            android:progressDrawable="@drawable/vertical_progressbar"
+            app:layout_constraintLeft_toRightOf="@id/static_tube"
+            app:layout_constraintTop_toTopOf="@id/pitot_apparatus" />
 
         <ImageView
             android:id="@+id/pitot_apparatus"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_320sdp"
-            android:src="@drawable/pitot_tube_off"
             android:layout_marginTop="@dimen/_25sdp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:src="@drawable/pitot_tube_off"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:background="#FF0000"
-            android:alpha="0.25"
             android:id="@+id/flowRateValve"
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_35sdp"
-            app:layout_constraintTop_toTopOf="@id/pitot_apparatus"
-            app:layout_constraintLeft_toRightOf="@id/dynamic_tube"
-            android:layout_marginTop="@dimen/_100sdp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:onClick="changeFlowRate"/>
+            android:layout_marginTop="@dimen/_100sdp"
+            android:alpha="0.25"
+            android:background="#FF0000"
+            android:onClick="changeFlowRate"
+            app:layout_constraintLeft_toRightOf="@id/dynamic_tube"
+            app:layout_constraintTop_toTopOf="@id/pitot_apparatus" />
 
         <View
-            android:background="#FF0000"
-            android:alpha="0.25"
             android:id="@+id/power_button"
             android:layout_width="@dimen/_45sdp"
             android:layout_height="@dimen/_32sdp"
-            app:layout_constraintBottom_toBottomOf="@id/pitot_test_section"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginStart="@dimen/_20sdp"
-            android:onClick="powerUp"/>
+            android:alpha="0.25"
+            android:background="#FF0000"
+            android:onClick="powerUp"
+            app:layout_constraintBottom_toBottomOf="@id/pitot_test_section"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <View
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_75sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#ff0000"
-            android:alpha="0.25"
             android:layout_marginStart="@dimen/_100sdp"
             android:layout_marginTop="@dimen/_90sdp"
-            android:onClick="openTestSectionPopUp"/>
+            android:alpha="0.25"
+            android:background="#ff0000"
+            android:onClick="openTestSectionPopUp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <SeekBar
             android:id="@+id/flowRateSeekBar"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_15sdp"
-            app:layout_constraintBottom_toTopOf="@id/flowRateValve"
-            app:layout_constraintStart_toStartOf="@+id/flowRateValve"
-            app:layout_constraintEnd_toEndOf="@id/flowRateValve"
             android:layout_marginBottom="@dimen/_40sdp"
             android:rotation="270"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/flowRateValve"
+            app:layout_constraintEnd_toEndOf="@id/flowRateValve"
+            app:layout_constraintStart_toStartOf="@+id/flowRateValve" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -212,26 +208,26 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Q (L/s)"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="h1 (cm)"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="h2 (cm)"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:text="h2 (cm)"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -243,28 +239,28 @@
                     android:id="@+id/flowRateText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:text=""
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/static_height_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:text=""
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/dynamic_height_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:text=""
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -274,81 +270,81 @@
             android:id="@+id/testSection_popUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:visibility="invisible">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#000000"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:alpha="0.25"
-                android:onClick="openTestSectionPopUp"/>
+                android:background="#000000"
+                android:onClick="openTestSectionPopUp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/pop_up_bg"
                 android:layout_width="@dimen/_200sdp"
                 android:layout_height="@dimen/_215sdp"
+                android:alpha="1"
                 android:background="#fff"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:alpha="1"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="@dimen/_138sdp"
                 android:layout_height="@dimen/_50sdp"
+                android:background="#00a7ff"
                 app:layout_constraintBottom_toBottomOf="@id/pop_up_pitot_test_section"
-                app:layout_constraintStart_toStartOf="@id/pop_up_pitot_test_section"
                 app:layout_constraintEnd_toEndOf="@id/pop_up_pitot_test_section"
-                android:background="#00a7ff"/>
+                app:layout_constraintStart_toStartOf="@id/pop_up_pitot_test_section" />
 
 
             <ImageView
                 android:id="@+id/pitot_test_section_pin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pitot_test_section_pin"
-                app:layout_constraintStart_toStartOf="@id/pop_up_pitot_test_section"
-                app:layout_constraintEnd_toEndOf="@id/pop_up_pitot_test_section"
-                app:layout_constraintBottom_toBottomOf="@id/pop_up_pitot_test_section"
                 android:layout_marginEnd="@dimen/_17sdp"
-                android:layout_marginBottom="22.5dp"/>
+                android:layout_marginBottom="22.5dp"
+                android:src="@drawable/pitot_test_section_pin"
+                app:layout_constraintBottom_toBottomOf="@id/pop_up_pitot_test_section"
+                app:layout_constraintEnd_toEndOf="@id/pop_up_pitot_test_section"
+                app:layout_constraintStart_toStartOf="@id/pop_up_pitot_test_section" />
 
             <ImageView
                 android:id="@+id/pop_up_pitot_test_section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:src="@drawable/pitot_test_section"
-                app:layout_constraintTop_toTopOf="@id/pop_up_bg"
                 app:layout_constraintStart_toStartOf="@id/pop_up_bg"
-                android:layout_marginTop="@dimen/_15sdp"/>
+                app:layout_constraintTop_toTopOf="@id/pop_up_bg" />
 
             <android.widget.VerticalSeekBar
                 android:id="@+id/needleHeightSeekBar"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_150sdp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/pop_up_bg"
                 app:layout_constraintStart_toEndOf="@id/pop_up_pitot_test_section"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/needleHeightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pop_up_pitot_test_section"
+                android:text="0 cm"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/pop_up_bg"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:text="0 cm"
-                android:textSize="20sp"/>
+                app:layout_constraintTop_toBottomOf="@id/pop_up_pitot_test_section" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

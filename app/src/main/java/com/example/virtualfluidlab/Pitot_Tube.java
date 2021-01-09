@@ -44,6 +44,7 @@ public class Pitot_Tube extends AppCompatActivity {
     MathJaxWebView pitot_webView;
 
     int choice;
+    float density;
     float[] height = new float[2];
     double flowRate;
     boolean flowBar_visibility = false, power = false, ts_popUp_visibility = false;
@@ -62,7 +63,8 @@ public class Pitot_Tube extends AppCompatActivity {
     String theory_formulas = "<p align=\"justify\" style = \"font-family: Arial Rounded MT; font-size: 20px; font-style:bold; font-weight: 400;color:#707070\">\n" +
             "  \\[{P_1\\over \\rho g}+ {v_1^2 \\over 2g} + Z_1= {P_2\\over \\rho g}+ {v_2^2 \\over 2g} + Z_2\\]\n" +
             "  Since \\(Z_1 = Z_2\\) and \\(v_2 = 0\\) m/s,\n" +
-            "  \\[v_1=\\sqrt{2g \\left({P_2 \\over \\rho g}-{P_1 \\over \\rho g} \\right)} = \\sqrt{2g(h_2-h_1)}\\]\n" +
+            "  \\[v_1=\\sqrt{2g \\left({P_2 \\over \\rho g}-{P_1 \\over \\rho g} \\right)}\\]\n" +
+            "  \\[=\\sqrt{2g(h_2-h_1)}\\]\n" +
             "  Also, for laminar flow, with the help of pipe Poiseuille's equation point velocity is\n" +
             "  \\[v_{1t}= 2v_m(1-({r \\over R})^2)\\]\n" +
             "  For turbulent flow, best approximated point velocity is calculated theoretically as follows:\n" +
@@ -110,12 +112,13 @@ public class Pitot_Tube extends AppCompatActivity {
             "measured with the help of measuring tank and stopwatch. A control valve and by-pass valve is provided to regulate the flow of water.";
 
     String expSetup2 = "The following precautions have to be followed:\n" +
-            "1 Never run the apparatus if power supply is less than 200 Volts and above 230 Volts\n" +
-            "2 Never fully close the control valve V1 and by pass valve V2 simultaneously.\n" +
-            "3 Always keep apparatus free from dust.\n" +
-            "4 If pump gets heated up, switch off the main power for 30 minutes and avoid closing the flow control valve V1 and by-pass valve V2 at a time, during operation.";
+            "1. Never run the apparatus if power supply is less than 200 Volts and above 230 Volts\n" +
+            "2. Never fully close the control valve V1 and by pass valve V2 simultaneously.\n" +
+            "3. Always keep apparatus free from dust.\n" +
+            "4. If pump gets heated up, switch off the main power for 30 minutes and avoid closing the flow control valve V1 and by-pass valve V2 at a time, during operation.";
 
     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    LinearLayout.LayoutParams labelled_params;
 
     public void openIntroduction(){
         heading1.setTextSize(30);
@@ -140,6 +143,7 @@ public class Pitot_Tube extends AppCompatActivity {
         heading2.setVisibility(View.INVISIBLE);
         para1.setText(expSetup1);
         para2.setText(expSetup2);
+        pitot_labelledDiagram.setLayoutParams(labelled_params);
 //        pitot_labelledDiagram.requestLayout();
 //        pitot_labelledDiagram.setImageResource(R.drawable.bernoulli_labelled);
 //        pitot_labelledDiagram.getLayoutParams().height = 800;
@@ -297,6 +301,8 @@ public class Pitot_Tube extends AppCompatActivity {
 
         pinParams = (ConstraintLayout.LayoutParams) pitot_test_section_pin.getLayoutParams();
         metrics  = getResources().getDisplayMetrics();
+        density = metrics.density;
+        labelled_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) (300*density));
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choice",0);

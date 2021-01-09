@@ -97,18 +97,10 @@
             android:paddingBottom="@dimen/_12sdp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="About Setup:"
-                android:fontFamily="@font/nunito_semibold"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/reynolds_aboutSetupPara"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/nunito_semibold"
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
@@ -118,8 +110,8 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#905040" />
+                android:layout_height="310dp"
+                android:src="@drawable/reynolds_labelled" />
 
         </LinearLayout>
 
@@ -140,18 +132,10 @@
             android:paddingRight="@dimen/_12sdp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Procedure:"
-                android:fontFamily="@font/nunito_semibold"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/reynolds_procedurePara"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/nunito_semibold"
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
