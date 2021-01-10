@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class CenterOfPressure extends AppCompatActivity {
 
     TextView aimText, theoryText, aboutSetupText, procedureText;
-    MathJaxWebView theoryFormulasText;
+    MathJaxWebView theoryFormula1Text, theoryFormula2Text, theoryFormula3Text;
     ScrollView introduction, aboutSetup, procedure;
     ImageView weightsView, compassBubbleView;
     ConstraintLayout simulation;
@@ -45,7 +45,7 @@ public class CenterOfPressure extends AppCompatActivity {
     private boolean mAutoDecrement = false;
 
     int choice, water = 75, weight = 0;
-    int weightId[] = new int[]{
+    int[] weightId = new int[]{
             R.drawable.cop_weight_1,
             R.drawable.cop_weight_2,
             R.drawable.cop_weight_3,
@@ -71,17 +71,23 @@ public class CenterOfPressure extends AppCompatActivity {
             "\n" +
             "If a rectangular surface of length a and width b is vertically immersed in the fluid, you can measure the total force acting on the surface with the aid of the torque acting on the same surface:\n";
 
-    String theoryFormulas = "<p \n align=\"justify\" style=\"font-family: Arial Rounded MT; font-size: 20px; font-style:bold; font-weight: 400;color:#707070;\">\n" +
+    String theoryFormula1 = "<p \n align=\"justify\" style=\"font-family: Arial Rounded MT; font-size: 18px; font-style:bold; font-weight: 400;color:#707070;\">\n" +
             "\\[T_t = wAx’(K-(h-h_o))\\]\n" +
             "Centre of pressure of the force (in m):\n" +
             "\\[h_o={ I_G \\over {A*x’}}+x’\\]\n" +
             "We can calculate it under two conditions,<br><br>\n" +
-            "<b><u>Condition-1:</b></u> Surface is fully submerged in water(h>b)<br><br>\n" +
+            "<b><u>Condition-1:</b></u> Surface is fully submerged in water(h>b)\n" +
+            "</p>";
+
+    String theoryFormula2 = "<p \n align=\"justify\" style=\"font-family: Arial Rounded MT; font-size: 18px; font-style:bold; font-weight: 400;color:#707070;\">\n" +
             "Center of Gravity (in m): \\[CG = {b\\over 2}\\]<br>\n" +
             "Area of the quadrant (in m2): \\[A={a*b}\\]<br>\n" +
             "Depth of the center of gravity from the liquid surface (in m): \\[x’={h\\over 1000} – CG\\]<br>\n" +
             "Moment of inertia for the rectangular surface (in m4): \\[I_G = {ab^3\\over 12}\\]\n" +
-            "<b><u>Condition-2:</b></u> Surface is partially submerged in water(h&ltb)<br><br>\n" +
+            "<b><u>Condition-2:</b></u> Surface is partially submerged in water(h&ltb)\n" +
+            "</p";
+
+    String theoryFormula3 = "<p \n align=\"justify\" style=\"font-family: Arial Rounded MT; font-size: 18px; font-style:bold; font-weight: 400;color:#707070;\">\n" +
             "Center of Gravity (in m): \\[CG = {h\\over 2000}\\]<br>\n" +
             "Area of the quadrant (in m2): \\[A={a*h\\over 1000}\\]<br>\n" +
             "Depth of the center of gravity from the liquid surface (in m): \\[x’={h\\over 2000} \\]<br>\n" +
@@ -114,10 +120,12 @@ public class CenterOfPressure extends AppCompatActivity {
 
     public void openIntroduction(){
         setTitle("Introduction");
-        introduction.setVisibility(View.VISIBLE);
         aimText.setText(aim);
         theoryText.setText(theory);
-        theoryFormulasText.setText(theoryFormulas);
+        theoryFormula1Text.setText(theoryFormula1);
+        theoryFormula2Text.setText(theoryFormula2);
+        theoryFormula3Text.setText(theoryFormula3);
+        introduction.setVisibility(View.VISIBLE);
     }
 
     public void openAboutSetup(){
@@ -197,7 +205,9 @@ public class CenterOfPressure extends AppCompatActivity {
 
         aimText = findViewById(R.id.cop_aimPara);
         theoryText = findViewById(R.id.cop_theoryPara);
-        theoryFormulasText = findViewById(R.id.cop_theory_formulas);
+        theoryFormula1Text = findViewById(R.id.cop_theory_formula1);
+        theoryFormula2Text = findViewById(R.id.cop_theory_formula2);
+        theoryFormula3Text = findViewById(R.id.cop_theory_formula3);
         aboutSetupText = findViewById(R.id.cop_aboutSetupPara);
         procedureText = findViewById(R.id.cop_procedurePara);
 

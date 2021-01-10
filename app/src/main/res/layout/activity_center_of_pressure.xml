@@ -25,9 +25,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/nunito_semibold"
+                android:fontFamily="@font/nunito_extrabold"
                 android:text="Aim:"
-                android:textSize="30sp"
+                android:textSize="27sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -38,16 +38,16 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/nunito_semibold"
+                android:fontFamily="@font/nunito_extrabold"
                 android:text="Theory:"
-                android:textSize="30sp"
+                android:textSize="27sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -58,11 +58,35 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <com.example.virtualfluidlab.view.MathJaxWebView
-                android:id="@+id/cop_theory_formulas"
+                android:id="@+id/cop_theory_formula1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_210sdp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:src="@drawable/cop_intro_fig1"/>
+
+            <com.example.virtualfluidlab.view.MathJaxWebView
+                android:id="@+id/cop_theory_formula2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_210sdp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:src="@drawable/cop_intro_fig2"/>
+
+            <com.example.virtualfluidlab.view.MathJaxWebView
+                android:id="@+id/cop_theory_formula3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -94,7 +118,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <ImageView
@@ -130,7 +154,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
         </LinearLayout>
@@ -268,6 +292,39 @@
             app:layout_constraintBottom_toBottomOf="@id/cop_addWater_text"
             app:layout_constraintStart_toEndOf="@id/cop_addWater_text"
             app:layout_constraintTop_toTopOf="@id/cop_addWater_text" />
+
+        <Button
+            android:id="@+id/cop_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="25dp"
+            android:text="Delete"
+            android:fontFamily="@font/nunito_semibold"/>
+
+        <Button
+            android:id="@+id/cop_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="25dp"
+            android:text="Save"
+            android:fontFamily="@font/nunito_semibold"/>
+
+        <TextView
+            android:id="@+id/cop_readingsCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/cop_save_button"
+            app:layout_constraintBottom_toBottomOf="@id/cop_save_button"
+            app:layout_constraintLeft_toRightOf="@id/cop_delete_button"
+            app:layout_constraintRight_toLeftOf="@id/cop_save_button"
+            android:text="0 of 10"
+            android:fontFamily="@font/nunito_semibold"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

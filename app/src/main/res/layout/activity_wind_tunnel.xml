@@ -10,7 +10,7 @@
         android:id="@+id/windTunnel_introduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -32,8 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="Aim:"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:textSize="27sp"
+                    android:fontFamily="@font/nunito_extrabold" />
 
                 <TextView
                     android:id="@+id/aimText"
@@ -43,7 +43,7 @@
                     android:justificationMode="inter_word"
                     android:lineSpacingMultiplier="0.85"
                     android:text=""
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="normal" />
 
                 <TextView
@@ -51,8 +51,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="Theory:"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:textSize="27sp"
+                    android:fontFamily="@font/nunito_extrabold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                         android:onClick="intro_para"
                         android:tag="1"
                         android:text="Drag Forces"
-                        android:textSize="25sp"
+                        android:textSize="23sp"
                         android:textStyle="normal" />
 
                     <ImageView
@@ -84,7 +84,7 @@
                     android:fontFamily="@font/nunito_semibold"
                     android:justificationMode="inter_word"
                     android:lineSpacingMultiplier="0.85"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="normal" />
 
                 <LinearLayout
@@ -99,7 +99,7 @@
                         android:onClick="intro_para"
                         android:tag="2"
                         android:text="Flow Type"
-                        android:textSize="25sp"
+                        android:textSize="23sp"
                         android:textStyle="normal" />
 
                     <ImageView
@@ -117,7 +117,7 @@
                     android:fontFamily="@font/nunito_semibold"
                     android:justificationMode="inter_word"
                     android:lineSpacingMultiplier="0.85"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="normal" />
 
                 <LinearLayout
@@ -132,7 +132,7 @@
                         android:onClick="intro_para"
                         android:tag="3"
                         android:text="Boundary Layer"
-                        android:textSize="25sp"
+                        android:textSize="23sp"
                         android:textStyle="normal" />
 
                     <ImageView
@@ -150,8 +150,43 @@
                     android:fontFamily="@font/nunito_semibold"
                     android:justificationMode="inter_word"
                     android:lineSpacingMultiplier="0.85"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="normal" />
+
+                <LinearLayout
+                    android:id="@+id/windTunnel_para3_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_weight="1"
+                            android:paddingEnd="8dp"
+                            android:src="@drawable/wind_tunnel_intro_fig1" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_weight="1"
+                            android:paddingStart="10dp"
+                            android:src="@drawable/wind_tunnel_intro_fig2" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/wind_tunnel_intro_fig3" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,7 +200,7 @@
                         android:onClick="intro_para"
                         android:tag="4"
                         android:text="Boundary Layer Manipulation"
-                        android:textSize="25sp"
+                        android:textSize="23sp"
                         android:textStyle="normal" />
 
                     <ImageView
@@ -183,7 +218,7 @@
                     android:fontFamily="@font/nunito_semibold"
                     android:justificationMode="inter_word"
                     android:lineSpacingMultiplier="0.85"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="normal" />
 
 
@@ -216,8 +251,8 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
-                android:textStyle="normal"/>
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -251,25 +286,25 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
-                android:textStyle="normal"/>
+                android:textSize="18sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/windTunnel_simulation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/windTunnel_simulation"
         android:visibility="invisible">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_170sdp"
+            android:layout_marginTop="50dp"
             android:src="@drawable/wind_tunnel_apparatus"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="50dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

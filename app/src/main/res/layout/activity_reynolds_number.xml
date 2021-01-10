@@ -26,8 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Aim:"
-                android:fontFamily="@font/nunito_semibold"
-                android:textSize="30sp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textSize="27sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <TextView
@@ -46,8 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Theory:"
-                android:fontFamily="@font/nunito_semibold"
-                android:textSize="30sp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textSize="27sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -58,7 +58,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <com.example.virtualfluidlab.view.MathJaxWebView
@@ -74,8 +74,56 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/laminar_flow"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_semibold"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/reynolds_intro_laminar"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/transition_flow"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_semibold"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/reynolds_intro_transition"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/turbulent_flow"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_semibold"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/reynolds_intro_turbulent"/>
 
         </LinearLayout>
 
@@ -105,7 +153,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <ImageView
@@ -140,7 +188,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
         </LinearLayout>
@@ -190,7 +238,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zoomed view of narrow tube"
+            android:text="Zoomed view of glass tube"
             android:textSize="13sp"
             app:layout_constraintTop_toTopOf="@id/reynolds_tube_zoomView"
             app:layout_constraintBottom_toTopOf="@id/reynolds_tube_zoomView"
@@ -212,7 +260,7 @@
             android:layout_height="@dimen/_90sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/reynolds_apparatus"
-            android:layout_marginEnd="44dp"
+            android:layout_marginEnd="45dp"
             android:layout_marginTop="25dp"/>
 
         <TableLayout
@@ -221,7 +269,8 @@
             app:layout_constraintBottom_toTopOf="@id/reynolds_saveButton"
             app:layout_constraintTop_toBottomOf="@id/reynolds_tube_zoomView"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:paddingRight="15dp"
+            android:layout_marginBottom="35dp">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -309,7 +358,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0 of 10"
-            android:textSize="20sp"
             android:fontFamily="@font/nunito_semibold"
             android:textColor="#909090"
             app:layout_constraintBottom_toBottomOf="@id/reynolds_saveButton"

@@ -27,12 +27,9 @@ public class ReynoldsNumber extends AppCompatActivity {
             "For the flow through pipe, the following equation is used to calculate the Reynolds number:";
 
     String theoryPara2 = "here, ρ is the density, V is the average flow velocity in the pipe, D is the pipe diameter and μ is the dynamic viscosity. \n" +
-            "\nThe flow transits from laminar to turbulent for a specific fluid, i.e. for continuous viscosity, as the flow velocity is increased. The Reynolds number at which the flow begins to transit from laminar is called the critical number of Reynolds. The value of critical Reynolds number for the flow through pipe is usually taken as 2300. The following classification of flow regimes were given by Reynolds based on the experimental results:\n" +
-            "\nLaminar: Re < 2300\n" +
-            "Transition: 2300 < Re < 4000\n" +
-            "Turbulent: Re > 4000\n";
+            "\nThe flow transits from laminar to turbulent for a specific fluid, i.e. for continuous viscosity, as the flow velocity is increased. The Reynolds number at which the flow begins to transit from laminar is called the critical number of Reynolds. The value of critical Reynolds number for the flow through pipe is usually taken as 2300. The following classification of flow regimes were given by Reynolds based on the experimental results:\n";
 
-    String theoryFormula = "<p align=\"justify\" style = \"font-size: 20px; font-style:bold; font-weight: 400;color:#707070\">\n" +
+    String theoryFormula = "<p align=\"justify\" style = \"font-size: 18px; font-style:bold; font-weight: 400;color:#707070\">\n" +
             "\\[R_e = {\\rho V D \\over \\mu}\\]" +
             "</p>";
 

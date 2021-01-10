@@ -60,7 +60,7 @@ public class Pitot_Tube extends AppCompatActivity {
             "At point 1 the pressure is p1 and the velocity of the stream is v1. However, at point 2 the fluid is brought to rest and the energy has been converted to pressure energy. Therefore the pressure at 2 is p2, the velocity v2 is zero and since 1 and 2 are in the same horizontal plane, \n" +
             "Applying Bernoulli’s equation at points (1) and (2)\n";
 
-    String theory_formulas = "<p align=\"justify\" style = \"font-family: Arial Rounded MT; font-size: 20px; font-style:bold; font-weight: 400;color:#707070\">\n" +
+    String theory_formulas = "<p align=\"justify\" style = \"font-family: Arial Rounded MT; font-size: 18px; font-style:bold; font-weight: 400;color:#707070\">\n" +
             "  \\[{P_1\\over \\rho g}+ {v_1^2 \\over 2g} + Z_1= {P_2\\over \\rho g}+ {v_2^2 \\over 2g} + Z_2\\]\n" +
             "  Since \\(Z_1 = Z_2\\) and \\(v_2 = 0\\) m/s,\n" +
             "  \\[v_1=\\sqrt{2g \\left({P_2 \\over \\rho g}-{P_1 \\over \\rho g} \\right)}\\]\n" +
@@ -103,7 +103,15 @@ public class Pitot_Tube extends AppCompatActivity {
             "\n12. For different positions of pitot tube (change by knob), Record the manometer reading for particular discharge to determine velocity profile.\n" +
             "\n13. Vary the flow rates of water by operating control valve V1 and by-pass valve V2 and repeat the experiment.\n" +
             "\n14. Turn OFF the pump and power supply. \n" +
-            "\n15. Drain the apparatus using valve V3 and V4.\n";
+            "\n15. Drain the apparatus using valve V3 and V4.\n" +
+            "\n\nProcedure for simulation :- \n" +
+            "1. Switch on the power supply by clicking on the power control box.\n" +
+            "2. Get desired flow rate by clicking on the valve and then adjusting the seekbar. \n" +
+            "3. Click on the knob. In the pop-up window, adjust the seekbar for getting the desired vertical position of the pointer.\n" +
+            "4. Click anywhere on the screen to close the pop-up window" +
+            "5. Record the readings in both arms of the manometer by clicking on the \"Save\" button.\n" +
+            "6. Keep repeating step 3 and recording the reading.\n" +
+            "7. Once done, turn of the power. Go back and then click on \"Observation Table\" to see the saved readings\n";
 
     String expSetup1 = "The apparatus consists of sump tank with centrifugal pump. A pitot tube made of copper" +
             "provided in the test section made of acrylic connected to pipeline with flow control valve." +
@@ -121,8 +129,8 @@ public class Pitot_Tube extends AppCompatActivity {
     LinearLayout.LayoutParams labelled_params;
 
     public void openIntroduction(){
-        heading1.setTextSize(30);
-        heading2.setTextSize(30);
+        heading1.setTextSize(27);
+        heading2.setTextSize(27);
         heading1.setText("Aim:");
         heading2.setText("Theory:");
         setTitle("Introduction");

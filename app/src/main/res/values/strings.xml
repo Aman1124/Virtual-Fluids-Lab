@@ -7,4 +7,7 @@
         <item>$$ p+\\frac{1}{2}\\rho v^2 = constant$$</item>
     </array>
     <string name="latexString">$$ p+\\frac{1}{2}\\rho v^2 = constant$$</string>
+    <string name="laminar_flow"><![CDATA[Laminar: Re < 2300]]></string>
+    <string name="transition_flow"><![CDATA[Transition: 2300 < Re < 4000]]></string>
+    <string name="turbulent_flow"><![CDATA[Turbulent: Re > 4000]]></string>
 </resources>

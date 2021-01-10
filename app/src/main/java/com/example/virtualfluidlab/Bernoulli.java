@@ -130,8 +130,8 @@ public class Bernoulli extends AppCompatActivity {
     }
 
     public void openIntroduction(){
-        heading1.setTextSize(30);
-        heading2.setTextSize(30);
+        heading1.setTextSize(27);
+        heading2.setTextSize(27);
         heading1.setText("Aim:");
         heading2.setText("Theory:");
         setTitle("Introduction");

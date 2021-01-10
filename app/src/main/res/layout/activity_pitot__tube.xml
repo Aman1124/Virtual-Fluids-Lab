@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textStyle="bold" />
+                android:fontFamily="@font/nunito_extrabold" />
 
             <TextView
                 android:id="@+id/pitot_para1"
@@ -36,7 +36,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text=""
-                android:textStyle="bold" />
+                android:fontFamily="@font/nunito_extrabold" />
 
             <ImageView
                 android:id="@+id/pitot_labelledDiagram"
@@ -68,7 +68,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="0.85"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
             <com.example.virtualfluidlab.view.MathJaxWebView
@@ -91,7 +91,7 @@
                 android:lineSpacingMultiplier="0.85"
                 android:paddingBottom="15dp"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
         </LinearLayout>
@@ -155,8 +155,6 @@
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_100sdp"
-            android:alpha="0.25"
-            android:background="#FF0000"
             android:onClick="changeFlowRate"
             app:layout_constraintLeft_toRightOf="@id/dynamic_tube"
             app:layout_constraintTop_toTopOf="@id/pitot_apparatus" />
@@ -166,8 +164,6 @@
             android:layout_width="@dimen/_45sdp"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginStart="@dimen/_20sdp"
-            android:alpha="0.25"
-            android:background="#FF0000"
             android:onClick="powerUp"
             app:layout_constraintBottom_toBottomOf="@id/pitot_test_section"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -177,8 +173,6 @@
             android:layout_height="@dimen/_75sdp"
             android:layout_marginStart="@dimen/_100sdp"
             android:layout_marginTop="@dimen/_90sdp"
-            android:alpha="0.25"
-            android:background="#ff0000"
             android:onClick="openTestSectionPopUp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -199,7 +193,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/pitot_apparatus">
+            app:layout_constraintTop_toBottomOf="@id/pitot_apparatus"
+            android:layout_marginTop="20dp">
 
             <TableRow
                 android:layout_width="wrap_content"
@@ -265,6 +260,39 @@
             </TableRow>
 
         </TableLayout>
+
+        <Button
+            android:id="@+id/pitot_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="25dp"
+            android:text="Delete"
+            android:fontFamily="@font/nunito_semibold"/>
+
+        <Button
+            android:id="@+id/pitot_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="25dp"
+            android:text="Save"
+            android:fontFamily="@font/nunito_semibold"/>
+
+        <TextView
+            android:id="@+id/pitot_readingsCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/pitot_save_button"
+            app:layout_constraintBottom_toBottomOf="@id/pitot_save_button"
+            app:layout_constraintLeft_toRightOf="@id/pitot_delete_button"
+            app:layout_constraintRight_toLeftOf="@id/pitot_save_button"
+            android:text="0 of 10"
+            android:fontFamily="@font/nunito_semibold"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/testSection_popUp"

@@ -23,6 +23,7 @@ public class WindTunnel extends AppCompatActivity {
 
     ScrollView introduction, aboutSetup, procedure;
     ConstraintLayout simulation;
+    LinearLayout para3_images;
 
     LinearLayout.LayoutParams openParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     LinearLayout.LayoutParams closeParams = new LinearLayout.LayoutParams(0, 0);
@@ -108,11 +109,15 @@ public class WindTunnel extends AppCompatActivity {
             para[tag].setLayoutParams(openParams);
             para[tag].setText(theory[tag]);
             para_arrow[tag].animate().rotation(180f).setDuration(50);
+            if(tag==2)
+                para3_images.setLayoutParams(openParams);
         }
         else{
             para[tag].setLayoutParams(closeParams);
             para[tag].setText("");
             para_arrow[tag].animate().rotation(0f).setDuration(50);
+            if(tag==2)
+                para3_images.setLayoutParams(closeParams);
         }
     }
 
@@ -160,6 +165,8 @@ public class WindTunnel extends AppCompatActivity {
         para2_arrow = findViewById(R.id.para2_arrow);
         para3_arrow = findViewById(R.id.para3_arrow);
         para4_arrow = findViewById(R.id.para4_arrow);
+
+        para3_images = findViewById(R.id.windTunnel_para3_images);
 
         simulation = findViewById(R.id.windTunnel_simulation);
 
