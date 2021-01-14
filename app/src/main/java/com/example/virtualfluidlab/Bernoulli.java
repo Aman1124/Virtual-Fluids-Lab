@@ -175,7 +175,7 @@ public class Bernoulli extends AppCompatActivity {
     public void openObservation(){
         setTitle("Observation Table");
         try{
-            Cursor c = observationDatabase.rawQuery("SELECT * FROM readings", null);
+            Cursor c = observationDatabase.rawQuery("SELECT * FROM bernoulli", null);
             c.moveToFirst();
             int index = c.getColumnIndex("sn");
             float d = c.getInt(index);
@@ -271,13 +271,13 @@ public class Bernoulli extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             if (obsCount < 10){
                 obsCount += 1; dataSNo += 1;
-                observationDatabase.execSQL("INSERT INTO readings (sn, flowRate, h1, h2, h3, h4, h5, h6, h7) VALUES (" +
+                observationDatabase.execSQL("INSERT INTO bernoulli (sn, flowRate, h1, h2, h3, h4, h5, h6, h7) VALUES (" +
                         String.format(Locale.US, "%d, %.6f, %.1f, %.1f, %.1f, %.1f, %.1f, %.1f, %.1f)",
                                 dataSNo, flowRate, tubes[0], tubes[1], tubes[2], tubes[3], tubes[4], tubes[5], tubes[6]));
             }
         }
         else if (tag == 0 && obsCount > 0){
-            observationDatabase.execSQL("DELETE FROM readings WHERE sn = " + (dataSNo));
+            observationDatabase.execSQL("DELETE FROM bernoulli WHERE sn = " + (dataSNo));
             dataSNo -= 1; obsCount -= 1;
         }
         else if (tag == 2) {
@@ -304,7 +304,7 @@ public class Bernoulli extends AppCompatActivity {
 
     public void createObservationTable(){
         tableStatus = true;
-        Cursor c = observationDatabase.rawQuery("SELECT * FROM readings", null);
+        Cursor c = observationDatabase.rawQuery("SELECT * FROM bernoulli", null);
         c.moveToFirst();
         int flowRateIndex = c.getColumnIndex("flowRate");
         int[] hIndex = new int[7]; int sno;
@@ -351,7 +351,7 @@ public class Bernoulli extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        observationDatabase.execSQL("DELETE FROM readings");
+                        observationDatabase.execSQL("DELETE FROM bernoulli");
                     }
                 })
                 .setNegativeButton("No", null)
@@ -472,13 +472,13 @@ public class Bernoulli extends AppCompatActivity {
         table = findViewById(R.id.observationTable);
 
         try{
-            observationDatabase = this.openOrCreateDatabase("Readings", MODE_PRIVATE, null);
-            observationDatabase.execSQL("CREATE TABLE IF NOT EXISTS readings ( sn INT(2), flowRate FLOAT, h1 FLOAT, h2 FLOAT, h3 FLOAT, h4 FLOAT, h5 FLOAT, h6 FLOAT, h7 FLOAT )");
+            observationDatabase = this.openOrCreateDatabase("Observation", MODE_PRIVATE, null);
+            observationDatabase.execSQL("CREATE TABLE IF NOT EXISTS bernoulli ( sn INT(2), flowRate FLOAT, h1 FLOAT, h2 FLOAT, h3 FLOAT, h4 FLOAT, h5 FLOAT, h6 FLOAT, h7 FLOAT )");
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        sharedPreferences = this.getSharedPreferences("com.example.virtualfluidlab", Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences("com.example.virtualfluidlab.bernoulli", Context.MODE_PRIVATE);
         dataSNo = sharedPreferences.getInt("serialNo", 0);
         obsCount = dataSNo;
         observationCount.setText(String.format("%s of 10", obsCount));

@@ -10,7 +10,7 @@
         android:id="@+id/windTunnel_introduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -67,7 +67,8 @@
                         android:tag="1"
                         android:text="Drag Forces"
                         android:textSize="23sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:fontFamily="@font/nunito_bold"/>
 
                     <ImageView
                         android:id="@+id/para1_arrow"
@@ -100,7 +101,8 @@
                         android:tag="2"
                         android:text="Flow Type"
                         android:textSize="23sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:fontFamily="@font/nunito_bold"/>
 
                     <ImageView
                         android:id="@+id/para2_arrow"
@@ -133,7 +135,8 @@
                         android:tag="3"
                         android:text="Boundary Layer"
                         android:textSize="23sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:fontFamily="@font/nunito_bold"/>
 
                     <ImageView
                         android:id="@+id/para3_arrow"
@@ -184,6 +187,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_gravity="center_horizontal"
+                        android:paddingBottom="15dp"
                         android:src="@drawable/wind_tunnel_intro_fig3" />
 
                 </LinearLayout>
@@ -201,7 +205,8 @@
                         android:tag="4"
                         android:text="Boundary Layer Manipulation"
                         android:textSize="23sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:fontFamily="@font/nunito_bold"/>
 
                     <ImageView
                         android:id="@+id/para4_arrow"
