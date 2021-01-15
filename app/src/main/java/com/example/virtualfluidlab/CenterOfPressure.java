@@ -181,7 +181,7 @@ public class CenterOfPressure extends AppCompatActivity {
         createObsTable();
         observation.setVisibility(View.VISIBLE);
         try{
-            Cursor c = observationDatabase.rawQuery("SELECT * FROM bernoulli", null);
+            Cursor c = observationDatabase.rawQuery("SELECT * FROM centerofpress", null);
             c.moveToFirst();
             int index = c.getColumnIndex("sn");
             float d = c.getInt(index);
