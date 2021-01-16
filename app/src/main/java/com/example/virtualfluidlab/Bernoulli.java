@@ -127,6 +127,10 @@ public class Bernoulli extends AppCompatActivity {
     public void startSimulation(){
         setTitle("Simulation");
         simulation.setVisibility(View.VISIBLE);
+        if(obsCount == 10){
+            saveButton.setText("Proceed");
+            saveButton.setTag("2");
+        }
     }
 
     public void openIntroduction(){
@@ -283,9 +287,6 @@ public class Bernoulli extends AppCompatActivity {
         else if (tag == 2) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
-        else if (tag == -1){
-
-        }
 
         observationCount.setText(String.format("%s of 10", obsCount));
         sharedPreferences.edit().putInt("serialNo", obsCount).apply();
@@ -293,8 +294,6 @@ public class Bernoulli extends AppCompatActivity {
         if (obsCount == 10) {
             saveButton.setText("Proceed");
             saveButton.setTag("2");
-            deleteButton.setText("Reset");
-            deleteButton.setTag("-1");
         }
         else {
             saveButton.setText("Save");

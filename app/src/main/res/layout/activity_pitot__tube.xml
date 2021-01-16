@@ -25,8 +25,8 @@
                 android:id="@+id/pitot_heading1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:fontFamily="@font/nunito_extrabold" />
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="" />
 
             <TextView
                 android:id="@+id/pitot_para1"
@@ -44,15 +44,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text=""
-                android:fontFamily="@font/nunito_extrabold" />
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="" />
 
             <ImageView
                 android:id="@+id/pitot_labelledDiagram"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:src="@drawable/pitot_tube_labelled"
-                android:paddingBottom="25dp" />
+                android:paddingBottom="25dp"
+                android:src="@drawable/pitot_tube_labelled" />
 
             <ImageView
                 android:id="@+id/pitot_testSectionData"
@@ -149,6 +149,29 @@
             android:src="@drawable/pitot_tube_off"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/pitot_experimentModeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center_horizontal"
+            android:text="Co-efficient of Velocity"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/pitot_switchExpButton"
+            app:layout_constraintTop_toTopOf="@id/pitot_switchExpButton" />
+
+        <Button
+            android:id="@+id/pitot_switchExpButton"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:onClick="switchExpMode"
+            android:text="Switch"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/flowRateValve"
             android:layout_width="@dimen/_22sdp"
@@ -189,12 +212,14 @@
             app:layout_constraintStart_toStartOf="@+id/flowRateValve" />
 
         <TableLayout
+            android:id="@+id/pitot_coeff_of_vel_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/pitot_apparatus"
-            android:layout_marginTop="20dp">
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/pitot_apparatus">
 
             <TableRow
                 android:layout_width="wrap_content"
@@ -261,38 +286,133 @@
 
         </TableLayout>
 
+        <LinearLayout
+            android:id="@+id/pitot_vel_profile_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/pitot_apparatus">
+
+            <TextView
+                android:id="@+id/pitot_flowRateText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_extrabold"
+                android:gravity="center_horizontal"
+                android:text="Q = x.xx L/s"
+                android:textSize="20dp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="R (cm)"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="h1 (cm)"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="h2 (cm)"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/pitot_pinHeightText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/pitot_static_height_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/pitot_dynamic_height_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/pitot_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="15dp"
             android:layout_marginStart="25dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:onClick="saveDelData"
+            android:tag="0"
             android:text="Delete"
-            android:fontFamily="@font/nunito_semibold"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/pitot_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="15dp"
             android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:onClick="saveDelData"
+            android:tag="1"
             android:text="Save"
-            android:fontFamily="@font/nunito_semibold"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/pitot_readingsCountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/pitot_save_button"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="0 of 10"
             app:layout_constraintBottom_toBottomOf="@id/pitot_save_button"
             app:layout_constraintLeft_toRightOf="@id/pitot_delete_button"
             app:layout_constraintRight_toLeftOf="@id/pitot_save_button"
-            android:text="0 of 10"
-            android:fontFamily="@font/nunito_semibold"/>
+            app:layout_constraintTop_toTopOf="@id/pitot_save_button" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/testSection_popUp"
@@ -378,47 +498,136 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pitot_observation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_height="match_parent"
         android:visibility="invisible">
 
-        <TableLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cop_observationTable">
+            android:layout_marginTop="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:text="S.No."
-                    android:textSize="20sp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="0.2"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:text="For Co-efficient of Velocity:"
+                        android:textSize="20dp" />
 
-                <TextView
-                    android:text="h1 (cm)"
-                    android:textSize="20sp"
-                    android:gravity="center_horizontal"
-                    android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="1"/>
+                    <TableLayout
+                        android:id="@+id/pitot_cov_observationTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <TextView
-                    android:text="h2 (cm)"
-                    android:textSize="20sp"
-                    android:gravity="center_horizontal"
-                    android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="1"/>
+                        <TableRow>
 
-            </TableRow>
+                            <TextView
+                                android:layout_weight="0.2"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="S.No."
+                                android:textSize="17sp" />
 
-        </TableLayout>
+                            <TextView
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="Q (L/s)"
+                                android:textSize="20sp" />
 
-    </ScrollView>
+                            <TextView
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="h1 (cm)"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="h2 (cm)"
+                                android:textSize="20sp" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:text="For Velocity Profile:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/pitot_obs_flowRateTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="Q = XX.xx L/s"
+                        android:textSize="20sp" />
+
+                    <TableLayout
+                        android:id="@+id/pitot_velPro_observationTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow>
+
+                            <TextView
+                                android:layout_weight="0.2"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="S.No."
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="R (cm)"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="h1 (cm)"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_bold"
+                                android:text="h2 (cm)"
+                                android:textSize="20sp" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:onClick="resetObsTable"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

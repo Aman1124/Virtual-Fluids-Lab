@@ -71,7 +71,7 @@
                 android:layout_height="@dimen/_210sdp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:src="@drawable/cop_intro_fig1"/>
+                android:src="@drawable/cop_intro_fig1" />
 
             <com.example.virtualfluidlab.view.MathJaxWebView
                 android:id="@+id/cop_theory_formula2"
@@ -83,7 +83,7 @@
                 android:layout_height="@dimen/_210sdp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:src="@drawable/cop_intro_fig2"/>
+                android:src="@drawable/cop_intro_fig2" />
 
             <com.example.virtualfluidlab.view.MathJaxWebView
                 android:id="@+id/cop_theory_formula3"
@@ -125,7 +125,7 @@
                 android:id="@+id/cop_labelled_diagram"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:src="@drawable/centre_of_pressure_labelled"/>
+                android:src="@drawable/centre_of_pressure_labelled" />
 
         </LinearLayout>
 
@@ -297,27 +297,27 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:padding="15dp"
-            app:layout_constraintTop_toBottomOf="@id/cop_add_water"
-            android:layout_marginTop="25dp">
+            app:layout_constraintTop_toBottomOf="@id/cop_add_water">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Weight, W(gm)"
-                    android:textSize="20sp"
-                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="1" />
+                    android:gravity="center_horizontal"
+                    android:text="Weight, W(gm)"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:text="Height, h(mm)"
-                    android:textSize="20sp"
-                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="1" />
+                    android:gravity="center_horizontal"
+                    android:text="Height, h(mm)"
+                    android:textSize="20sp" />
 
             </TableRow>
 
@@ -327,19 +327,19 @@
 
                 <TextView
                     android:id="@+id/cop_weight_text"
-                    android:text=""
-                    android:textSize="18sp"
-                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_semibold"
-                    android:layout_weight="1" />
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/cop_height_text"
-                    android:text=""
-                    android:textSize="18sp"
-                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_semibold"
-                    android:layout_weight="1" />
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textSize="18sp" />
 
             </TableRow>
 
@@ -349,83 +349,100 @@
             android:id="@+id/cop_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="15dp"
             android:layout_marginStart="25dp"
-            android:text="Delete"
-            android:tag="0"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/nunito_semibold"
             android:onClick="saveDelData"
-            android:fontFamily="@font/nunito_semibold"/>
+            android:tag="0"
+            android:text="Delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/cop_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="15dp"
             android:layout_marginEnd="25dp"
-            android:text="Save"
-            android:tag="1"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/nunito_semibold"
             android:onClick="saveDelData"
-            android:fontFamily="@font/nunito_semibold"/>
+            android:tag="1"
+            android:text="Save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/cop_readingsCountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/cop_save_button"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="0 of 10"
             app:layout_constraintBottom_toBottomOf="@id/cop_save_button"
             app:layout_constraintLeft_toRightOf="@id/cop_delete_button"
             app:layout_constraintRight_toLeftOf="@id/cop_save_button"
-            android:text="0 of 10"
-            android:fontFamily="@font/nunito_semibold"/>
+            app:layout_constraintTop_toTopOf="@id/cop_save_button" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cop_observation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_height="match_parent"
         android:visibility="invisible">
 
-        <TableLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cop_observationTable">
+            android:layout_marginTop="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow>
+            <TableLayout
+                android:id="@+id/cop_observationTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:text="S.No."
-                    android:textSize="20sp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="0.2"/>
+                <TableRow>
 
-                <TextView
-                    android:text="Weight (gm)"
-                    android:textSize="20sp"
-                    android:gravity="center_horizontal"
-                    android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="1"/>
+                    <TextView
+                        android:layout_weight="0.2"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="S.No."
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:text="Height (mm)"
-                    android:textSize="20sp"
-                    android:gravity="center_horizontal"
-                    android:fontFamily="@font/nunito_bold"
-                    android:layout_weight="1"/>
+                    <TextView
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Weight (gm)"
+                        android:textSize="20sp" />
 
-            </TableRow>
+                    <TextView
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Height (mm)"
+                        android:textSize="20sp" />
 
-        </TableLayout>
+                </TableRow>
 
-    </ScrollView>
+            </TableLayout>
+
+        </ScrollView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:fontFamily="@font/nunito_bold"
+            android:onClick="resetObsTable"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="15dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

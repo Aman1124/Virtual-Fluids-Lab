@@ -143,6 +143,8 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
             bernoulli.animate().alpha(0.45f).setDuration(duration);
             wind_tunnel_float.animate().alpha(0.45f).setDuration(duration);
             pitotFloat.animate().alpha(0.45f).setDuration(duration);
+            reynolds_float.animate().alpha(0.45f).setDuration(duration);
+            centerOfPressFloat.animate().alpha(0.45f).setDuration(duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
         }
@@ -152,6 +154,8 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
             bernoulli.animate().alpha(1f).setDuration(duration);
             wind_tunnel_float.animate().alpha(1f).setDuration(duration);
             pitotFloat.animate().alpha(1f).setDuration(duration);
+            reynolds_float.animate().alpha(1f).setDuration(duration);
+            centerOfPressFloat.animate().alpha(1f).setDuration(duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
         }

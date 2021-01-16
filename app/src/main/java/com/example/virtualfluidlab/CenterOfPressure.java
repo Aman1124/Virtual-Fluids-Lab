@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -41,9 +42,9 @@ public class CenterOfPressure extends AppCompatActivity {
 
     TextView aimText, theoryText, aboutSetupText, procedureText;
     MathJaxWebView theoryFormula1Text, theoryFormula2Text, theoryFormula3Text;
-    ScrollView introduction, aboutSetup, procedure, observation;
+    ScrollView introduction, aboutSetup, procedure;
     ImageView weightsView, compassBubbleView;
-    ConstraintLayout simulation;
+    ConstraintLayout simulation, observation;
     ImageButton add_water;
     Button valve_V1, saveButton, delButton;
     ProgressBar waterLvl;
@@ -172,6 +173,10 @@ public class CenterOfPressure extends AppCompatActivity {
             heights[i] = idealHeights[i]*(1 - randErr[i]/100);
         }
         setTitle("Simulation");
+        if(obsCount == 10){
+            saveButton.setText("Proceed");
+            saveButton.setTag("2");
+        }
         simulation.setVisibility(View.VISIBLE);
         repeatUpdateHandler.post(new updateBubblePosition());
     }
@@ -179,12 +184,14 @@ public class CenterOfPressure extends AppCompatActivity {
     public void openObservation() {
         setTitle("Observation");
         createObsTable();
-        observation.setVisibility(View.VISIBLE);
+
         try{
             Cursor c = observationDatabase.rawQuery("SELECT * FROM centerofpress", null);
             c.moveToFirst();
             int index = c.getColumnIndex("sn");
             float d = c.getInt(index);
+            c.close();
+            observation.setVisibility(View.VISIBLE);
         }catch(Exception e){
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -277,6 +284,7 @@ public class CenterOfPressure extends AppCompatActivity {
             dataSNo -= 1; obsCount -= 1;
         }
         else if (tag == 2) {
+            simulation.setVisibility(View.INVISIBLE);
             openObservation();
         }
 
@@ -324,6 +332,27 @@ public class CenterOfPressure extends AppCompatActivity {
         } catch (Exception e) {
             Log.i("DATA", "No more data found");
         }
+    }
+
+    public void resetObsTable(View view){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Are you sure ?")
+                .setMessage("Do you want to delete observation table ?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        observationDatabase.execSQL("DELETE FROM centerofpress");
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+        sharedPreferences.edit().putInt("serialNo", 1).apply();
+        obsCount = 0;
+        dataSNo = 1;
+
+        observationCount.setText(String.format("%s of 10", obsCount));
+        sharedPreferences.edit().putInt("serialNo", obsCount).apply();
     }
 
     @SuppressLint("ClickableViewAccessibility")

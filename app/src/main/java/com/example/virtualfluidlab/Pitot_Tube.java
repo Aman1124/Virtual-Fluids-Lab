@@ -1,26 +1,32 @@
 package com.example.virtualfluidlab;
 
-import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VerticalSeekBar;
 
 import com.example.virtualfluidlab.view.MathJaxWebView;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 public class Pitot_Tube extends AppCompatActivity {
@@ -28,16 +34,22 @@ public class Pitot_Tube extends AppCompatActivity {
     TextView heading1, heading2, para1, para2, para3;
     TextView flowRateText, static_pressText, dynamic_pressText;
     TextView needleHeightTextView;
+    TextView expModeText;
+    TextView pinHeightTV, flowRateTV, staticHTV, dynamicHTV, observationCount, obsFlowRateTV;
 
     ImageView pitot_labelledDiagram, pitot_Equation, pitot_testSectionData, pitot_apparatus;
     ImageView pitot_test_section_pin;
+
+    Button saveButton;
 
     SeekBar flowRateSeekBar;
     VerticalSeekBar needleHeightSeekBar;
     ProgressBar static_press_bar, dynamic_press_bar;
 
-    ScrollView introduction, observation;
-    ConstraintLayout simulation, testSection_popUp;
+    ScrollView introduction;
+    ConstraintLayout simulation, testSection_popUp, observation;
+    LinearLayout velProfile;
+    TableLayout coeff_of_vel, obsTableCV, obsTableVP;
 
     ConstraintLayout.LayoutParams pinParams;
     DisplayMetrics metrics;
@@ -52,7 +64,11 @@ public class Pitot_Tube extends AppCompatActivity {
     double[] spd_height = new double[11];
     double[] percentageError = new double[11];
     double[] staticH = new double[11];
-    boolean flowBar_visibility = false, power = false, ts_popUp_visibility = false;
+    boolean flowBar_visibility = false, power = false, ts_popUp_visibility = false, vel_profile = false;
+
+    SQLiteDatabase observationDatabase;
+    SharedPreferences sharedPreferencesCV, sharedPreferencesVP;
+    int dataSNo = 0, obsCount = 0;
 
     String aim = "•\tTo find the point velocity at center of a tube for different flow rate.\n" +
             "•\tTo find the coefficient of pitot tube.\n" +
@@ -167,11 +183,65 @@ public class Pitot_Tube extends AppCompatActivity {
     public void startSimulation() {
         setTitle("Simulation");
         simulation.setVisibility(View.VISIBLE);
+        if(obsCount == 10){
+            saveButton.setText("Proceed");
+            saveButton.setTag("2");
+        }
     }
 
     public void openObservation() {
         setTitle("Observation");
-        observation.setVisibility(View.VISIBLE);
+        createObsTable();
+        try{
+            Cursor c = observationDatabase.rawQuery("SELECT * FROM pitotcovel", null);
+            c.moveToFirst();
+            int index = c.getColumnIndex("sn");
+            float d = c.getInt(index);
+            c.close();
+            observation.setVisibility(View.VISIBLE);
+        }catch(Exception e){
+            try{
+                Cursor c = observationDatabase.rawQuery("SELECT * FROM pitotvelpro", null);
+                c.moveToFirst();
+                int index = c.getColumnIndex("sn");
+                float d = c.getInt(index);
+                c.close();
+                observation.setVisibility(View.VISIBLE);
+            }catch (Exception ex) {
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Error 404")
+                        .setMessage("No readings taken")
+                        .show();
+            }
+        }
+    }
+
+    public void switchExpMode(View view){
+        if (!vel_profile) {
+            vel_profile = true;
+            expModeText.setText("Velocity Profile");
+            velProfile.setVisibility(View.VISIBLE);
+            coeff_of_vel.setVisibility(View.INVISIBLE);
+            dataSNo = sharedPreferencesVP.getInt("serialNo", 0);
+        }
+        else{
+            vel_profile = false;
+            expModeText.setText("Co-efficient of Velocity");
+            velProfile.setVisibility(View.INVISIBLE);
+            coeff_of_vel.setVisibility(View.VISIBLE);
+            dataSNo = sharedPreferencesCV.getInt("serialNo", 0);
+        }
+        setObservationData(0);
+        obsCount = dataSNo;
+        if(obsCount == 10){
+            saveButton.setText("Proceed");
+            saveButton.setTag("2");
+        }else{
+            saveButton.setText("Save");
+            saveButton.setTag("1");
+        }
+        observationCount.setText(String.format("%s of 10", obsCount));
     }
 
     public void changeFlowRate(View view) {
@@ -318,21 +388,29 @@ public class Pitot_Tube extends AppCompatActivity {
     private void setObservationData(int r) {
         height[0] = (float) staticH[(r+10)/2];
         height[1] = (float) spd_height[(r+10)/2];
-        flowRateText.setText(String.format(Locale.US, "%.2fE-04", flowRate));
-        static_pressText.setText(String.format(Locale.US, "%.1f", height[0]));
-        dynamic_pressText.setText(String.format(Locale.US, "%.1f", height[1]));
+        if(vel_profile){
+            flowRateTV.setText(String.format(Locale.US, "Q = %.2fE-01 L/s", flowRate));
+            pinHeightTV.setText(String.valueOf(pin_height));
+            staticHTV.setText(String.format(Locale.US, "%.1f", height[0]));
+            dynamicHTV.setText(String.format(Locale.US, "%.1f", height[1]));
+        }
+        else {
+            flowRateText.setText(String.format(Locale.US, "%.2fE-01", flowRate));
+            static_pressText.setText(String.format(Locale.US, "%.1f", height[0]));
+            dynamic_pressText.setText(String.format(Locale.US, "%.1f", height[1]));
+        }
     }
 
     public void openTestSectionPopUp(View view) {
-        if (power && !ts_popUp_visibility) {
+        if (power && !ts_popUp_visibility && vel_profile) {
             testSection_popUp.setVisibility(View.VISIBLE);
             ts_popUp_visibility = true;
             needleHeightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    pin_height = progress - 10;
+                    pin_height = progress*2 - 10;
                     float density = metrics.density;
-                    pinParams.bottomMargin = (int) ((0.65 * density * progress) + (16 * density));
+                    pinParams.bottomMargin = (int) ((1.3 * density * progress) + (16 * density));
                     pitot_test_section_pin.setLayoutParams(pinParams);
                     needleHeightTextView.setText(String.format("%s cm", pin_height));
                     setObservationData(pin_height);
@@ -354,6 +432,165 @@ public class Pitot_Tube extends AppCompatActivity {
             testSection_popUp.setVisibility(View.INVISIBLE);
             ts_popUp_visibility = false;
         }
+    }
+
+    public void saveDelData(View view){
+        int tag = Integer.parseInt(view.getTag().toString());
+        Log.i("Button Tag", String.valueOf(tag));
+        if (tag == 1){
+            if (obsCount < 10){
+                obsCount += 1; dataSNo += 1;
+                if(vel_profile) {
+                    observationDatabase.execSQL("INSERT INTO pitotvelpro (sn, flowrate, pinH, sheight, dheight) VALUES (" +
+                            String.format(Locale.US, "%d, %f, %d, %f, %f)",
+                                    dataSNo, (float) flowRate * 0.1, pin_height, (float) staticH[(pin_height+10)/2], (float) spd_height[(pin_height+10)/2]));
+                }
+                else {
+                    observationDatabase.execSQL("INSERT INTO pitotcovel (sn, flowrate, sheight, dheight) VALUES (" +
+                            String.format(Locale.US, "%d, %f, %f, %f)",
+                                    dataSNo, (float) flowRate * 0.1, (float) staticH[5], (float) spd_height[5]));
+                }
+            }
+        }
+        else if (tag == 0 && obsCount > 0){
+            if(vel_profile)
+                observationDatabase.execSQL("DELETE FROM pitotvelpro WHERE sn = " + dataSNo);
+            else
+                observationDatabase.execSQL("DELETE FROM pitotcovel WHERE sn = " + (dataSNo));
+            dataSNo -= 1; obsCount -= 1;
+        }
+        else if (tag == 2) {
+            simulation.setVisibility(View.INVISIBLE);
+            openObservation();
+        }
+
+        if (obsCount == 10){
+            saveButton.setText("Proceed");
+            saveButton.setTag("2");
+        }
+        else{
+            saveButton.setText("Save");
+            saveButton.setTag("1");
+        }
+
+        observationCount.setText(String.format("%s of 10", obsCount));
+        if(vel_profile)
+            sharedPreferencesVP.edit().putInt("serialNo", obsCount).apply();
+        else
+            sharedPreferencesCV.edit().putInt("serialNo", obsCount).apply();
+    }
+
+    public void createObsTable(){
+        Cursor c = observationDatabase.rawQuery("SELECT * FROM pitotcovel", null);
+        c.moveToFirst();
+        int sNo = c.getColumnIndex("sn");
+        int frIndex = c.getColumnIndex("flowRate");
+        int shIndex = c.getColumnIndex("sheight");
+        int dhIndex = c.getColumnIndex("dheight");
+        try {
+            for (int i = 0; i < 10; i++) {
+                TableRow row = new TableRow(Pitot_Tube.this);
+                //row.setId(1 + i);
+                for (int j = 0; j < 4; j++) {
+                    float d;
+                    if (j == 0)
+                        d = c.getInt(sNo);
+                    else if (j == 1)
+                        d = c.getFloat(frIndex);
+                    else if (j==2)
+                        d = c.getFloat(shIndex);
+                    else
+                        d = c.getFloat(dhIndex);
+                    TextView tv = new TextView(Pitot_Tube.this);
+                    tv.setTextSize(17);
+                    float initWeight = j>0?1:0.2f;
+                    tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT, initWeight));
+                    String format = j>0?(j==1?"%.3f":"%.1f"):"%.0f";
+                    tv.setText(String.format(Locale.US, format, d));
+                    row.addView(tv);
+                }
+                obsTableCV.addView(row);
+                c.moveToNext();
+            }
+        } catch (Exception e) {
+            Log.i("DATA", "No more data found");
+        }
+
+        //-----------Read Data from Pitot Velocity Profile Table---------------//
+
+        c = observationDatabase.rawQuery("SELECT * FROM pitotvelpro", null);
+        c.moveToFirst();
+        sNo = c.getColumnIndex("sn");
+        frIndex = c.getColumnIndex("flowRate");
+        int phIndex = c.getColumnIndex("pinH");
+        shIndex = c.getColumnIndex("sheight");
+        dhIndex = c.getColumnIndex("dheight");
+        try {
+            for (int i = 0; i < 11; i++) {
+                TableRow row = new TableRow(Pitot_Tube.this);
+                //row.setId(1 + i);
+                for (int j = 0; j < 5; j++) {
+                    float d;
+                    if (j == 0)
+                        d = c.getInt(sNo);
+                    else if (j == 1)
+                        d = c.getFloat(frIndex);
+                    else if (j == 2)
+                        d = c.getInt(phIndex);
+                    else if (j == 3)
+                        d = c.getFloat(shIndex);
+                    else
+                        d = c.getFloat(dhIndex);
+                    float initWeight = j>0?1:0.2f;
+                    if(j!=1) {
+                        TextView tv = new TextView(Pitot_Tube.this);
+                        tv.setTextSize(17);
+                        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                                TableRow.LayoutParams.WRAP_CONTENT, initWeight));
+                        String format = j > 0 ? (j == 2 ? "%.0f" : "%.1f") : "%.0f";
+                        tv.setText(String.format(Locale.US, format, d));
+                        row.addView(tv);
+                    }
+                    else
+                        obsFlowRateTV.setText(String.format(Locale.US, "Q = %.3f L/s", d));
+                }
+                obsTableVP.addView(row);
+                c.moveToNext();
+            }
+        } catch (Exception e) {
+            Log.i("DATA", "No more data found");
+        }
+        c.close();
+    }
+
+    public void resetObsTable(View view){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Are you sure ?")
+                .setMessage("Delete observation table for ?")
+                .setPositiveButton("Co-eff. of vel.", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        observationDatabase.execSQL("DELETE FROM pitotcovel");
+                        sharedPreferencesCV.edit().putInt("serialNo", 0).apply();
+                    }
+                })
+                .setNegativeButton("Velocity Profile", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        observationDatabase.execSQL("DELETE FROM pitotvelpro");
+                        sharedPreferencesVP.edit().putInt("serialNo", 0).apply();
+                    }
+                })
+                .show();
+
+        if(vel_profile)
+            obsCount = sharedPreferencesVP.getInt("serialNo", 0);
+        else
+            obsCount = sharedPreferencesCV.getInt("serialNo", 0);
+        observationCount.setText(String.format("%s of 10", obsCount));
+        dataSNo = obsCount+1;
     }
 
     @Override
@@ -382,10 +619,32 @@ public class Pitot_Tube extends AppCompatActivity {
 
         flowRateSeekBar = findViewById(R.id.flowRateSeekBar);
         needleHeightSeekBar = (VerticalSeekBar) findViewById(R.id.needleHeightSeekBar);
-        needleHeightSeekBar.setMax(20);
-        needleHeightSeekBar.incrementProgressBy(2);
-        needleHeightSeekBar.setProgress(10);
+        needleHeightSeekBar.setMax(10);
+        needleHeightSeekBar.setProgress(5);
         needleHeightTextView = findViewById(R.id.needleHeightTextView);
+        expModeText = findViewById(R.id.pitot_experimentModeText);
+        velProfile = findViewById(R.id.pitot_vel_profile_table);
+        coeff_of_vel = findViewById(R.id.pitot_coeff_of_vel_table);
+        pinHeightTV = findViewById(R.id.pitot_pinHeightText);
+        flowRateTV = findViewById(R.id.pitot_flowRateText2);
+        staticHTV = findViewById(R.id.pitot_static_height_text2);
+        dynamicHTV = findViewById(R.id.pitot_dynamic_height_text2);
+        observationCount = findViewById(R.id.pitot_readingsCountText);
+        saveButton = findViewById(R.id.pitot_save_button);
+
+        try{
+            observationDatabase = this.openOrCreateDatabase("Observation", MODE_PRIVATE, null);
+            observationDatabase.execSQL("CREATE TABLE IF NOT EXISTS pitotcovel ( sn INT(2), flowRate FLOAT, sheight FLOAT, dheight FLOAT )");
+            observationDatabase.execSQL("CREATE TABLE IF NOT EXISTS pitotvelpro ( sn INT(2), flowRate FLOAT, pinH INT(2), sheight FLOAT, dheight FLOAT )");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        sharedPreferencesCV = this.getSharedPreferences("com.example.virtualfluidlab.pitotCV", Context.MODE_PRIVATE);
+        sharedPreferencesVP = this.getSharedPreferences("com.example.virtualfluidlab.pitotVP", Context.MODE_PRIVATE);
+        dataSNo = sharedPreferencesCV.getInt("serialNo", 0);
+        obsCount = dataSNo;
+        observationCount.setText(String.format("%s of 10", obsCount));
 
         static_press_bar = findViewById(R.id.static_tube); static_press_bar.setMax(150);
         dynamic_press_bar = findViewById(R.id.dynamic_tube); dynamic_press_bar.setMax(150);
@@ -393,6 +652,10 @@ public class Pitot_Tube extends AppCompatActivity {
 
         simulation = findViewById(R.id.simulation);
         testSection_popUp = findViewById(R.id.testSection_popUp);
+
+        obsTableCV = findViewById(R.id.pitot_cov_observationTable);
+        obsTableVP = findViewById(R.id.pitot_velPro_observationTable);
+        obsFlowRateTV = findViewById(R.id.pitot_obs_flowRateTV);
 
         pinParams = (ConstraintLayout.LayoutParams) pitot_test_section_pin.getLayoutParams();
         metrics = getResources().getDisplayMetrics();
