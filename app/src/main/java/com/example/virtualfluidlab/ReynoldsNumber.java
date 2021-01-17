@@ -3,12 +3,20 @@ package com.example.virtualfluidlab;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.VerticalSeekBar;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.virtualfluidlab.view.MathJaxWebView;
 
 public class ReynoldsNumber extends AppCompatActivity {
@@ -19,6 +27,14 @@ public class ReynoldsNumber extends AppCompatActivity {
     TextView rey_aimPara, rey_theoryPara1, rey_theoryPara2;
     TextView rey_aboutSetup, rey_procedure;
     MathJaxWebView rey_theoryFormula;
+    ProgressBar narrowTube, exitTap;
+    ImageView apparatus, water2dye;
+    VerticalSeekBar flowRateSeekBar;
+    LottieAnimationView animationView;
+
+    Boolean powerOn = false, flowExit = false, firstTime = true;
+    float density;
+    ConstraintLayout.LayoutParams dyeParams;
 
     String aim = "\t•\tTo identify the laminar, transition, and turbulent flow regimes in pipe flow using Reynolds experiment.";
 
@@ -78,6 +94,28 @@ public class ReynoldsNumber extends AppCompatActivity {
         simulationView.setVisibility(View.VISIBLE);
     }
 
+    public void powerOnOff(View view){
+        powerOn = !powerOn;
+        if(powerOn){
+            apparatus.setImageResource(R.drawable.reynolds_apparatus_on);
+            flowRateSeekBar.setVisibility(View.VISIBLE);
+            ObjectAnimator animator = ObjectAnimator.ofInt(narrowTube, "progress", 0, 100);
+            animator.setDuration(200);
+            animator.setInterpolator(new LinearInterpolator());
+            if(narrowTube.getProgress() == 0)
+                animator.start();
+        }
+        else{
+            apparatus.setImageResource(R.drawable.reynolds_apparatus);
+            flowRateSeekBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void replayAnimation(View view){
+        LottieAnimationView animationView = (LottieAnimationView) view;
+        animationView.playAnimation();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +134,16 @@ public class ReynoldsNumber extends AppCompatActivity {
         rey_procedure = findViewById(R.id.reynolds_procedurePara);
 
         simulationView = findViewById(R.id.reynolds_simulation);
+        narrowTube = findViewById(R.id.reynolds_narrowTube);
+        exitTap = findViewById(R.id.reynolds_exitTap);
+        apparatus = findViewById(R.id.reynolds_apparatus);
+        flowRateSeekBar = findViewById(R.id.reynolds_flowRate_seekBar);
+        animationView = findViewById(R.id.reynolds_flow_animation);
+        water2dye = findViewById(R.id.reynolds_water_to_dye);
+        dyeParams = (ConstraintLayout.LayoutParams) water2dye.getLayoutParams();
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        density = metrics.density;
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choice",0);
@@ -119,5 +167,43 @@ public class ReynoldsNumber extends AppCompatActivity {
             default:
                 break;
         }
+
+        flowRateSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                flowExit = progress != 0;
+                if(flowExit && firstTime){
+                    ObjectAnimator animator = ObjectAnimator.ofInt(exitTap, "progress", 0, 100);
+                    animator.setDuration(200);
+                    animator.setInterpolator(new LinearInterpolator());
+                    animator.start();
+                    firstTime = false;
+                }
+                else if (progress == 0){
+                    ObjectAnimator animator = ObjectAnimator.ofInt(exitTap, "progress", 100, 0);
+                    animator.setDuration(200);
+                    animator.setInterpolator(new LinearInterpolator());
+                    animator.start();
+                    firstTime = true;
+                }
+                if(progress > 30)
+                    animationView.setProgress((progress/10f - 3)/7f);
+                else
+                    animationView.setProgress(0f);
+                dyeParams.leftMargin = (int)((-32*progress/7 + 3200/7)*density);
+                water2dye.setLayoutParams(dyeParams);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
     }
 }
