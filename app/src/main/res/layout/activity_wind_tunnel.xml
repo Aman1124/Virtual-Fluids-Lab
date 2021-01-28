@@ -305,11 +305,184 @@
         android:visibility="invisible">
 
         <ImageView
+            android:id="@+id/windTunnel_sim_diagram"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_170sdp"
             android:layout_marginTop="50dp"
             android:src="@drawable/wind_tunnel_apparatus"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/windSpeedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wind\nSpeed"
+            android:lineSpacingExtra="-4dp"
+            android:textSize="17sp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/windTunnel_sim_diagram"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/wt_top_view"
+            app:layout_constraintTop_toTopOf="@id/windTunnel_sim_diagram"
+            app:layout_constraintBottom_toBottomOf="@id/windTunnel_sim_diagram"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.03"
+            app:layout_constraintHorizontal_bias="0.365">
+
+            <ImageView
+                android:id="@+id/windTunnel_ballImage"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <SeekBar
+            android:id="@+id/windSpeedSeekBar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/windSpeedText"
+            app:layout_constraintBottom_toBottomOf="@id/windSpeedText"
+            app:layout_constraintStart_toEndOf="@id/windSpeedText"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/wt_smooth_ball"
+            app:layout_constraintStart_toStartOf="@id/windTunnel_smoothBallBox"
+            app:layout_constraintEnd_toEndOf="@id/windTunnel_smoothBallBox"
+            app:layout_constraintTop_toTopOf="@id/windTunnel_smoothBallBox"
+            app:layout_constraintBottom_toBottomOf="@id/windTunnel_smoothBallBox"
+            app:layout_constraintVertical_bias="0.65"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/windTunnel_smoothBallBox"
+            android:tag="1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:lottie_rawRes="@raw/select_box"
+            app:layout_constraintTop_toTopOf="@id/windSpeedText"
+            app:layout_constraintBottom_toBottomOf="@id/windSpeedText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="15dp"
+            app:lottie_autoPlay="false"
+            android:onClick="changeBall"/>
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/wt_dimpled_ball"
+            app:layout_constraintStart_toStartOf="@id/windTunnel_dimpledBallBox"
+            app:layout_constraintEnd_toEndOf="@id/windTunnel_dimpledBallBox"
+            app:layout_constraintTop_toTopOf="@id/windTunnel_dimpledBallBox"
+            app:layout_constraintBottom_toBottomOf="@id/windTunnel_dimpledBallBox"
+            app:layout_constraintVertical_bias="0.65"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/windTunnel_dimpledBallBox"
+            android:tag="2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:lottie_rawRes="@raw/select_box"
+            app:layout_constraintTop_toTopOf="@id/windSpeedText"
+            app:layout_constraintBottom_toBottomOf="@id/windSpeedText"
+            app:layout_constraintStart_toEndOf="@id/windTunnel_smoothBallBox"
+            android:layout_marginStart="0dp"
+            app:lottie_autoPlay="false"
+            android:onClick="changeBall"/>
+
+        <TextView
+            android:id="@+id/wt_fanSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fan Speed(%)"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/windTunnel_smoothBallBox"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/windTunnel_deleteButton"
+            app:layout_constraintVertical_bias="0.2"/>
+
+        <TextView
+            android:id="@+id/wt_coOfDrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Co-eff. of Drag(Cd)"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/windTunnel_smoothBallBox"
+            app:layout_constraintBottom_toBottomOf="@id/windTunnel_deleteButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintVertical_bias="0.2"/>
+
+        <TextView
+            android:id="@+id/wt_simFanSpeedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="40"
+            android:fontFamily="@font/nunito_semibold"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/wt_fanSpeed"
+            app:layout_constraintLeft_toLeftOf="@id/wt_fanSpeed"
+            app:layout_constraintRight_toRightOf="@id/wt_fanSpeed"/>
+
+        <TextView
+            android:id="@+id/wt_simCoOfDragText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:fontFamily="@font/nunito_semibold"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/wt_coOfDrag"
+            app:layout_constraintLeft_toLeftOf="@id/wt_coOfDrag"
+            app:layout_constraintRight_toRightOf="@id/wt_coOfDrag"/>
+
+        <Button
+            android:id="@+id/windTunnel_deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:fontFamily="@font/nunito_semibold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/windTunnel_saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:fontFamily="@font/nunito_semibold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 of 10"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="#909090"
+            app:layout_constraintBottom_toBottomOf="@id/windTunnel_saveButton"
+            app:layout_constraintTop_toTopOf="@id/windTunnel_saveButton"
+            app:layout_constraintLeft_toRightOf="@id/windTunnel_deleteButton"
+            app:layout_constraintRight_toLeftOf="@id/windTunnel_saveButton"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

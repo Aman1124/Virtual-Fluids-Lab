@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //getActionBar().hide();
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         Thread timer = new Thread(){
         public void run(){

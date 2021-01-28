@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="ToolbarFont" parent="Widget.AppCompat.Light.ActionBar">
-        <item name="android:fontFamily">@font/nunito_semibold</item>
-        <item name="android:textSize">35sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-</resources>

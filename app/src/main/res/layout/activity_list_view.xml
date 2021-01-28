@@ -28,22 +28,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/custom_toolbar_layout"
+        <include
+            layout="@layout/app_bar_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="top">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:theme="@style/ToolbarFont"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:background="#2cc0f4"
-                android:layout_gravity="center"/>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
         android:id="@+id/listLayout"

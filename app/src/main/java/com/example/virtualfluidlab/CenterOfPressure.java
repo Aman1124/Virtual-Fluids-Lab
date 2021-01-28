@@ -332,6 +332,7 @@ public class CenterOfPressure extends AppCompatActivity {
         } catch (Exception e) {
             Log.i("DATA", "No more data found");
         }
+        c.close();
     }
 
     public void resetObsTable(View view){

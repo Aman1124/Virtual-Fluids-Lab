@@ -329,7 +329,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="R1(cm)"
+                    android:text="R1(ml)"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/nunito_semibold"
@@ -337,7 +337,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:text="R2(cm)"
+                    android:text="R2(ml)"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/nunito_semibold"
@@ -359,6 +359,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/reynolds_simR1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
@@ -366,6 +367,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
+                    android:id="@+id/reynolds_simR2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
@@ -373,6 +375,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
+                    android:id="@+id/reynolds_simTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
@@ -393,7 +396,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="25dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:tag="0"
+            android:onClick="saveDelData"/>
 
         <Button
             android:id="@+id/reynolds_saveButton"
@@ -404,9 +409,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:tag="1"
+            android:onClick="saveDelData"/>
 
         <TextView
+            android:id="@+id/reynolds_obsCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0 of 10"
@@ -418,5 +426,74 @@
             app:layout_constraintRight_toLeftOf="@id/reynolds_saveButton"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/reynolds_observation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableLayout
+                android:id="@+id/cop_observationTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_weight="0.2"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Sn."
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center_horizontal"
+                        android:text="R1 (ml)"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center_horizontal"
+                        android:text="R2 (ml)"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Time (s)"
+                        android:textSize="20sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:fontFamily="@font/nunito_bold"
+            android:onClick="resetObsTable"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="15dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import org.w3c.dom.Text;
 
 public class WindTunnel extends AppCompatActivity {
@@ -25,14 +27,18 @@ public class WindTunnel extends AppCompatActivity {
     ConstraintLayout simulation;
     LinearLayout para3_images;
 
+    ImageView ballImage;
+    LottieAnimationView[] ballBox;
+    String selectedBall = "";
+
     LinearLayout.LayoutParams openParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     LinearLayout.LayoutParams closeParams = new LinearLayout.LayoutParams(0, 0);
 
     int choice;
 
     String aim = "• Comparison of drag for shapes of equal equatorial diameter\n" +
-                 "• Visualisation of flow around different body shapes\n" +
-                 "• Measurement of the wake profile behind different shapes (requires C14-15)";
+            "• Visualisation of flow around different body shapes\n" +
+            "• Measurement of the wake profile behind different shapes (requires C14-15)";
 
     String theory1 = "Two kinds of drag force are encountered by a body moving through a fluid: pressure drag, " +
             "which is a result of shifting the movement of the air particles and causing eddies and wake, and friction drag, " +
@@ -97,49 +103,75 @@ public class WindTunnel extends AppCompatActivity {
             "\n22)\tBy selecting the 'Fan On button in the software, shut down the fan and turn it to Standby.\n" +
             "\n23)\tSwitching off the mains switch on an IFD7\n";
 
-    public void openIntroduction(){
+    public void openIntroduction() {
         introduction.setVisibility(View.VISIBLE);
         setTitle("Introduction");
         aimText.setText(aim);
     }
 
-    public void intro_para(View view){
+    public void intro_para(View view) {
         int tag = Integer.parseInt(view.getTag().toString()) - 1;
-        if (para[tag].getText() == ""){
+        if (para[tag].getText() == "") {
             para[tag].setLayoutParams(openParams);
             para[tag].setText(theory[tag]);
             para_arrow[tag].animate().rotation(180f).setDuration(50);
-            if(tag==2)
+            if (tag == 2)
                 para3_images.setLayoutParams(openParams);
-        }
-        else{
+        } else {
             para[tag].setLayoutParams(closeParams);
             para[tag].setText("");
             para_arrow[tag].animate().rotation(0f).setDuration(50);
-            if(tag==2)
+            if (tag == 2)
                 para3_images.setLayoutParams(closeParams);
         }
     }
 
-    public void openProcedure(){
+    public void openProcedure() {
         setTitle("Procedure");
         procedure.setVisibility(View.VISIBLE);
         procedurePara.setText(procedureText);
     }
 
-    public void openAboutSetup(){
+    public void openAboutSetup() {
         setTitle("About Setup");
         aboutSetupPara.setText(about_setup);
         aboutSetup.setVisibility(View.VISIBLE);
     }
 
-    public void openObservation(){
+    public void openObservation() {
         setTitle("Observation");
     }
 
-    public void startSimulation(){
+    public void startSimulation() {
         setTitle("Simulation");
         simulation.setVisibility(View.VISIBLE);
+    }
+
+    public void changeBall(View view) {
+        int tag = Integer.parseInt(view.getTag().toString());
+        if (tag == 1) {
+            if (!selectedBall.equals("smooth")) {
+                selectedBall = "smooth";
+                ballImage.setImageResource(R.drawable.wt_smooth_ball);
+                ballBox[0].playAnimation();
+                ballBox[1].setProgress(0f);
+            } else {
+                selectedBall = "";
+                ballImage.setImageResource(0);
+                ballBox[0].setProgress(0f);
+            }
+        } else {
+            if (!selectedBall.equals("dimpled")) {
+                selectedBall = "dimpled";
+                ballImage.setImageResource(R.drawable.wt_dimpled_ball);
+                ballBox[0].setProgress(0f);
+                ballBox[1].playAnimation();
+            } else {
+                selectedBall = "";
+                ballImage.setImageResource(0);
+                ballBox[1].setProgress(0f);
+            }
+        }
     }
 
     @Override
@@ -169,13 +201,17 @@ public class WindTunnel extends AppCompatActivity {
         para3_images = findViewById(R.id.windTunnel_para3_images);
 
         simulation = findViewById(R.id.windTunnel_simulation);
+        ballImage = findViewById(R.id.windTunnel_ballImage);
+        ballBox = new LottieAnimationView[]{
+                findViewById(R.id.windTunnel_smoothBallBox),
+                findViewById(R.id.windTunnel_dimpledBallBox)};
 
         para_arrow = new ImageView[]{para1_arrow, para2_arrow, para3_arrow, para4_arrow};
 
         Intent intent = getIntent();
-        choice = intent.getIntExtra("choice",0);
+        choice = intent.getIntExtra("choice", 0);
 
-        switch (choice){
+        switch (choice) {
             case 1:
                 openIntroduction();
                 break;

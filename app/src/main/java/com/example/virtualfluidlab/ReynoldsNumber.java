@@ -1,23 +1,37 @@
 package com.example.virtualfluidlab;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.VerticalSeekBar;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.virtualfluidlab.view.MathJaxWebView;
+
+import java.util.Locale;
+import java.util.Random;
 
 public class ReynoldsNumber extends AppCompatActivity {
 
@@ -32,9 +46,21 @@ public class ReynoldsNumber extends AppCompatActivity {
     VerticalSeekBar flowRateSeekBar;
     LottieAnimationView animationView;
 
+    TextView simR1, simR2, simTime;
+
     Boolean powerOn = false, flowExit = false, firstTime = true;
     float density;
+    int flowRate = 0;
+    int r1 = 0, r2 = 0, time = 0;
     ConstraintLayout.LayoutParams dyeParams;
+
+    SQLiteDatabase observationDatabase;
+    SharedPreferences sharedPreferences;
+    int dataSNo = 0, obsCount = 0;
+    TableLayout obsTable;
+    Button saveButton, delButton;
+    TextView observationCount;
+    ConstraintLayout rey_observation;
 
     String aim = "\t•\tTo identify the laminar, transition, and turbulent flow regimes in pipe flow using Reynolds experiment.";
 
@@ -87,6 +113,21 @@ public class ReynoldsNumber extends AppCompatActivity {
 
     public void openObservation(){
         setTitle("Observation");
+        createObsTable();
+        try{
+            Cursor c = observationDatabase.rawQuery("SELECT * FROM reynoldsnumber", null);
+            c.moveToFirst();
+            int index = c.getColumnIndex("sn");
+            float d = c.getInt(index);
+            c.close();
+            rey_observation.setVisibility(View.VISIBLE);
+        }catch(Exception e){
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Error 404")
+                    .setMessage("No readings taken")
+                    .show();
+        }
     }
 
     public void startSimulation(){
@@ -111,9 +152,106 @@ public class ReynoldsNumber extends AppCompatActivity {
         }
     }
 
-    public void replayAnimation(View view){
-        LottieAnimationView animationView = (LottieAnimationView) view;
-        animationView.playAnimation();
+    public void setSimulationData(){
+        Random random = new Random();
+        r1 = 5 + random.nextInt(11);
+        time = 10 + random.nextInt(6);
+        r2 = r1 + flowRate*time;
+        simR1.setText(String.valueOf(r1));
+        simR2.setText(String.valueOf(r2));
+        simTime.setText(String.valueOf(time));
+    }
+
+    public void saveDelData(View view){
+        int tag = Integer.parseInt(view.getTag().toString());
+        Log.i("Button Tag", String.valueOf(tag));
+        if (tag == 1){
+            if (obsCount < 10){
+                obsCount += 1; dataSNo += 1;
+                observationDatabase.execSQL("INSERT INTO reynoldsnumber (sn, r1, r2, time) VALUES (" +
+                        String.format(Locale.US, "%d, %d, %d, %d)",
+                                dataSNo, r1, r2, time));
+            }
+        }
+        else if (tag == 0 && obsCount > 0){
+            observationDatabase.execSQL("DELETE FROM reynoldsnumber WHERE sn = " + (dataSNo));
+            dataSNo -= 1; obsCount -= 1;
+        }
+        else if (tag == 2) {
+            simulationView.setVisibility(View.INVISIBLE);
+            openObservation();
+        }
+
+        if (obsCount == 10){
+            saveButton.setText("Proceed");
+            saveButton.setTag("2");
+        }
+        else{
+            saveButton.setText("Save");
+            saveButton.setTag("1");
+        }
+
+        observationCount.setText(String.format("%s of 10", obsCount));
+        sharedPreferences.edit().putInt("serialNo", obsCount).apply();
+    }
+
+    public void createObsTable(){
+        Cursor c = observationDatabase.rawQuery("SELECT * FROM reynoldsnumber", null);
+        c.moveToFirst();
+        int sNo = c.getColumnIndex("sn");
+        int r1Index = c.getColumnIndex("r1");
+        int r2Index = c.getColumnIndex("r2");
+        int timeIndex = c.getColumnIndex("time");
+        try {
+            for (int i = 0; i < 10; i++) {
+                TableRow row = new TableRow(ReynoldsNumber.this);
+                //row.setId(1 + i);
+                for (int j = 0; j < 4; j++) {
+                    int d;
+                    if (j == 0)
+                        d = c.getInt(sNo);
+                    else if (j == 1)
+                        d = c.getInt(r1Index);
+                    else if (j==2)
+                        d = c.getInt(r2Index);
+                    else
+                        d = c.getInt(timeIndex);
+                    TextView tv = new TextView(ReynoldsNumber.this);
+                    tv.setTextSize(17);
+                    tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT, 1f));
+                    tv.setText(String.valueOf(d));
+                    tv.setGravity(Gravity.CENTER);
+                    row.addView(tv);
+                }
+                obsTable.addView(row);
+                c.moveToNext();
+            }
+        } catch (Exception e) {
+            Log.i("DATA", "No more data found");
+        }
+        c.close();
+    }
+
+    public void resetObsTable(View view){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Are you sure ?")
+                .setMessage("Do you want to delete observation table ?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        observationDatabase.execSQL("DELETE FROM reynoldsnumber");
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+        sharedPreferences.edit().putInt("serialNo", 1).apply();
+        obsCount = 0;
+        dataSNo = 1;
+
+        observationCount.setText(String.format("%s of 10", obsCount));
+        sharedPreferences.edit().putInt("serialNo", obsCount).apply();
     }
 
     @Override
@@ -138,12 +276,34 @@ public class ReynoldsNumber extends AppCompatActivity {
         exitTap = findViewById(R.id.reynolds_exitTap);
         apparatus = findViewById(R.id.reynolds_apparatus);
         flowRateSeekBar = findViewById(R.id.reynolds_flowRate_seekBar);
+        flowRateSeekBar.setMax(50);
         animationView = findViewById(R.id.reynolds_flow_animation);
         water2dye = findViewById(R.id.reynolds_water_to_dye);
+        simR1 = findViewById(R.id.reynolds_simR1);
+        simR2 = findViewById(R.id.reynolds_simR2);
+        simTime = findViewById(R.id.reynolds_simTime);
         dyeParams = (ConstraintLayout.LayoutParams) water2dye.getLayoutParams();
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         density = metrics.density;
+
+
+        rey_observation = findViewById(R.id.reynolds_observation);
+        saveButton = findViewById(R.id.reynolds_saveButton);
+        delButton = findViewById(R.id.reynolds_deleteButton);
+        observationCount = findViewById(R.id.reynolds_obsCount);
+        try{
+            observationDatabase = this.openOrCreateDatabase("Observation", MODE_PRIVATE, null);
+            observationDatabase.execSQL("CREATE TABLE IF NOT EXISTS reynoldsnumber ( sn INT(2), r1 INT(2), r2 INT(2), time INT(2) )");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        sharedPreferences = this.getSharedPreferences("com.example.virtualfluidlab.reynolds", Context.MODE_PRIVATE);
+        dataSNo = sharedPreferences.getInt("serialNo", 0);
+        obsCount = dataSNo;
+        observationCount.setText(String.format("%s of 10", obsCount));
+        obsTable = findViewById(R.id.cop_observationTable);
+
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choice",0);
@@ -171,6 +331,7 @@ public class ReynoldsNumber extends AppCompatActivity {
         flowRateSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                flowRate = progress + 10;
                 flowExit = progress != 0;
                 if(flowExit && firstTime){
                     ObjectAnimator animator = ObjectAnimator.ofInt(exitTap, "progress", 0, 100);
@@ -186,12 +347,13 @@ public class ReynoldsNumber extends AppCompatActivity {
                     animator.start();
                     firstTime = true;
                 }
-                if(progress > 30)
-                    animationView.setProgress((progress/10f - 3)/7f);
+                if(progress > 5)
+                    animationView.setProgress((progress/5f - 1)/8f);
                 else
                     animationView.setProgress(0f);
-                dyeParams.leftMargin = (int)((-32*progress/7 + 3200/7)*density);
+                dyeParams.leftMargin = (int)((-8*progress + 360)*density);
                 water2dye.setLayoutParams(dyeParams);
+                setSimulationData();
             }
 
             @Override
@@ -206,4 +368,5 @@ public class ReynoldsNumber extends AppCompatActivity {
         });
 
     }
+
 }

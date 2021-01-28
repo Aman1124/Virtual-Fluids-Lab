@@ -223,11 +223,13 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_layout);
         setTitle("Fluids Lab");
-        drawerLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+        //drawerLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        //drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, 0, 0);
