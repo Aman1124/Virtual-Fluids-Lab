@@ -10,7 +10,4 @@ Seeing the COVID'19 pandemic situation, we, a group of 5 IIT Patna students thou
 
 Each experiment has its own interactive simulation to provide user how the actual apparatus works and what are the things one has to handel while performing that experiment in actual time. The animation of the simulation of 4 completed experiments are shown below.
 
-<img src="bernoulli.gif" width="250" height="500"> 
-<img src="center%20of%20pressure.gif" width="250" height="500"> 
-<img src="reynolds.gif" width="250" height="500"> 
-<img src="pitot.gif" width="250" height="500">
+<img src="bernoulli.gif" width="250" height="500"> <img src="center%20of%20pressure.gif" width="250" height="500"> <img src="reynolds.gif" width="250" height="500"> <img src="pitot.gif" width="250" height="500">
