@@ -4,9 +4,9 @@ Seeing the COVID'19 pandemic situation, we, a group of 5 IIT Patna students thou
 
 # How it looks
 
-![alt text]<img src="https://github.com/Aman1124/Virtual-Fluids-Lab/blob/1d9d8497cbac29efc68a5134dac8bd973068ab37/Screenshot_20210208_193239.png" width="250" height="500">
-![alt text]<img src="https://github.com/Aman1124/Virtual-Fluids-Lab/blob/1d9d8497cbac29efc68a5134dac8bd973068ab37/Screenshot_20210208_193310.png width="250" height="500"> 
-![alt text]<img src="https://github.com/Aman1124/Virtual-Fluids-Lab/blob/1d9d8497cbac29efc68a5134dac8bd973068ab37/Screenshot_20210208_193317.png |width="250" height="500">
+<img src="https://github.com/Aman1124/Virtual-Fluids-Lab/blob/1d9d8497cbac29efc68a5134dac8bd973068ab37/Screenshot_20210208_193239.png" width="250" height="500">
+<img src="https://github.com/Aman1124/Virtual-Fluids-Lab/blob/1d9d8497cbac29efc68a5134dac8bd973068ab37/Screenshot_20210208_193310.png width="250" height="500"> 
+<img src="https://github.com/Aman1124/Virtual-Fluids-Lab/blob/1d9d8497cbac29efc68a5134dac8bd973068ab37/Screenshot_20210208_193317.png |width="250" height="500">
 
 # Working of App
 
