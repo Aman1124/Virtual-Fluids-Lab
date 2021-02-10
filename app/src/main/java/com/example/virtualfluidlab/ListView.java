@@ -39,7 +39,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
 
     ImageView bernoulli;
-    ImageView wind_tunnel_float, reynolds_float, centerOfPressFloat;
+    ImageView wind_tunnel_float, reynolds_float, centerOfPressFloat, vNotchFloat, losesInPipesFloat;
     ImageView pitotFloat;
     ImageView drawer;
 
@@ -49,12 +49,17 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
     int[] locationOfVNotch = new int[2];
     int[] drawerLocation = new int[2];
 
-    int scroll = 2, drawerPos = 0;
+    int scroll = 3, drawerPos = 0;
     float displacementX;
     long duration = 200;
     private float x1,x2,y1,y2;
     static final int MIN_DISTANCE = 200;
 
+    public void switchToVNotch(View view){
+        Intent intent = new Intent(getApplicationContext(), VNotch.class);
+        intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
+        startActivity(intent);
+    }
 
     public void switchToReynolds(View view){
         Intent intent = new Intent(getApplicationContext(), ReynoldsNumber.class);
@@ -86,6 +91,12 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
     }
 
+    public void switchToLosesInPipes(View view){
+        Intent intent = new Intent(getApplicationContext(),LosesInPipes.class);
+        intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
+        startActivity(intent);
+    }
+
     public void openSelfAssessment(View view){
         Intent intent = new Intent(getApplicationContext(), MCQs.class);
         intent.putExtra("choice", scroll);
@@ -94,39 +105,35 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 
     public void openExperiment(View view){
         if(scroll == 0)
-            switchToReynolds(view);
+            switchToVNotch(view);
         else if(scroll == 1)
-            switchToWindTunnel(view);
+            switchToReynolds(view);
         else if(scroll == 2)
-            switchToBernoulli(view);
+            switchToWindTunnel(view);
         else if(scroll == 3)
+            switchToBernoulli(view);
+        else if(scroll == 4)
             switchToPitot(view);
-        else if (scroll == 4)
+        else if (scroll == 5)
             switchToCenterofPress(view);
+        else if (scroll == 6)
+            switchToLosesInPipes(view);
     }
 
     public void scrollFloatBox(boolean direction){
         //True: left to right movement
         if (drawerPos == 0) {
             if (direction && scroll > 0) {
-                bernoulli.animate().translationXBy(displacementX).setDuration(duration);
-                wind_tunnel_float.animate().translationXBy(displacementX).setDuration(duration);
-                reynolds_float.animate().translationXBy(displacementX).setDuration(duration);
-                centerOfPressFloat.animate().translationXBy(displacementX).setDuration(duration);
-                pitotFloat.animate().translationXBy(displacementX).setDuration(duration);
+                translateFloatBoxes(displacementX, duration);
                 if (scroll >= 1)
                     scroll -= 1;
 //                floatBoxes[scroll].animate().scaleX(1f).scaleY(1f).setDuration(duration);
 //                for(int i=0; i<5; i++)
 //                    if(i!=scroll)
 //                        floatBoxes[i].animate().scaleX(0.9f).scaleY(0.9f).setDuration(duration);
-            } else if (!direction && scroll < 4) {
-                bernoulli.animate().translationXBy(-displacementX).setDuration(duration);
-                wind_tunnel_float.animate().translationXBy(-displacementX).setDuration(duration);
-                reynolds_float.animate().translationXBy(-displacementX).setDuration(duration);
-                centerOfPressFloat.animate().translationXBy(-displacementX).setDuration(duration);
-                pitotFloat.animate().translationXBy(-displacementX).setDuration(duration);
-                if (scroll <= 3)
+            } else if (!direction && scroll < 6) {
+                translateFloatBoxes(-displacementX, duration);
+                if (scroll <= 5)
                     scroll += 1;
 //                floatBoxes[scroll].animate().scaleX(1f).scaleY(1f).setDuration(duration);
 //                for(int i=0; i<5; i++)
@@ -136,26 +143,38 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         }
     }
 
+    private void translateFloatBoxes(float distance, long time){
+        bernoulli.animate().translationXBy(distance).setDuration(time);
+        wind_tunnel_float.animate().translationXBy(distance).setDuration(time);
+        reynolds_float.animate().translationXBy(distance).setDuration(time);
+        centerOfPressFloat.animate().translationXBy(distance).setDuration(time);
+        pitotFloat.animate().translationXBy(distance).setDuration(time);
+        vNotchFloat.animate().translationXBy(distance).setDuration(time);
+        losesInPipesFloat.animate().translationXBy(distance).setDuration(time);
+    }
+
+    private void changeAlphaOfBoxes(float alpha, long time){
+        bernoulli.animate().alpha(alpha ).setDuration(time);
+        wind_tunnel_float.animate().alpha(alpha).setDuration(time);
+        pitotFloat.animate().alpha(alpha).setDuration(time);
+        reynolds_float.animate().alpha(alpha).setDuration(time);
+        centerOfPressFloat.animate().alpha(alpha).setDuration(time);
+        vNotchFloat.animate().alpha(alpha).setDuration(time);
+        losesInPipesFloat.animate().alpha(alpha).setDuration(time);
+    }
+
     public void pullDrawer(boolean direction){
         if( direction && drawerPos == 0 ){
             drawer.animate().translationYBy(-2.2f*locationOfBernoulli[1]).setDuration(duration);
             optionsLayout.animate().translationYBy(-2.2f*locationOfBernoulli[1]).setDuration(duration);
-            bernoulli.animate().alpha(0.45f).setDuration(duration);
-            wind_tunnel_float.animate().alpha(0.45f).setDuration(duration);
-            pitotFloat.animate().alpha(0.45f).setDuration(duration);
-            reynolds_float.animate().alpha(0.45f).setDuration(duration);
-            centerOfPressFloat.animate().alpha(0.45f).setDuration(duration);
+            changeAlphaOfBoxes(0.45f, duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
         }
         else if(!direction && drawerPos == 1){
             drawer.animate().translationYBy(2.2f*locationOfBernoulli[1]).setDuration(duration);
             optionsLayout.animate().translationYBy(2.2f*locationOfBernoulli[1]).setDuration(duration);
-            bernoulli.animate().alpha(1f).setDuration(duration);
-            wind_tunnel_float.animate().alpha(1f).setDuration(duration);
-            pitotFloat.animate().alpha(1f).setDuration(duration);
-            reynolds_float.animate().alpha(1f).setDuration(duration);
-            centerOfPressFloat.animate().alpha(1f).setDuration(duration);
+            changeAlphaOfBoxes(1f, duration);
             drawer.getLocationOnScreen(drawerLocation);
             //Toast.makeText(this,"Y: " + drawerLocation[1] + "\nBernoulli: " + locationOfBernoulli[1],Toast.LENGTH_SHORT).show();
         }
@@ -207,6 +226,8 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         reynolds_float = findViewById(R.id.reynolds_float);
         pitotFloat = findViewById(R.id.pitotFloat);
         centerOfPressFloat = findViewById(R.id.centerOfPressFloat);
+        vNotchFloat = findViewById(R.id.vNotch_float);
+        losesInPipesFloat = findViewById(R.id.losesInPipes_float);
         drawer = findViewById(R.id.drawer);
 
         floatBoxes = new ImageView[]{reynolds_float, wind_tunnel_float, bernoulli, pitotFloat, centerOfPressFloat};

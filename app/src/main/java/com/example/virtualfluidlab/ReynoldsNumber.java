@@ -25,6 +25,7 @@ import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VerticalSeekBar;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -39,14 +40,14 @@ public class ReynoldsNumber extends AppCompatActivity {
     ScrollView introductionView, aboutSetupView, procedureView;
     ConstraintLayout simulationView;
     TextView rey_aimPara, rey_theoryPara1, rey_theoryPara2;
-    TextView rey_aboutSetup, rey_procedure;
+    TextView rey_aboutSetup, rey_procedure1, rey_procedure2;
     MathJaxWebView rey_theoryFormula;
     ProgressBar narrowTube, exitTap;
     ImageView apparatus, water2dye;
     VerticalSeekBar flowRateSeekBar;
     LottieAnimationView animationView;
 
-    TextView simR1, simR2, simTime;
+    TextView simR1, simR2, simTime, obsNote;
 
     Boolean powerOn = false, flowExit = false, firstTime = true;
     float density;
@@ -80,7 +81,7 @@ public class ReynoldsNumber extends AppCompatActivity {
             "Diameter of pipe section(d) = 0.01 m\n" +
             "Length of pipe section(L) = 0.74 m\n";
 
-    String procedure = "1.)\tClose the drainage valve of the constant head tank if it is in open position. \n" +
+    String procedure1 = "1.)\tClose the drainage valve of the constant head tank if it is in open position. \n" +
             "\n2.)\tSwitch ON the main power supply and the pump. \n" +
             "\n3.)\tOpen the control valve of water supply to constant head tank and partially close the bypass valve. Wait till overflow occurs. \n" +
             "\n4.)\tBy partially opening the control valve provided at the end of the tube, the minimum flow of water through the glass tube is regulated. \n" +
@@ -89,6 +90,18 @@ public class ReynoldsNumber extends AppCompatActivity {
             "\n7.)\tMeasure the flow rate using measuring cylinder, stop watch. Determine the flow velocity and corresponding Reynolds number. \n" +
             "\n8.)\tRepeat the steps 6 and 7 for different flow rates by adjusting the control valve. \n" +
             "\n9.)\tSwitch OFF the pump and drain the apparatus completely once the experiment is over.\n";
+
+    String procedure2 = "1. Click on the Power box to turn on.\n" +
+            "2. Once powered up a slider will appear over the valve.\n" +
+            "3. Move the slider to regulate the flow of water through the glass tube.\n" +
+            "4. The flow can be observed in the magnified view of the glass tube below the apparatus.\n" +
+            "5. Press the save button to save the readings.\n" +
+            "6. Take 10 readings.\n" +
+            "7. To access the readings close the simulation and press the Observation button.\n" +
+            "8. Make sure to turn off the power before leaving the simulation.";
+
+    String observationNote = "For water at 20°C:\nDynamic viscosity, µ/ρ = 9.554e-06 m²/sec\n" +
+            "Diameter, D = 0.01m";
 
     public void openIntroduction(){
         setTitle("Introduction");
@@ -107,13 +120,15 @@ public class ReynoldsNumber extends AppCompatActivity {
 
     public void openProcedure(){
         setTitle("Procedure");
-        rey_procedure.setText(procedure);
+        rey_procedure1.setText(procedure1);
+        rey_procedure2.setText(procedure2);
         procedureView.setVisibility(View.VISIBLE);
     }
 
     public void openObservation(){
         setTitle("Observation");
         createObsTable();
+        obsNote.setText(observationNote);
         try{
             Cursor c = observationDatabase.rawQuery("SELECT * FROM reynoldsnumber", null);
             c.moveToFirst();
@@ -179,6 +194,7 @@ public class ReynoldsNumber extends AppCompatActivity {
         }
         else if (tag == 2) {
             simulationView.setVisibility(View.INVISIBLE);
+            powerOn = false;
             openObservation();
         }
 
@@ -255,6 +271,14 @@ public class ReynoldsNumber extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if(!powerOn)
+            super.onBackPressed();
+        else
+            Toast.makeText(this, "Please turn off the power", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reynolds_number);
@@ -269,7 +293,8 @@ public class ReynoldsNumber extends AppCompatActivity {
         rey_aboutSetup = findViewById(R.id.reynolds_aboutSetupPara);
 
         procedureView = findViewById(R.id.reynolds_procedure);
-        rey_procedure = findViewById(R.id.reynolds_procedurePara);
+        rey_procedure1 = findViewById(R.id.reynolds_procedurePara1);
+        rey_procedure2 = findViewById(R.id.reynolds_procedurePara2);
 
         simulationView = findViewById(R.id.reynolds_simulation);
         narrowTube = findViewById(R.id.reynolds_narrowTube);
@@ -283,6 +308,7 @@ public class ReynoldsNumber extends AppCompatActivity {
         simR2 = findViewById(R.id.reynolds_simR2);
         simTime = findViewById(R.id.reynolds_simTime);
         dyeParams = (ConstraintLayout.LayoutParams) water2dye.getLayoutParams();
+        obsNote = findViewById(R.id.reynolds_obsNote);
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         density = metrics.density;

@@ -1,65 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/action_menu_presenter"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".ActionMenu"
-    android:id="@+id/action_menu_presenter"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    tools:context=".ActionMenu">
 
-        <ScrollView
+    <ScrollView
+        android:id="@+id/additional_resources_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/expanded_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:text=""
+                android:textSize="17sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:id="@+id/expanded_menu"
-                            android:text=""
-                            android:textSize="17sp"
-                            android:justificationMode="inter_word"
-                            android:fontFamily="@font/nunito_semibold"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginEnd="@dimen/_15sdp"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/workFromHome"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:onClick="replayAnimation"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:lottie_rawRes="@raw/workfromhome" />
 
-<!--                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/robot404"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:lottie_rawRes="@raw/robot404"
-                            app:lottie_autoPlay="false"
-                            app:lottie_loop="false"
-                            android:visibility="invisible"
-                            android:onClick="replayAnimation"/>-->
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/workFromHome"
-                            android:layout_width="@dimen/_150sdp"
-                            android:layout_height="@dimen/_150sdp"
-                            app:layout_constraintTop_toBottomOf="@id/expanded_menu"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:lottie_rawRes="@raw/workfromhome"
-                            app:lottie_autoPlay="true"
-                            app:lottie_loop="false"
-                            android:visibility="invisible"
-                            android:onClick="replayAnimation"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
-        </ScrollView>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/additional_resources_links"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_15sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_extrabold"
+                android:justificationMode="inter_word"
+                android:text="Lab Manuals:"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/bernoulliManual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:text="@string/bernoulli_manual"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/copManual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:text="@string/cop_manual"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/pitotManual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:text="@string/pitot_manual"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/reynoldsManual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:text="@string/reynolds_manual"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/windManual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:text="@string/windTunnel_manual"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/vNotchManual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:text="@string/vNotch_manual"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/links_note"
+                android:layout_marginTop="15dp"
+                android:textSize="15dp"
+                android:fontFamily="@font/nunito_bold"/>
+
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</RelativeLayout>

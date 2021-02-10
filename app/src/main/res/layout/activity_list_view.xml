@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    tools:context=".ListView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    tools:context=".ListView"
     tools:openDrawer="end">
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:theme="@style/AppTheme"
-        android:id="@+id/nav_view"
-        app:headerLayout="@layout/menu_header"
-        app:menu="@menu/main_menu"
-        android:background="#d8f7fe"
-        app:itemTextColor="#707070"
-        app:itemIconTint="@color/colorPrimaryDark"
-        android:clickable="true"
         android:layout_gravity="start"
-        android:focusable="true" />
+        android:background="#d8f7fe"
+        android:clickable="true"
+        android:focusable="true"
+        android:theme="@style/AppTheme"
+        app:headerLayout="@layout/menu_header"
+        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextColor="#707070"
+        app:menu="@menu/main_menu" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,207 +31,222 @@
         <include
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <RelativeLayout
-        android:id="@+id/listLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bubbleback"
-        android:clipToPadding="false">
-
-        <ImageView
+            android:id="@+id/listLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:src="@drawable/appuicrop" />
-
-        <ImageView
-            android:id="@+id/wind_tunnel_float"
-            android:layout_width="240dp"
-            android:layout_height="290dp"
-            android:layout_centerHorizontal="false"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="35dp"
-            android:layout_toStartOf="@id/bernoulliFloat"
-            android:alpha="1"
-            android:src="@drawable/wind_tunnel_box" />
-
-        <ImageView
-            android:id="@+id/reynolds_float"
-            android:layout_width="240dp"
-            android:layout_height="290dp"
-            android:layout_alignEnd="@+id/wind_tunnel_float"
-            android:layout_centerHorizontal="false"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="275dp"
-            android:alpha="1"
-            android:src="@drawable/reynolds_box" />
-
-
-        <ImageView
-            android:id="@+id/pitotFloat"
-            android:layout_width="240dp"
-            android:layout_height="290dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="-300dp"
-            android:layout_toEndOf="@id/bernoulliFloat"
-            android:alpha="1"
-            android:src="@drawable/pitot_tube_box" />
-
-        <ImageView
-            android:id="@+id/centerOfPressFloat"
-            android:layout_width="240dp"
-            android:layout_height="290dp"
-            android:layout_alignStart="@+id/pitotFloat"
-            android:layout_marginStart="275dp"
-            android:layout_marginTop="30dp"
-            android:alpha="1"
-            android:src="@drawable/center_of_press_box" />
-
-        <ImageView
-            android:id="@+id/bernoulliFloat"
-            android:layout_width="240dp"
-            android:layout_height="290dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:alpha="1"
-            android:src="@drawable/bernoullibox" />
-
-
-        <ImageView
-            android:id="@+id/drawer"
-            android:layout_width="match_parent"
-            android:layout_height="800dp"
-            android:layout_below="@id/bernoulliFloat"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="670dp"
-            android:alpha="1"
-            android:background="@drawable/drawer"
-            android:clipChildren="false" />
-
-        <LinearLayout
-            android:id="@+id/optionsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/bernoulliFloat"
-            android:layout_marginTop="75dp"
-            android:layout_marginBottom="-1080dp"
-            android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
-
-            <TextView
-                android:id="@+id/introduction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_semibold"
-                android:onClick="openExperiment"
-                android:tag="1"
-                android:text="Introduction"
-                android:textColor="#1b6572"
-                android:textSize="30sp" />
+            android:layout_height="match_parent"
+            android:background="@drawable/bubbleback"
+            android:clipToPadding="false">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="2.5dp"
-                android:layout_marginTop="22dp"
-                android:alpha="0.8"
-                android:background="@drawable/horiz_line" />
-
-            <TextView
-                android:id="@+id/aboutSetup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:fontFamily="@font/nunito_semibold"
-                android:onClick="openExperiment"
-                android:tag="2"
-                android:text="About Setup"
-                android:textColor="#1b6572"
-                android:textSize="30sp" />
+                android:id="@+id/wind_tunnel_float"
+                android:layout_width="240dp"
+                android:layout_height="290dp"
+                android:layout_centerHorizontal="false"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="35dp"
+                android:layout_toStartOf="@id/bernoulliFloat"
+                android:alpha="1"
+                android:src="@drawable/wind_tunnel_box" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="2.5dp"
-                android:layout_marginTop="22dp"
-                android:alpha="0.8"
-                android:background="@drawable/horiz_line" />
-
-            <TextView
-                android:id="@+id/procedure"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:fontFamily="@font/nunito_semibold"
-                android:onClick="openExperiment"
-                android:tag="3"
-                android:text="Procedure"
-                android:textColor="#1b6572"
-                android:textSize="30sp" />
+                android:id="@+id/reynolds_float"
+                android:layout_width="240dp"
+                android:layout_height="290dp"
+                android:layout_alignEnd="@+id/wind_tunnel_float"
+                android:layout_centerHorizontal="false"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="275dp"
+                android:alpha="1"
+                android:src="@drawable/reynolds_box" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="2.5dp"
-                android:layout_marginTop="22dp"
-                android:alpha="0.8"
-                android:background="@drawable/horiz_line" />
+                android:id="@+id/vNotch_float"
+                android:layout_width="240dp"
+                android:layout_height="290dp"
+                android:layout_alignEnd="@+id/reynolds_float"
+                android:layout_centerHorizontal="false"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="275dp"
+                android:alpha="1"
+                android:src="@drawable/vnotch_box" />
 
-            <TextView
-                android:id="@+id/simulation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:fontFamily="@font/nunito_semibold"
-                android:onClick="openExperiment"
-                android:tag="4"
-                android:text="Simulation"
-                android:textColor="#1b6572"
-                android:textSize="30sp" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="2.5dp"
-                android:layout_marginTop="22dp"
-                android:alpha="0.8"
-                android:background="@drawable/horiz_line" />
-
-            <TextView
-                android:id="@+id/observation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:fontFamily="@font/nunito_semibold"
-                android:onClick="openExperiment"
-                android:tag="5"
-                android:text="Observation"
-                android:textColor="#1b6572"
-                android:textSize="30sp" />
+                android:id="@+id/pitotFloat"
+                android:layout_width="240dp"
+                android:layout_height="290dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="-300dp"
+                android:layout_toEndOf="@id/bernoulliFloat"
+                android:alpha="1"
+                android:src="@drawable/pitot_tube_box" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="2.5dp"
-                android:layout_marginTop="22dp"
-                android:alpha="0.8"
-                android:background="@drawable/horiz_line" />
+                android:id="@+id/centerOfPressFloat"
+                android:layout_width="240dp"
+                android:layout_height="290dp"
+                android:layout_alignStart="@+id/pitotFloat"
+                android:layout_marginStart="275dp"
+                android:layout_marginTop="30dp"
+                android:alpha="1"
+                android:src="@drawable/center_of_press_box" />
 
-            <TextView
-                android:id="@+id/selfAssessment"
+            <ImageView
+                android:id="@+id/losesInPipes_float"
+                android:layout_width="240dp"
+                android:layout_height="290dp"
+                android:layout_alignStart="@+id/centerOfPressFloat"
+                android:layout_marginStart="275dp"
+                android:layout_marginTop="30dp"
+                android:alpha="1"
+                android:src="@drawable/loses_in_pipes_box" />
+
+            <ImageView
+                android:id="@+id/bernoulliFloat"
+                android:layout_width="240dp"
+                android:layout_height="290dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:alpha="1"
+                android:src="@drawable/bernoullibox" />
+
+
+            <ImageView
+                android:id="@+id/drawer"
+                android:layout_width="match_parent"
+                android:layout_height="800dp"
+                android:layout_below="@id/bernoulliFloat"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="670dp"
+                android:alpha="1"
+                android:background="@drawable/drawer"
+                android:clipChildren="false" />
+
+            <LinearLayout
+                android:id="@+id/optionsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:fontFamily="@font/nunito_semibold"
-                android:onClick="openSelfAssessment"
-                android:tag="6"
-                android:text="Self Assessment"
-                android:textColor="#1b6572"
-                android:textSize="30sp" />
+                android:layout_below="@id/bernoulliFloat"
+                android:layout_marginTop="75dp"
+                android:layout_marginBottom="-1080dp"
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/introduction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:onClick="openExperiment"
+                    android:tag="1"
+                    android:text="Introduction"
+                    android:textColor="#1b6572"
+                    android:textSize="30sp" />
 
-    </RelativeLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    android:layout_marginTop="22dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/horiz_line" />
+
+                <TextView
+                    android:id="@+id/aboutSetup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:onClick="openExperiment"
+                    android:tag="2"
+                    android:text="About Setup"
+                    android:textColor="#1b6572"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    android:layout_marginTop="22dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/horiz_line" />
+
+                <TextView
+                    android:id="@+id/procedure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:onClick="openExperiment"
+                    android:tag="3"
+                    android:text="Procedure"
+                    android:textColor="#1b6572"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    android:layout_marginTop="22dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/horiz_line" />
+
+                <TextView
+                    android:id="@+id/simulation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:onClick="openExperiment"
+                    android:tag="4"
+                    android:text="Simulation"
+                    android:textColor="#1b6572"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    android:layout_marginTop="22dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/horiz_line" />
+
+                <TextView
+                    android:id="@+id/observation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:onClick="openExperiment"
+                    android:tag="5"
+                    android:text="Observation"
+                    android:textColor="#1b6572"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    android:layout_marginTop="22dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/horiz_line" />
+
+                <TextView
+                    android:id="@+id/selfAssessment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:onClick="openSelfAssessment"
+                    android:tag="6"
+                    android:text="Self Assessment"
+                    android:textColor="#1b6572"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

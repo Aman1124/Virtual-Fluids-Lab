@@ -110,23 +110,23 @@ public class Pitot_Tube extends AppCompatActivity {
             "\n" +
             "</p>\n";
 
-    String procedureSteps = "1. Ensure that ON/OFF switch given on the panel is at OFF position.\n" +
-            "\n2. Make sure all the drain valves are closed. \n" +
-            "\n3. Fill sump tank ¾ with clean water and open by-pass valve V2. \n" +
-            "\n4. Switch ON the main power supply and the pump.\n" +
-            "\n5. Open valve V1 and allow water to flow through test section by partially closing valve V2.\n" +
-            "\n6. Open the air release valve V5 provided on the manometer, slowly to release the air from manometer.\n" +
-            "\n7. When no air is observed in the manometer, close the valve V5.\n" +
-            "\n8. Position the Pitot tube at the centre of the test section by adjusting the pointer to zero by knob provided.\n" +
-            "\n9. Adjust water flow rate with the help of control valve V1 and by pass valve V2.\n" +
-            "\n10. Record the manometer reading, in case of pressure above scale in any tube, apply air pressure by hand pump to get readable reading.\n" +
-            "\n11. Measure the discharge flow rate using stop watch and measuring tank.\n" +
-            "\n12. For different positions of pitot tube (change by knob), Record the manometer reading for particular discharge to determine velocity profile.\n" +
-            "\n13. Vary the flow rates of water by operating control valve V1 and by-pass valve V2 and repeat the experiment.\n" +
-            "\n14. Turn OFF the pump and power supply. \n" +
-            "\n15. Drain the apparatus using valve V3 and V4.\n" +
-            "\n\nProcedure for simulation :- \n" +
-            "1. Switch on the power supply by clicking on the power control box.\n" +
+    String procedureSteps1 = "1. Ensure that ON/OFF switch given on the panel is at OFF position.\n" +
+            "2. Make sure all the drain valves are closed. \n" +
+            "3. Fill sump tank ¾ with clean water and open by-pass valve V2. \n" +
+            "4. Switch ON the main power supply and the pump.\n" +
+            "5. Open valve V1 and allow water to flow through test section by partially closing valve V2.\n" +
+            "6. Open the air release valve V5 provided on the manometer, slowly to release the air from manometer.\n" +
+            "7. When no air is observed in the manometer, close the valve V5.\n" +
+            "8. Position the Pitot tube at the centre of the test section by adjusting the pointer to zero by knob provided.\n" +
+            "9. Adjust water flow rate with the help of control valve V1 and by pass valve V2.\n" +
+            "10. Record the manometer reading, in case of pressure above scale in any tube, apply air pressure by hand pump to get readable reading.\n" +
+            "11. Measure the discharge flow rate using stop watch and measuring tank.\n" +
+            "12. For different positions of pitot tube (change by knob), Record the manometer reading for particular discharge to determine velocity profile.\n" +
+            "13. Vary the flow rates of water by operating control valve V1 and by-pass valve V2 and repeat the experiment.\n" +
+            "14. Turn OFF the pump and power supply. \n" +
+            "15. Drain the apparatus using valve V3 and V4.\n";
+
+    String procedureSteps2 = "1. Switch on the power supply by clicking on the power control box.\n" +
             "2. Get desired flow rate by clicking on the valve and then adjusting the seekbar. \n" +
             "3. Click on the knob. In the pop-up window, adjust the seekbar for getting the desired vertical position of the pointer.\n" +
             "4. Click anywhere on the screen to close the pop-up window" +
@@ -174,9 +174,12 @@ public class Pitot_Tube extends AppCompatActivity {
 
     public void openProcedure() {
         setTitle("Procedure");
-        heading1.setVisibility(View.INVISIBLE);
-        heading2.setVisibility(View.INVISIBLE);
-        para2.setText(procedureSteps);
+        heading1.setTextSize(27);
+        heading2.setTextSize(27);
+        heading1.setText("Laboratory Procedure:");
+        para1.setText(procedureSteps1);
+        heading2.setText("Simulation Procedure");
+        para2.setText(procedureSteps2);
         introduction.setVisibility(View.VISIBLE);
     }
 

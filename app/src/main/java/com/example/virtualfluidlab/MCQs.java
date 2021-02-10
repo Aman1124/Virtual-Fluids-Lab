@@ -42,12 +42,19 @@ public class MCQs extends AppCompatActivity {
     */
 
     String[][] questions = new String[][]{
+            {   //V-Notch
+                    "The ratio of inertia force and gravitational force is called as ______",
+                    "The Froude’s number for a flow in a channel section is 1. What type of flow is it?",
+                    "In an open-channel flow, the specific energy is defined as",
+                    "The weir is used to measure",
+                    "The dimension of Darcy friction factor is:"
+            },
             {   //Reynolds
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
+                    "In Reynolds experiment we observe which of the following flowlines",
+                    "If observed streakline is like continuous thread then flow can be said as ____",
+                    "For steady flow, streakline is the instantaneous locus of all fluid particles ____",
+                    "Which of the factors primarily decide whether the flow in a circular pipe is laminar or turbulent?",
+                    "In flow through a pipe, the transition from laminar to turbulent flow does not depend on ____"
             },
             {   //Wind Tunnel
                     "Frictional drag is due to ___",
@@ -76,16 +83,30 @@ public class MCQs extends AppCompatActivity {
                     "",
                     "",
                     ""
+            },
+            {   //Loses in Pipes
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
             }
     };
 
     String[][][] options = new String[][][]{
+            {   //V-Notch
+                    {"Reynolds number","Stokes number","Froude's number","Euler's number"},
+                    {"Sub Critical","Critical","Super Critical","Tranquil"},
+                    {"the total energy per unit","the total energy per unit mass","the total energy per unit specific volume weight","the total energy with respect to the channel bottom as reference"},
+                    {"discharge through a small channel","discharge through a large channel","velocity through a small channel","discharge through a small pipe"},
+                    {"M⁰L¹T⁰","M⁰L¹T¹","M¹L¹T¹","M⁰L⁰T⁰"}
+            },
             {   //Reynolds
-                    {"", "", "", ""},
-                    {"", "", "", ""},
-                    {"", "", "", ""},
-                    {"", "", "", ""},
-                    {"", "", "", ""}
+                    {"pathline", "streamline", "streakline", "timeline"},
+                    {"laminar", "turbulent", "transition", "none of the above"},
+                    {"passed through a fixed point", "that is tangential to velocity vector", "both 1 and 2", "none of the above"},
+                    {"Prandtl number", "Pressure gradient along the length of the pipe", "Dynamic viscosity coefficient", "Reynolds number"},
+                    {"the velocity of the fluid", "the density of the fluid", "the diameter of the pipe", "the length of the pipe"}
             },
             {   //Wind Tunnel
                     {"Velocity of fluid", "Density of fluid", "Viscosity of fluid", "All"},
@@ -114,22 +135,33 @@ public class MCQs extends AppCompatActivity {
                     {"", "", "", ""},
                     {"", "", "", ""},
                     {"", "", "", ""}
+            },
+            {   //Loses in Pipes
+                    {"","","",""},
+                    {"","","",""},
+                    {"","","",""},
+                    {"","","",""},
+                    {"","","",""}
             }
     };
 
     int[][] correctAnswer = new int[][]{
-            {1, 1, 1, 1, 1}, //reynolds
+            {3, 2, 4, 2, 4}, //v-notch
+            {3, 1, 3, 4, 4}, //reynolds
             {3, 2, 2, 3, 3}, //wind tunnel
             {2, 4, 3, 1, 2}, //bernoulli
             {1, 1, 3, 2, 1}, //pitot
-            {1, 1, 1, 1, 1}  //center of pressure
+            {1, 1, 1, 1, 1}, //center of pressure
+            {1, 1, 1, 1, 1}  //loses in pipes
     };
     char[][] answerStatus = new char[][]{
+            {'N', 'N', 'N', 'N', 'N'}, //v-notch
             {'N', 'N', 'N', 'N', 'N'}, //reynolds
             {'N', 'N', 'N', 'N', 'N'}, //wind tunnel
             {'N', 'N', 'N', 'N', 'N'}, //bernoulli
             {'N', 'N', 'N', 'N', 'N'}, //pitot
-            {'N', 'N', 'N', 'N', 'N'}  //center of pressure
+            {'N', 'N', 'N', 'N', 'N'}, //center of pressure
+            {'N', 'N', 'N', 'N', 'N'}  //loses in pipes
     };
 
     public void changeColor(View view) {
@@ -230,11 +262,15 @@ public class MCQs extends AppCompatActivity {
         resetColor();
         for (int i = 0; i < 5; i++)
             answerStatus[expNo][i] = 'N';
+        LottieAnimationView animationView = (LottieAnimationView) view;
+        animationView.playAnimation();
         resultScreen.setVisibility(View.INVISIBLE);
         createQuestion();
     }
 
     public void backToDrawer(View view) {
+        LottieAnimationView animationView = (LottieAnimationView) view;
+        animationView.playAnimation();
         super.onBackPressed();
     }
 
@@ -264,7 +300,7 @@ public class MCQs extends AppCompatActivity {
         optionsText = new TextView[]{option1, option2, option3, option4};
 
         Intent intent = getIntent();
-        expNo = intent.getIntExtra("choice",2);
+        expNo = intent.getIntExtra("choice", 3);
 
         createQuestion();
 

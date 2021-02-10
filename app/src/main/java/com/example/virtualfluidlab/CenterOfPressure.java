@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CenterOfPressure extends AppCompatActivity {
 
-    TextView aimText, theoryText, aboutSetupText, procedureText;
+    TextView aimText, theoryText, aboutSetupText, procedureText1, procedureText2;
     MathJaxWebView theoryFormula1Text, theoryFormula2Text, theoryFormula3Text;
     ScrollView introduction, aboutSetup, procedure;
     ImageView weightsView, compassBubbleView;
@@ -130,7 +130,7 @@ public class CenterOfPressure extends AppCompatActivity {
             "The apparatus consists of a manufactured quadrant mounted on a balanced arm, pivoting on the tip of the knife. The knife-edge of the quadrant coincides with the center of the arc. Thus, when submerged, only the tension on the rectangular end face gives rise to a moment along the knife edge of the hydrostatic force acting on the quadrant. A balancing pan for the supplied weight and an adjustable counter balance are built into the balance arm.\n" +
             "This assembly is placed on the top of an acrylic tank that can be levelled by adjusting screw feet. A spirit level is given on the quadrant's top surface to show that the balance arm is or is not horizontal. Water is fed to the top of the tank and can be drained by a valve on the side of the tank.\n";
 
-    String steps = "1.\tClean up the setup and make it dust free. On the base plate, set the acrylic tank. \n" +
+    String steps1 = "1.\tClean up the setup and make it dust free. On the base plate, set the acrylic tank. \n" +
             "\n2.\tUse the level screw given at the bottom of the base plate to level the tank horizontally. \n" +
             "\n3.\tOn the top of the tank, put the left end of the balance arm into the stopper given. \n" +
             "\n4.\tBy placing the pivot given at the arm, on the slot provided at the top of the tank, set the quadrant with the balance arm at the tank. \n" +
@@ -143,6 +143,16 @@ public class CenterOfPressure extends AppCompatActivity {
             "\n11.\tOpen the tank's V1 drain valve and allow the water to flow out of the tank before the arm returns to its horizontal position.\n" +
             "\n12.\tClose the V1 valve and note the height of the tank's water level and the weight applied. \n" +
             "\n13.\tAgain remove one weight from the weight hanger and repeat step 11 and 12.\n";
+
+    String steps2 = "1. Press the 'Add Water' button to add water and raise the water level.\n" +
+            "2. Tap on the '+' sign on the left to add weights.\n" +
+            "3. Make the arm horizontal, i.e. the blue dot is at the centre by adjusting water level.\n" +
+            "4. To decrease the water level use the valve 'V1'." +
+            "5. After the arm is horizontal, press the Save button to save the water level and weight.\n" +
+            "6. Now change the weight by using '+' or '-' sign.\n" +
+            "7. Again make the arm horizontal by adjusting the water level\n" +
+            "8. Press the save button to save the readings.\n" +
+            "9. To access the Observation table, exit the simulation by pressing the back button and click on Observation.\n";
 
     public void openIntroduction() {
         setTitle("Introduction");
@@ -163,7 +173,8 @@ public class CenterOfPressure extends AppCompatActivity {
     public void openProcedure() {
         setTitle("Procedure");
         procedure.setVisibility(View.VISIBLE);
-        procedureText.setText(steps);
+        procedureText1.setText(steps1);
+        procedureText2.setText(steps2);
     }
 
     public void startSimulation() {
@@ -368,7 +379,8 @@ public class CenterOfPressure extends AppCompatActivity {
         theoryFormula2Text = findViewById(R.id.cop_theory_formula2);
         theoryFormula3Text = findViewById(R.id.cop_theory_formula3);
         aboutSetupText = findViewById(R.id.cop_aboutSetupPara);
-        procedureText = findViewById(R.id.cop_procedurePara);
+        procedureText1 = findViewById(R.id.cop_procedurePara1);
+        procedureText2 = findViewById(R.id.cop_procedurePara2);
 
         introduction = findViewById(R.id.cop_introduction);
         aboutSetup = findViewById(R.id.cop_aboutSetup);

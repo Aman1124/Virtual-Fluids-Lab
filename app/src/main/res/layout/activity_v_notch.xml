@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".VNotch">
+
+    <ScrollView
+        android:id="@+id/vn_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="Aim:"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/vn_aimPara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="Theory:"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/vn_theoryPara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/vn_aboutSetup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp">
+
+            <TextView
+                android:id="@+id/vn_aboutSetupPara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:id="@+id/vn_labelled_diagram"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/vn_procedure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="Laboratory Procedure:"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/vn_procedurePara1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="Simulation Procedure:"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/vn_procedurePara2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="0.85"
+                android:text=""
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vNotch_simulation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/vNotch_setupImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_280sdp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/v_notch_off"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:onClick="powerUp"
+            app:layout_constraintBottom_toBottomOf="@id/vNotch_setupImage"
+            app:layout_constraintStart_toStartOf="@id/vNotch_setupImage"
+            app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <ProgressBar
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:progress="20"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/vertical_progressbar"
+            app:layout_constraintBottom_toBottomOf="@id/vNotch_endView"
+            app:layout_constraintLeft_toLeftOf="@id/vNotch_endView"
+            app:layout_constraintRight_toRightOf="@id/vNotch_endView"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="4dp"/>
+
+        <ImageView
+            android:layout_width="1.5dp"
+            android:layout_height="35dp"
+            android:src="@drawable/v_notch_hook_gauge_needle"
+            app:layout_constraintRight_toRightOf="@id/vNotch_endView"
+            app:layout_constraintLeft_toLeftOf="@id/vNotch_endView"
+            app:layout_constraintTop_toTopOf="@id/vNotch_endView"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="1.5dp"/>
+
+        <LinearLayout
+            android:id="@+id/vNotch_endView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/vNotch_setupImage"
+            app:layout_constraintEnd_toEndOf="@id/vNotch_setupImage"
+            app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
+            app:layout_constraintVertical_bias="0.15"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/vNotch_hookGauge"
+                android:layout_width="51dp"
+                android:layout_height="35dp"
+                android:src="@drawable/v_notch_hook_gauge"
+                android:layout_marginBottom="-4dp"/>
+
+            <ImageView
+                android:id="@+id/vNotch_endViewImg"
+                android:layout_width="48dp"
+                android:layout_height="50dp"
+                android:src="@drawable/v_notch_end_view" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

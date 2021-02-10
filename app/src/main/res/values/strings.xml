@@ -10,4 +10,13 @@
     <string name="laminar_flow"><![CDATA[Laminar: Re < 2300]]></string>
     <string name="transition_flow"><![CDATA[Transition: 2300 < Re < 4000]]></string>
     <string name="turbulent_flow"><![CDATA[Turbulent: Re > 4000]]></string>
+    <string name="bernoulli_manual"><a href="https://drive.google.com/file/d/1SHqM6Jcw7w0URVBEN0mPEmfWqlYgZ3UE/view?usp=sharing">1. Bernoulli\'s Experiment lab manual</a></string>
+    <string name="cop_manual"><a href="https://drive.google.com/file/d/13brOcQNNjQyG4O6Y96HSLVd0gxJ66XTJ/view?usp=sharing">2. Center of pressure Experiment lab manual</a></string>
+    <string name="pitot_manual"><a href="https://drive.google.com/file/d/1DjUtiJmFjEylxmjYuP8d5qcRz8gvC1A2/view?usp=sharing">3. Pitot Tube Experiment lab manual</a></string>
+    <string name="reynolds_manual"><a href="https://drive.google.com/file/d/1WCx3LWIty2-7_wAmXdaZmD5IhNyL9yU4/view?usp=sharing">4. Reynolds\' Number Experiment lab manual</a></string>
+    <string name="windTunnel_manual"><a href="https://drive.google.com/file/d/1v1aYWilmWIFVMt3BRrRlBk-Lsb2ysthI/view?usp=sharing">5. Wind Tunnel Experiment lab manual</a></string>
+    <string name="vNotch_manual"><a href="https://drive.google.com/file/d/1RnXgR_PtVZmqimjpzRZurEfEnb5jAx2I/view?usp=sharing">6. V Notch Experiment lab manual</a></string>
+
+    <string name="links_note"><u><b>Note:</b></u> These lab manual are subject to copyright and we don\'t own them. We are using these manuals only for educational purpose.</string>
+
 </resources>
