@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -28,11 +29,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ListView.class);
                 startActivity(intent);
                 overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                finish();
+                Log.i("TAG", "Opening listView activity");
             }
         }
     };
         timer.start();
 }
+
 
     @Override
     protected void onPause(){

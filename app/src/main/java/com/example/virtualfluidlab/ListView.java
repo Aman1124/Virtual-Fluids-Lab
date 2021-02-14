@@ -211,6 +211,9 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
+        Intent intent = getIntent();
+        Log.i("TAG", "Opened listView activity");
+
         introduction = findViewById(R.id.introduction);
         aboutSetup = findViewById(R.id.aboutSetup);
         procedure = findViewById(R.id.procedure);
