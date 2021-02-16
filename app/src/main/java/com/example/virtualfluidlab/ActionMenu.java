@@ -137,8 +137,9 @@ public class ActionMenu extends AppCompatActivity {
         display = getWindowManager().getDefaultDisplay();
         metrics = getResources().getDisplayMetrics();
         float densityDpi = (metrics.densityDpi);
+        float density = metrics.density;
         display.getSize(size);
-        displayDetailsText = "Width: " + size.x + "\nHeight: " + size.y + "\nDensity: " + densityDpi;
+        displayDetailsText = "Width: " + size.x + "\nHeight: " + size.y + "\nDensity: " + densityDpi + " (" + density + ")";
         display.getRealSize(size);
         displayDetailsText += "\nReal Width: " + size.x + "\nReal Height: " + size.y;
 

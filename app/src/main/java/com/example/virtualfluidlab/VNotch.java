@@ -35,7 +35,7 @@ public class VNotch extends AppCompatActivity {
 
     ConstraintLayout simulation;
     RelativeLayout popUp;
-    ImageView setupImage, needle, endViewNeedle;
+    ImageView setupImage, needle, endViewNeedle, channelWaterFlow;
     TextView x1value, x2value, hValue, tValue, observationCount;
     Button x1orx2, saveButton;
     SeekBar v1, v2;
@@ -46,7 +46,7 @@ public class VNotch extends AppCompatActivity {
     float x1, x2, h, flow, waterLvl;
     int t, p1, p2;
     RelativeLayout.LayoutParams params1;
-    ConstraintLayout.LayoutParams params2;
+    ConstraintLayout.LayoutParams params2, waterParams;
 
     float density;
 
@@ -189,10 +189,10 @@ public class VNotch extends AppCompatActivity {
         endViewNeedle.setLayoutParams(params2);
 
         if (x) {
-            x1 = 8.3f + (max_topMargin - params1.topMargin) * 0.036f;
+            x1 = 6.72f + (max_topMargin - params1.topMargin) * 0.036f;
             x1orx2.setText(String.format(Locale.US, "x₁ = %.2f", x1));
         } else {
-            x2 = 8.3f + (max_topMargin - params1.topMargin) * 0.036f;
+            x2 = 6.72f + (max_topMargin - params1.topMargin) * 0.036f;
             x1orx2.setText(String.format(Locale.US, "x₂ = %.2f", x2));
         }
 
@@ -255,11 +255,11 @@ public class VNotch extends AppCompatActivity {
         h = flow * t * 0.00111f;
 
         if (flow > 0)
-            waterLvl = H * 15.3125f;
+            waterLvl = H * 23.4375f;
         else
             waterLvl = 0;
         setWaterLvl(Math.round(waterLvl));
-        Log.i("TAGGED", "flow = " + flow + "waterLvl = " + waterLvl);
+        Log.i("DATA", "flow = " + flow + " waterLvl = " + waterLvl + " H = " + H);
 
         displaySimData();
     }
@@ -275,6 +275,19 @@ public class VNotch extends AppCompatActivity {
         channel.setProgress(level);
         endView.setProgress(level);
         popUpWater.setProgress(level);
+        if(level>32) {
+            float topMargin = (float) ((-0.0125f * Math.pow(level, 2) + 1.025f * level + 63.438f)*density);
+            float rightMargin = (127.5f - 0.9f * level)*density;
+            waterParams.topMargin = Math.round(topMargin);
+            waterParams.rightMargin = Math.round(rightMargin);
+            channelWaterFlow.setLayoutParams(waterParams);
+            Log.i("TAGGED", level + "  TM = " + waterParams.topMargin + " RM = " + waterParams.rightMargin);
+        } else {
+            waterParams.topMargin = Math.round(88*density);
+            waterParams.rightMargin = Math.round(105*density);
+            channelWaterFlow.setLayoutParams(waterParams);
+            Log.i("TAGGED", level + "  TM = " + waterParams.topMargin + " RM = " + waterParams.rightMargin);
+        }
     }
 
     private void createObsTable() {
@@ -344,8 +357,12 @@ public class VNotch extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!powerOn)
+        if (!powerOn) {
+//            Intent intent = new Intent(getApplicationContext(), ListView.class);
+//            startActivity(intent);
+//            finish();
             super.onBackPressed();
+        }
         else
             Toast.makeText(this, "Turn off the power", Toast.LENGTH_SHORT).show();
     }
@@ -377,6 +394,7 @@ public class VNotch extends AppCompatActivity {
         tValue = findViewById(R.id.vNotch_simT);
         needle = findViewById(R.id.vNotch_needle);
         endViewNeedle = findViewById(R.id.vNotch_endView_needle);
+        channelWaterFlow = findViewById(R.id.vNotch_waterFlow);
         x1orx2 = findViewById(R.id.vNotch_x1orx2);
         x1orx2.setText("x₁");
         channel = findViewById(R.id.vNotch_channel_waterLvl);
@@ -394,6 +412,7 @@ public class VNotch extends AppCompatActivity {
 
         params1 = (RelativeLayout.LayoutParams) needle.getLayoutParams();
         params2 = (ConstraintLayout.LayoutParams) endViewNeedle.getLayoutParams();
+        waterParams = (ConstraintLayout.LayoutParams) channelWaterFlow.getLayoutParams();
 
         v1.setOnSeekBarChangeListener(changeListener);
         v2.setOnSeekBarChangeListener(changeListener);

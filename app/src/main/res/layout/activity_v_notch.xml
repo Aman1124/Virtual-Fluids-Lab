@@ -172,12 +172,22 @@
             android:layout_width="10dp"
             android:layout_height="33dp"
             android:layout_marginBottom="7dp"
-            android:progress="20"
+            android:progress="30"
             android:progressDrawable="@drawable/vertical_progressbar"
             app:layout_constraintBottom_toBottomOf="@id/vNotch_endView2"
             app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintLeft_toLeftOf="@id/vNotch_setupImage"
             app:layout_constraintRight_toRightOf="@id/vNotch_setupImage" />
+
+        <ImageView
+            android:id="@+id/vNotch_waterFlow"
+            android:layout_width="100dp"
+            android:layout_height="62dp"
+            android:src="@drawable/v_notch_water"
+            app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
+            app:layout_constraintEnd_toEndOf="@id/vNotch_setupImage"
+            android:layout_marginTop="88dp"
+            android:layout_marginEnd="105dp" />
 
         <ImageView
             android:id="@+id/vNotch_setupImage"
@@ -205,7 +215,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="7dp"
-            android:progress="20"
+            android:progress="30"
             android:progressDrawable="@drawable/vertical_progressbar"
             app:layout_constraintBottom_toBottomOf="@id/vNotch_endView2"
             app:layout_constraintLeft_toLeftOf="@id/vNotch_endView2"
@@ -316,16 +326,9 @@
                 <TextView
                     android:textSize="17sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="h (cm)"
-                    android:layout_weight="1.5"
+                    android:text="Measuring Tank"
+                    android:layout_weight="2"
                     android:textAlignment="center" />
-
-                <TextView
-                    android:textSize="17sp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:text="t (sec)"
-                    android:layout_weight="1.5"
-                    android:textAlignment="center"/>
 
             </TableRow>
 
@@ -353,14 +356,16 @@
                 <TextView
                     android:textSize="17sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text=""
-                    android:layout_weight="1.5" />
+                    android:text="h (cm)"
+                    android:layout_weight="1.5"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:textSize="17sp"
                     android:fontFamily="@font/nunito_bold"
-                    android:text=""
-                    android:layout_weight="1.5"/>
+                    android:text="t (sec)"
+                    android:layout_weight="1.5"
+                    android:textAlignment="center"/>
 
             </TableRow>
 
@@ -578,13 +583,37 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
+        <LinearLayout
+            android:id="@+id/vNotch_obsHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Hook Gauge"
+                android:layout_marginStart="90dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Flow Rate"
+                android:layout_marginStart="60dp"/>
+
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_below="@id/vNotch_obsHeading">
 
             <TableLayout
                 android:id="@+id/vNotch_observationTable"
@@ -597,7 +626,7 @@
                         android:layout_weight="0.2"
                         android:fontFamily="@font/nunito_bold"
                         android:text="S.No."
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_weight="1"
@@ -621,7 +650,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:fontFamily="@font/nunito_bold"
                         android:gravity="center_horizontal"
                         android:text="t (s)"

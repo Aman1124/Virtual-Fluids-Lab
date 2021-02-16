@@ -272,9 +272,12 @@ public class ReynoldsNumber extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(!powerOn)
+        if(!powerOn) {
+//            Intent intent = new Intent(getApplicationContext(), ListView.class);
+//            startActivity(intent);
+//            finish();
             super.onBackPressed();
-        else
+        } else
             Toast.makeText(this, "Please turn off the power", Toast.LENGTH_SHORT).show();
     }
 

@@ -367,6 +367,14 @@ public class CenterOfPressure extends AppCompatActivity {
         sharedPreferences.edit().putInt("serialNo", obsCount).apply();
     }
 
+    @Override
+    public void onBackPressed() {
+//        Intent intent = new Intent(getApplicationContext(), ListView.class);
+//        startActivity(intent);
+//        finish();
+        super.onBackPressed();
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

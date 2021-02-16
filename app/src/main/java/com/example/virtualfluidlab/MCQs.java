@@ -271,6 +271,16 @@ public class MCQs extends AppCompatActivity {
     public void backToDrawer(View view) {
         LottieAnimationView animationView = (LottieAnimationView) view;
         animationView.playAnimation();
+        Intent intent = new Intent(getApplicationContext(), ListView.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        Intent intent = new Intent(getApplicationContext(), ListView.class);
+//        startActivity(intent);
+//        finish();
         super.onBackPressed();
     }
 

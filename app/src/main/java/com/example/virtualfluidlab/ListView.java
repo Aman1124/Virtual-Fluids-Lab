@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -59,48 +60,56 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         Intent intent = new Intent(getApplicationContext(), VNotch.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
+//        finish();
     }
 
     public void switchToReynolds(View view){
         Intent intent = new Intent(getApplicationContext(), ReynoldsNumber.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
+//        finish();
     }
 
     public void switchToBernoulli(View view){
         Intent intent = new Intent(getApplicationContext(),Bernoulli.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
+        finish();
     }
 
     public void switchToPitot(View view){
         Intent intent = new Intent(getApplicationContext(),Pitot_Tube.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
+//        finish();
     }
 
     public void switchToWindTunnel(View view){
         Intent intent = new Intent(getApplicationContext(),WindTunnel.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
+//        finish();
     }
 
     public void switchToCenterofPress(View view){
         Intent intent = new Intent(getApplicationContext(),CenterOfPressure.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
+//        finish();
     }
 
     public void switchToLosesInPipes(View view){
         Intent intent = new Intent(getApplicationContext(),LosesInPipes.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
+//        finish();
     }
 
     public void openSelfAssessment(View view){
         Intent intent = new Intent(getApplicationContext(), MCQs.class);
         intent.putExtra("choice", scroll);
         startActivity(intent);
+//        finish();
     }
 
     public void openExperiment(View view){
@@ -212,7 +221,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_list_view);
 
         Intent intent = getIntent();
-        Log.i("TAG", "Opened listView activity");
+        Log.i("TAGGED", "Opened listView activity");
 
         introduction = findViewById(R.id.introduction);
         aboutSetup = findViewById(R.id.aboutSetup);
@@ -294,7 +303,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
                 {
                     pullDrawer(true);
                     drawerPos = 1;
-                    //Toast.makeText(this,"DrawerUp " + drawerPos,Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this,"DrawerUp " + drawerPos, Toast.LENGTH_SHORT).show();
                 }
                 else if (Math.abs(deltaY) > MIN_DISTANCE && deltaY > 0)
                 {
@@ -341,5 +350,10 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

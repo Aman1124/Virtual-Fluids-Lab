@@ -24,23 +24,23 @@ public class MainActivity extends AppCompatActivity {
                 sleep(5000);
             }
             catch(InterruptedException e){
+                Log.i("TAGGED", "An Error Occurred");
                 e.printStackTrace();
             } finally {
                 Intent intent = new Intent(getApplicationContext(), ListView.class);
                 startActivity(intent);
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                //overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                 finish();
-                Log.i("TAG", "Opening listView activity");
+                Log.i("TAGGED", "Opening listView activity");
             }
         }
     };
         timer.start();
 }
 
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        finish();
-    }
+//    @Override
+//    protected void onPause(){
+//        super.onPause();
+//        finish();
+//    }
 }

@@ -66,8 +66,7 @@ public class Bernoulli extends AppCompatActivity {
 
     SQLiteDatabase observationDatabase;
     SharedPreferences sharedPreferences;
-
-    float x1,y1,x2,y2;
+    
     double flowRate;
     float[] tubes = new float[7];
     int choice, setupId = 2, obsCount = 0, dataSNo = 0;
@@ -401,8 +400,12 @@ public class Bernoulli extends AppCompatActivity {
     public void onBackPressed() {
         if(setupId == 1)
             Toast.makeText(this, "Turn OFF the power", Toast.LENGTH_SHORT).show();
-        else
+        else {
+            Intent intent = new Intent(getApplicationContext(), ListView.class);
+            startActivity(intent);
+            finish();
             super.onBackPressed();
+        }
     }
 
     @Override

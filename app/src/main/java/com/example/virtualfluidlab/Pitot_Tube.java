@@ -23,6 +23,7 @@ import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VerticalSeekBar;
 
 import com.example.virtualfluidlab.view.MathJaxWebView;
@@ -594,6 +595,17 @@ public class Pitot_Tube extends AppCompatActivity {
             obsCount = sharedPreferencesCV.getInt("serialNo", 0);
         observationCount.setText(String.format("%s of 10", obsCount));
         dataSNo = obsCount+1;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!power) {
+//            Intent intent = new Intent(getApplicationContext(), ListView.class);
+//            startActivity(intent);
+//            finish();
+            super.onBackPressed();
+        } else
+            Toast.makeText(this, "Turn off the power!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
