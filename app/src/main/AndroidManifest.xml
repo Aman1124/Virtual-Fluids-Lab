@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VNotch"></activity>
+        <activity android:name=".MetaCenter"></activity>
+        <activity android:name=".VNotch" />
         <activity android:name=".LosesInPipes" />
         <activity android:name=".ReynoldsNumber" />
         <activity android:name=".CenterOfPressure" />

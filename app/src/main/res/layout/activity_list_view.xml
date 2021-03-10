@@ -98,14 +98,14 @@
                 android:src="@drawable/center_of_press_box" />
 
             <ImageView
-                android:id="@+id/losesInPipes_float"
+                android:id="@+id/metaCenter_float"
                 android:layout_width="240dp"
                 android:layout_height="290dp"
                 android:layout_alignStart="@+id/centerOfPressFloat"
                 android:layout_marginStart="275dp"
                 android:layout_marginTop="30dp"
                 android:alpha="1"
-                android:src="@drawable/loses_in_pipes_box" />
+                android:src="@drawable/metacenter_box" />
 
             <ImageView
                 android:id="@+id/bernoulliFloat"

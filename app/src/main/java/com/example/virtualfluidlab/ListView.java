@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -98,8 +97,8 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
 //        finish();
     }
 
-    public void switchToLosesInPipes(View view){
-        Intent intent = new Intent(getApplicationContext(),LosesInPipes.class);
+    public void switchToMetaCenter(View view){
+        Intent intent = new Intent(getApplicationContext(),MetaCenter.class);
         intent.putExtra("choice", Integer.parseInt(view.getTag().toString()));
         startActivity(intent);
 //        finish();
@@ -126,7 +125,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         else if (scroll == 5)
             switchToCenterofPress(view);
         else if (scroll == 6)
-            switchToLosesInPipes(view);
+            switchToMetaCenter(view);
     }
 
     public void scrollFloatBox(boolean direction){
@@ -239,7 +238,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         pitotFloat = findViewById(R.id.pitotFloat);
         centerOfPressFloat = findViewById(R.id.centerOfPressFloat);
         vNotchFloat = findViewById(R.id.vNotch_float);
-        losesInPipesFloat = findViewById(R.id.losesInPipes_float);
+        losesInPipesFloat = findViewById(R.id.metaCenter_float);
         drawer = findViewById(R.id.drawer);
 
         floatBoxes = new ImageView[]{reynolds_float, wind_tunnel_float, bernoulli, pitotFloat, centerOfPressFloat};

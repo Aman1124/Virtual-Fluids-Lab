@@ -11,7 +11,7 @@
         android:id="@+id/cop_introduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -98,7 +98,7 @@
         android:id="@+id/cop_aboutSetup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -135,7 +135,7 @@
         android:id="@+id/cop_procedure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -193,7 +193,7 @@
         android:id="@+id/cop_simulation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="match_parent"
@@ -417,7 +417,7 @@
         android:id="@+id/cop_observation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
