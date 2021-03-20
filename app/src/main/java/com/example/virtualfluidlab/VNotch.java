@@ -79,7 +79,16 @@ public class VNotch extends AppCompatActivity {
             "4. Take 4/5 readings by repeating the aforementioned procedure for different discharges by adjusting the valves ( V1 and V2 ) at different positions.\n" +
             "5. Stop the motor and open the valve ( V2 ) to drain out the remaining water out of the channel.";
 
-    String simProcedure = "";
+    String simProcedure = "1. Click the power button to turn on the motor.\n" +
+            "2. Click on valve v1 (valve attached to the motor). A seekbaar will appear.\n" +
+            "3. Drag the seekbar to change the inlet flow rate of water.\n" +
+            "4. Adjust the flow such that water level touches the crest of the notch.\n" +
+            "5. Click on the front view of the notch. A pop up will open up.\n" +
+            "6. Use the +/- buttons to adjust the height of the vernier scale. Once the tip of the scale touches the water level click on the tick button to note the reading.\n" +
+            "7. Change the flow rate and repeat steps 5 and 6 to take x2, h and t.\n" +
+            "8. Click on save button to save the readings.\n" +
+            "9. Change the flow rate and repeat steps 6, 7 and 8 to get more readings.\n" +
+            "10. Once all readings are taken, turn off the motor and then exit to home screen. You can also click on the \"Proceed\" button to jump to Observation Table.\n";
 
     private void openIntroduction() {
         setTitle("Introduction");
@@ -238,6 +247,7 @@ public class VNotch extends AppCompatActivity {
             obsCount -= 1;
         } else if (tag == 2) {
             simulation.setVisibility(View.INVISIBLE);
+            powerOn = false;
             openObservation();
         }
 
