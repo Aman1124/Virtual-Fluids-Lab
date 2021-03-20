@@ -1,7 +1,9 @@
 package com.example.virtualfluidlab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.virtualfluidlab.view.MathJaxWebView;
 
 public class MetaCenter extends AppCompatActivity {
@@ -20,6 +24,14 @@ public class MetaCenter extends AppCompatActivity {
     TextView aimText, theoryText1, theoryText2, theoryFormulaRef, aboutSetupText, procedureText1, procedureText2;
     MathJaxWebView theoryFormula;
     ImageView  theoryImg;
+
+    ConstraintLayout simulation;
+    int x_weight = 0;
+    LottieAnimationView anim_noWeight, anim_singleWeight, anim_doubleWeight;
+    LottieAnimationView[] animations;
+    int weights = 0;
+    float curr_progress = 0.5f;
+    TextView simX;
 
     SQLiteDatabase observationDatabase;
     SharedPreferences sharedPreferences;
@@ -110,10 +122,42 @@ public class MetaCenter extends AppCompatActivity {
 
     private void startSimulation() {
         setTitle("Simulation");
+        simulation.setVisibility(View.VISIBLE);
     }
 
     private void openObservation() {
         setTitle("Observation");
+    }
+
+    public void moveWeight(View view){
+        switch (view.getTag().toString()){
+            case "1":
+                if(x_weight <= 90)
+                    x_weight += 10;
+                break;
+            case "2":
+                if(x_weight >= -90)
+                x_weight -= 10;
+                break;
+        }
+        updateAnimation(animations[weights], curr_progress, 0.5f - (x_weight/10f)*0.05f);
+        curr_progress = 0.5f - (x_weight/10f)*0.05f;
+        simX.setText(String.valueOf(Math.abs(x_weight)));
+//        Toast.makeText(this, "Progress = " + curr_progress, Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateAnimation(final LottieAnimationView anim, float from, float to){
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(from, to).setDuration(300);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                anim.setProgress(Math.abs((float)animation.getAnimatedValue()));
+            }
+        });
+        valueAnimator.start();
+    }
+
+    public void saveDelData(View view) {
     }
 
     @Override
@@ -140,6 +184,11 @@ public class MetaCenter extends AppCompatActivity {
         aboutSetupText = findViewById(R.id.meta_aboutSetupPara);
         procedureText1 = findViewById(R.id.meta_procedurePara1);
         procedureText2 = findViewById(R.id.meta_procedurePara2);
+
+        simulation = findViewById(R.id.meta_simulation);
+        anim_noWeight = findViewById(R.id.meta_apparatusNoWeight);
+        animations = new LottieAnimationView[]{anim_noWeight, anim_singleWeight, anim_doubleWeight};
+        simX = findViewById(R.id.meta_simX);
 
         /*
         try{
@@ -177,4 +226,5 @@ public class MetaCenter extends AppCompatActivity {
                 break;
         }
     }
+
 }
