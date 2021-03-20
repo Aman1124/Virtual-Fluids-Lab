@@ -177,7 +177,8 @@
             app:layout_constraintBottom_toBottomOf="@id/vNotch_endView2"
             app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintLeft_toLeftOf="@id/vNotch_setupImage"
-            app:layout_constraintRight_toRightOf="@id/vNotch_setupImage" />
+            app:layout_constraintRight_toRightOf="@id/vNotch_setupImage"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/vNotch_waterFlow"
@@ -187,7 +188,8 @@
             app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
             app:layout_constraintEnd_toEndOf="@id/vNotch_setupImage"
             android:layout_marginTop="88dp"
-            android:layout_marginEnd="105dp" />
+            android:layout_marginEnd="105dp"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/vNotch_setupImage"
@@ -195,16 +197,39 @@
             android:layout_height="@dimen/_280sdp"
             android:layout_marginTop="20dp"
             android:src="@drawable/v_notch_off"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/vNotch_on_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            app:lottie_rawRes="@raw/vnotch_on_anim"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            android:visibility="gone"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/vNotch_off_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            app:lottie_rawRes="@raw/vnotch_off_anim"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            android:visibility="visible"/>
 
         <View
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:onClick="powerUp"
-            app:layout_constraintBottom_toBottomOf="@id/vNotch_setupImage"
-            app:layout_constraintStart_toStartOf="@id/vNotch_setupImage"
-            app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
+            app:layout_constraintBottom_toBottomOf="@id/vNotch_off_anim"
+            app:layout_constraintStart_toStartOf="@id/vNotch_off_anim"
+            app:layout_constraintTop_toTopOf="@id/vNotch_off_anim"
             app:layout_constraintVertical_bias="0.55" />
 
         <ProgressBar
@@ -241,9 +266,9 @@
             android:onClick="openPopUp"
             android:orientation="vertical"
             android:tag="1"
-            app:layout_constraintBottom_toBottomOf="@id/vNotch_setupImage"
-            app:layout_constraintEnd_toEndOf="@id/vNotch_setupImage"
-            app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
+            app:layout_constraintBottom_toBottomOf="@id/vNotch_off_anim"
+            app:layout_constraintEnd_toEndOf="@id/vNotch_off_anim"
+            app:layout_constraintTop_toTopOf="@id/vNotch_off_anim"
             app:layout_constraintVertical_bias="0.15">
 
             <ImageView
@@ -267,11 +292,11 @@
             android:layout_height="20dp"
             android:onClick="openValve"
             android:tag="1"
-            app:layout_constraintBottom_toBottomOf="@id/vNotch_setupImage"
-            app:layout_constraintEnd_toEndOf="@id/vNotch_setupImage"
+            app:layout_constraintBottom_toBottomOf="@id/vNotch_off_anim"
+            app:layout_constraintEnd_toEndOf="@id/vNotch_off_anim"
             app:layout_constraintHorizontal_bias="0.357"
-            app:layout_constraintStart_toStartOf="@id/vNotch_setupImage"
-            app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
+            app:layout_constraintStart_toStartOf="@id/vNotch_off_anim"
+            app:layout_constraintTop_toTopOf="@id/vNotch_off_anim"
             app:layout_constraintVertical_bias="0.427" />
 
         <View
@@ -280,11 +305,11 @@
             android:layout_height="20dp"
             android:onClick="openValve"
             android:tag="2"
-            app:layout_constraintBottom_toBottomOf="@id/vNotch_setupImage"
-            app:layout_constraintEnd_toEndOf="@id/vNotch_setupImage"
+            app:layout_constraintBottom_toBottomOf="@id/vNotch_off_anim"
+            app:layout_constraintEnd_toEndOf="@id/vNotch_off_anim"
             app:layout_constraintHorizontal_bias="0.425"
-            app:layout_constraintStart_toStartOf="@id/vNotch_setupImage"
-            app:layout_constraintTop_toTopOf="@id/vNotch_setupImage"
+            app:layout_constraintStart_toStartOf="@id/vNotch_off_anim"
+            app:layout_constraintTop_toTopOf="@id/vNotch_off_anim"
             app:layout_constraintVertical_bias="0.357" />
 
         <SeekBar
@@ -311,7 +336,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/vNotch_setupImage"
+            app:layout_constraintTop_toBottomOf="@id/vNotch_off_anim"
             android:padding="10dp">
 
             <TableRow>
@@ -673,6 +698,5 @@
             android:layout_margin="15dp" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

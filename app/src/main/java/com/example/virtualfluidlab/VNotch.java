@@ -25,6 +25,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import java.util.Locale;
 import java.util.Random;
 
@@ -39,6 +41,8 @@ public class VNotch extends AppCompatActivity {
     TextView x1value, x2value, hValue, tValue, observationCount;
     Button x1orx2, saveButton;
     SeekBar v1, v2;
+    LottieAnimationView on_anim, off_anim;
+    float anim_progress = 0;
     ProgressBar channel, endView, popUpWater;
     boolean powerOn = false;
     boolean valve1 = false, valve2 = false;
@@ -106,7 +110,7 @@ public class VNotch extends AppCompatActivity {
         setTitle("Observation");
 
         try {
-            Cursor c = observationDatabase.rawQuery("SELECT * FROM centerofpress", null);
+            Cursor c = observationDatabase.rawQuery("SELECT * FROM vnotch", null);
             c.moveToFirst();
             int index = c.getColumnIndex("sn");
             float d = c.getInt(index);
@@ -124,10 +128,18 @@ public class VNotch extends AppCompatActivity {
 
     public void powerUp(View view) {
         if (!powerOn) {
-            setupImage.setImageResource(R.drawable.v_notch_on);
+//            setupImage.setImageResource(R.drawable.v_notch_on);
+            on_anim.setVisibility(View.VISIBLE);
+            off_anim.setVisibility(View.INVISIBLE);
             powerOn = true;
         } else {
-            setupImage.setImageResource(R.drawable.v_notch_off);
+//            setupImage.setImageResource(R.drawable.v_notch_off);
+            on_anim.setVisibility(View.GONE);
+            off_anim.setProgress(0);
+            off_anim.setVisibility(View.VISIBLE);
+//            off_anim.reverseAnimationSpeed();
+//            off_anim.setSpeed(-1);
+//            off_anim.playAnimation();
             powerOn = false;
             setWaterLvl(0);
         }
@@ -272,22 +284,23 @@ public class VNotch extends AppCompatActivity {
     }
 
     private void setWaterLvl(int level) {
-        channel.setProgress(level);
+//        channel.setProgress(level);
         endView.setProgress(level);
         popUpWater.setProgress(level);
-        if(level>32) {
-            float topMargin = (float) ((-0.0125f * Math.pow(level, 2) + 1.025f * level + 63.438f)*density);
-            float rightMargin = (127.5f - 0.9f * level)*density;
-            waterParams.topMargin = Math.round(topMargin);
-            waterParams.rightMargin = Math.round(rightMargin);
-            channelWaterFlow.setLayoutParams(waterParams);
-            Log.i("TAGGED", level + "  TM = " + waterParams.topMargin + " RM = " + waterParams.rightMargin);
-        } else {
-            waterParams.topMargin = Math.round(88*density);
-            waterParams.rightMargin = Math.round(105*density);
-            channelWaterFlow.setLayoutParams(waterParams);
-            Log.i("TAGGED", level + "  TM = " + waterParams.topMargin + " RM = " + waterParams.rightMargin);
-        }
+//        if(level>32) {
+//            float topMargin = (float) ((-0.0125f * Math.pow(level, 2) + 1.025f * level + 63.438f)*density);
+//            float rightMargin = (127.5f - 0.9f * level)*density;
+//            waterParams.topMargin = Math.round(topMargin);
+//            waterParams.rightMargin = Math.round(rightMargin);
+//            channelWaterFlow.setLayoutParams(waterParams);
+//            Log.i("TAGGED", level + "  TM = " + waterParams.topMargin + " RM = " + waterParams.rightMargin);
+//        } else {
+//            waterParams.topMargin = Math.round(88*density);
+//            waterParams.rightMargin = Math.round(105*density);
+//            channelWaterFlow.setLayoutParams(waterParams);
+//            Log.i("TAGGED", level + "  TM = " + waterParams.topMargin + " RM = " + waterParams.rightMargin);
+//        }
+        on_anim.setProgress(anim_progress);
     }
 
     private void createObsTable() {
@@ -393,6 +406,8 @@ public class VNotch extends AppCompatActivity {
         hValue = findViewById(R.id.vNotch_simH);
         tValue = findViewById(R.id.vNotch_simT);
         needle = findViewById(R.id.vNotch_needle);
+        on_anim = findViewById(R.id.vNotch_on_anim);
+        off_anim = findViewById(R.id.vNotch_off_anim);
         endViewNeedle = findViewById(R.id.vNotch_endView_needle);
         channelWaterFlow = findViewById(R.id.vNotch_waterFlow);
         x1orx2 = findViewById(R.id.vNotch_x1orx2);
@@ -460,6 +475,8 @@ public class VNotch extends AppCompatActivity {
     SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if(seekBar.getTag().toString().equals("1"))
+                anim_progress = progress/400f;
             if (progress >= 25) {
                 if (seekBar.getTag().toString().equals("1")) {
                     p1 = Math.round(progress * 1.039f - 15.585f);
@@ -467,6 +484,8 @@ public class VNotch extends AppCompatActivity {
                     p2 = progress;
                 flow = (p1 - p2) + (float) ((10 + (new Random().nextInt(90))) * 0.01);
                 calculateData(flow);
+            } else {
+                calculateData(0);
             }
         }
 
