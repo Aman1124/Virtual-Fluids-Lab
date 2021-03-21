@@ -120,7 +120,8 @@ public class ActionMenu extends AppCompatActivity {
                 findViewById(R.id.pitotManual),
                 findViewById(R.id.reynoldsManual),
                 findViewById(R.id.windManual),
-                findViewById(R.id.vNotchManual)
+                findViewById(R.id.vNotchManual),
+                findViewById(R.id.metaCenterManual)
         };
 
         manuals[0].setMovementMethod(LinkMovementMethod.getInstance());
@@ -129,6 +130,7 @@ public class ActionMenu extends AppCompatActivity {
         manuals[3].setMovementMethod(LinkMovementMethod.getInstance());
         manuals[4].setMovementMethod(LinkMovementMethod.getInstance());
         manuals[5].setMovementMethod(LinkMovementMethod.getInstance());
+        manuals[6].setMovementMethod(LinkMovementMethod.getInstance());
 
         Intent intent = getIntent();
         option = intent.getIntExtra("option", 0);

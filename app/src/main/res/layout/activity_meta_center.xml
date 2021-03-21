@@ -92,6 +92,19 @@
                 android:textSize="18sp"
                 android:textStyle="normal" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calculation for determining metacentric height:"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="20sp" />
+
+            <com.example.virtualfluidlab.view.MathJaxWebView
+                android:id="@+id/meta_theory_formula2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
         </LinearLayout>
 
     </ScrollView>
@@ -197,96 +210,164 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <Button
-            android:id="@+id/meta_addWeightButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/meta_wtButtons"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Weight"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="15dp"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/meta_addWeightButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:onClick="addWeight"
+                android:text="Weight +"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/meta_remWeightButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:onClick="rmvWeight"
+                android:text="Weight -"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/meta_apparatusNoWeight"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="25dp"
             android:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/meta_wtButtons"
             app:lottie_autoPlay="false"
             app:lottie_loop="false"
             app:lottie_progress="0.5"
-            app:lottie_rawRes="@raw/metacenter_anim"
-            app:layout_constraintTop_toTopOf="@id/meta_addWeightButton"
-            android:layout_marginTop="25dp" />
+            app:lottie_rawRes="@raw/metacenter_anim" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/meta_apparatusDoubleWeight"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="25dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@id/meta_wtButtons"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_progress="0.5"
+            app:lottie_rawRes="@raw/metacenter_weight2_anim" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/meta_apparatusSingleWeight"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="25dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@id/meta_wtButtons"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_progress="0.5"
+            app:lottie_rawRes="@raw/metacenter_weight1_anim" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/meta_apparatusTrans1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="25dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@id/meta_wtButtons"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_progress="0.5"
+            app:lottie_rawRes="@raw/meta_add_weight1" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/meta_apparatusTrans2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="25dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@id/meta_wtButtons"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_progress="0.5"
+            app:lottie_rawRes="@raw/meta_add_weight2" />
 
         <LinearLayout
             android:id="@+id/meta_moveWeightButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meta_apparatusNoWeight"
-            android:layout_marginTop="5dp">
+            app:layout_constraintTop_toBottomOf="@id/meta_apparatusNoWeight">
 
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="45dp"
-                android:src="@drawable/ic_arrow_backward"
                 android:onClick="moveWeight"
-                android:tag="2"/>
+                android:src="@drawable/ic_arrow_backward"
+                android:tag="2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Move Weight"
-                android:textSize="16sp"
-                android:fontFamily="@font/nunito_bold"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
-                android:layout_gravity="center_vertical" />
+                android:fontFamily="@font/nunito_bold"
+                android:text="Move Weight"
+                android:textSize="16sp" />
 
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="45dp"
-                android:src="@drawable/ic_arrow_forward"
                 android:layout_marginStart="10dp"
                 android:onClick="moveWeight"
-                android:tag="1"/>
+                android:src="@drawable/ic_arrow_forward"
+                android:tag="1" />
 
         </LinearLayout>
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/meta_moveWeightButtons"
             app:layout_constraintBottom_toBottomOf="@id/meta_save_button"
+            app:layout_constraintTop_toBottomOf="@id/meta_moveWeightButtons"
             app:layout_constraintVertical_bias="0.3">
 
             <TableRow>
 
                 <TextView
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_extrabold"
                     android:text="x (mm)"
-                    android:textSize="17sp"
-                    android:fontFamily="@font/nunito_extrabold"
                     android:textAlignment="center"
-                    android:layout_weight="1"/>
+                    android:textSize="17sp" />
 
                 <TextView
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_extrabold"
                     android:text="Fwd. y''(mm)"
-                    android:textSize="17sp"
-                    android:fontFamily="@font/nunito_extrabold"
                     android:textAlignment="center"
-                    android:layout_weight="1"/>
+                    android:textSize="17sp" />
 
                 <TextView
-                    android:text="Bck. y'' (mm)"
-                    android:textSize="17sp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_extrabold"
+                    android:text="Bck. y'' (mm)"
                     android:textAlignment="center"
-                    android:layout_weight="1"/>
+                    android:textSize="17sp" />
 
             </TableRow>
 
@@ -294,27 +375,27 @@
 
                 <TextView
                     android:id="@+id/meta_simX"
-                    android:text="0"
-                    android:textSize="17sp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_semibold"
+                    android:text="0"
                     android:textAlignment="center"
-                    android:layout_weight="1" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/meta_simFwdY"
-                    android:text="0"
-                    android:textSize="17sp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_semibold"
+                    android:text="0"
                     android:textAlignment="center"
-                    android:layout_weight="1" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/meta_simBackY"
-                    android:text="0"
-                    android:textSize="17sp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunito_semibold"
+                    android:text="0"
                     android:textAlignment="center"
-                    android:layout_weight="1" />
+                    android:textSize="17sp" />
 
             </TableRow>
 
@@ -327,9 +408,9 @@
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/nunito_semibold"
+            android:onClick="saveDelData"
             android:tag="0"
             android:text="Delete"
-            android:onClick="saveDelData"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -340,23 +421,206 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/nunito_semibold"
+            android:onClick="saveDelData"
             android:tag="1"
             android:text="Save"
-            android:onClick="saveDelData"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/vNotch_readingsCountText"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/meta_observation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom ="@id/meta_resetButton"
+            android:layout_marginBottom="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Length of pendulum, L = 255 mm"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:paddingBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:paddingBottom="10dp"
+                    android:text="No weight in pontoon:"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingBottom="10dp"
+                    android:text="Weight = 4.933 kg\ny' = 100 mm"
+                    android:textSize="17sp" />
+
+                <TableLayout
+                    android:id="@+id/meta_obsTable1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="x (mm)"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Fwd, y'' (mm)"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Back, x (mm)"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:paddingBottom="10dp"
+                    android:text="Single weight slab in pontoon:"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingBottom="10dp"
+                    android:text="Weight = 6.245 kg\ny' = 100 mm"
+                    android:textSize="17sp" />
+
+                <TableLayout
+                    android:id="@+id/meta_obsTable2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="x (mm)"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Fwd, y'' (mm)"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Back, x (mm)"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:paddingBottom="10dp"
+                    android:text="Two weight slabs in pontoon:"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingBottom="10dp"
+                    android:text="Weight = 7.549 kg\ny' = 100 mm"
+                    android:textSize="17sp" />
+
+                <TableLayout
+                    android:id="@+id/meta_obsTable3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="x (mm)"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Fwd, y'' (mm)"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Back, x (mm)"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/meta_resetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="0 of 10"
-            app:layout_constraintBottom_toBottomOf="@id/meta_save_button"
-            app:layout_constraintLeft_toRightOf="@id/meta_delete_button"
-            app:layout_constraintRight_toLeftOf="@id/meta_save_button"
-            app:layout_constraintTop_toTopOf="@id/meta_save_button" />
+            android:text="Reset"
+            android:fontFamily="@font/nunito_bold"
+            android:onClick="resetObsTable"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

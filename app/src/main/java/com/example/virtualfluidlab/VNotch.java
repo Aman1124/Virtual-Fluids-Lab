@@ -33,7 +33,7 @@ import java.util.Random;
 public class VNotch extends AppCompatActivity {
 
     ScrollView introduction, aboutSetup, procedure;
-    TextView aimText, theoryText, aboutSetupText, procedureText1, procedureText2;
+    TextView aimText, theoryText, aboutSetupText, aboutSetupText2, procedureText1, procedureText2;
 
     ConstraintLayout simulation;
     RelativeLayout popUp;
@@ -70,6 +70,7 @@ public class VNotch extends AppCompatActivity {
             "A notch is made up of a metallic plate and is placed at the end of a small channel, whereas a weir is a concrete or masonry structure in an open channel, over which the liquid flow takes place.  Occasionally notches are smaller in size in comparison to weir. The top edge of a weir or the bottom edge of a notch is called a crest or sill, over which the water flows. When its crest length is equal to the width of the channel, a rectangular notch is called a suppressed notch. However, the effect of end contraction is considered if the width is shorter than the width of the channel. Nappe is known as the sheet of water flowing through a notch or weir.\n";
 
     String setup = "A schematic diagram of the experimental set up is shown below:";
+    String setup2 = "The specifications of setup are tabulated below:";
 
     String labProcedure = "1. Open the bypass valve (V1) and close all other valves.\n" +
             "2. Start the motor and close the valve (V1) until the water level reaches crest (weir) height. Then take the initial reading using Hook’s gauge.\n" +
@@ -100,6 +101,7 @@ public class VNotch extends AppCompatActivity {
     private void openAboutSetup() {
         setTitle("About Setup");
         aboutSetupText.setText(setup);
+        aboutSetupText2.setText(setup2);
         aboutSetup.setVisibility(View.VISIBLE);
     }
 
@@ -402,6 +404,7 @@ public class VNotch extends AppCompatActivity {
         aimText = findViewById(R.id.vn_aimPara);
         theoryText = findViewById(R.id.vn_theoryPara);
         aboutSetupText = findViewById(R.id.vn_aboutSetupPara);
+        aboutSetupText2 = findViewById(R.id.vn_aboutSetupPara2);
         procedureText1 = findViewById(R.id.vn_procedurePara1);
         procedureText2 = findViewById(R.id.vn_procedurePara2);
 

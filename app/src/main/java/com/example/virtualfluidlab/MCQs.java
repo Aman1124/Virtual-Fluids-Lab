@@ -79,17 +79,17 @@ public class MCQs extends AppCompatActivity {
             },
             {   //Center of Pressure
                     "Fluid pressure always acts ___",
-                    "",
-                    "",
-                    "",
-                    ""
+                    "The basic principle used in this experiment is ___",
+                    "The apparatus uses knife edge support. Which of following is not a valid reason?",
+                    "Which of following is not source of error?",
+                    "Why is counter mass used?"
             },
-            {   //Loses in Pipes
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
+            {   //MetaCenter
+                    "Which of the following statements is wrong about meta-centre?",
+                    "When ship is docked, its meta-center lies on (here, CG means 'centre of gravity')",
+                    "What is the stability criteria with respect to meta-center, M?",
+                    "The basic principle used to calculate maximum load is ___",
+                    "Can CG coincide with buoyancy centre for a floating device?"
             }
     };
 
@@ -131,17 +131,17 @@ public class MCQs extends AppCompatActivity {
             },
             {   //Center of Pressure
                     {"Normal to surface", "Tangent to surface", "At 45 ⁰ from Normal", "None"},
-                    {"", "", "", ""},
-                    {"", "", "", ""},
-                    {"", "", "", ""},
-                    {"", "", "", ""}
+                    {"Force Balance", "Energy Balance", "Torque Balance", "Pressure Balance"},
+                    {"It reduces the losses", "It increase the sensitivity", "High Precision", "Low cost"},
+                    {"Friction", "Surface Roughness", "Change in water density", "Inaccurate radius of quadrant"},
+                    {"To balance the torque due to weight of quadrant and unsymmetrical pivot point", "To add stability by adding more mass to apparatus", "To reduces the velocity of moving component", "None of the above"}
             },
-            {   //Loses in Pipes
-                    {"","","",""},
-                    {"","","",""},
-                    {"","","",""},
-                    {"","","",""},
-                    {"","","",""}
+            {   //MetaCenter
+                    {"It lies on axis of oscillation.","It determines Stability of floating device","It is used to determine load carrying capacity","None of the above"},
+                    {"Line joining CG and Buoyancy center","Line perpendicular to CG","Line parallel to line joining CG and Buoyancy center","None of the above"},
+                    {"M must lie below CG","M must lie above CG","M must lie above Buoyancy Centre","M must lie below Buoyancy Centre"},
+                    {"Force balance","Torque balance","Both of these","None of these"},
+                    {"Yes","No","Maybe","Cannot say"}
             }
     };
 
@@ -151,8 +151,8 @@ public class MCQs extends AppCompatActivity {
             {3, 2, 2, 3, 3}, //wind tunnel
             {2, 4, 3, 1, 2}, //bernoulli
             {1, 1, 3, 2, 1}, //pitot
-            {1, 1, 1, 1, 1}, //center of pressure
-            {1, 1, 1, 1, 1}  //loses in pipes
+            {1, 3, 4, 2, 1}, //center of pressure
+            {4, 1, 2, 1, 2}  //meta center
     };
     char[][] answerStatus = new char[][]{
             {'N', 'N', 'N', 'N', 'N'}, //v-notch
@@ -161,7 +161,7 @@ public class MCQs extends AppCompatActivity {
             {'N', 'N', 'N', 'N', 'N'}, //bernoulli
             {'N', 'N', 'N', 'N', 'N'}, //pitot
             {'N', 'N', 'N', 'N', 'N'}, //center of pressure
-            {'N', 'N', 'N', 'N', 'N'}  //loses in pipes
+            {'N', 'N', 'N', 'N', 'N'}  //meta center
     };
 
     public void changeColor(View view) {
@@ -278,9 +278,11 @@ public class MCQs extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        Intent intent = new Intent(getApplicationContext(), ListView.class);
-//        startActivity(intent);
-//        finish();
+        if(expNo == 3) {
+            Intent intent = new Intent(getApplicationContext(), ListView.class);
+            startActivity(intent);
+            finish();
+        }
         super.onBackPressed();
     }
 
