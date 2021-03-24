@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class ActionMenu extends AppCompatActivity {
 
-    TextView textView;
+    TextView textView, feedback;
     TextView[] manuals;
 
     ScrollView additional, links;
@@ -92,6 +92,7 @@ public class ActionMenu extends AppCompatActivity {
             case 5:
                 setTitle("Help");
                 textView.setText(help);
+                feedback.setVisibility(View.VISIBLE);
                 workFromHome.setVisibility(View.VISIBLE);
                 break;
             default:
@@ -123,6 +124,7 @@ public class ActionMenu extends AppCompatActivity {
                 findViewById(R.id.vNotchManual),
                 findViewById(R.id.metaCenterManual)
         };
+        feedback = findViewById(R.id.feedbackFormLink);
 
         manuals[0].setMovementMethod(LinkMovementMethod.getInstance());
         manuals[1].setMovementMethod(LinkMovementMethod.getInstance());
@@ -131,6 +133,7 @@ public class ActionMenu extends AppCompatActivity {
         manuals[4].setMovementMethod(LinkMovementMethod.getInstance());
         manuals[5].setMovementMethod(LinkMovementMethod.getInstance());
         manuals[6].setMovementMethod(LinkMovementMethod.getInstance());
+        feedback.setMovementMethod(LinkMovementMethod.getInstance());
 
         Intent intent = getIntent();
         option = intent.getIntExtra("option", 0);

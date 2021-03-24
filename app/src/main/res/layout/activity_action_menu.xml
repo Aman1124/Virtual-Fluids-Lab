@@ -35,6 +35,17 @@
                 android:text=""
                 android:textSize="17sp" />
 
+            <TextView
+                android:id="@+id/feedbackFormLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/feedback_form"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_bold"
+                android:visibility="gone" />
+
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/workFromHome"
                 android:layout_width="@dimen/_150sdp"

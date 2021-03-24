@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 public class ListView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView introduction;
@@ -248,7 +250,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         action_menu = findViewById(R.id.action_menu_presenter);
 
 //        setTitle("Fluids Lab");
-//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 //        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
 
 
@@ -256,7 +258,7 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_layout);
         setTitle("Fluids Lab");
 

@@ -76,7 +76,7 @@ public class VNotch extends AppCompatActivity {
             "2. Start the motor and close the valve (V1) until the water level reaches crest (weir) height. Then take the initial reading using Hook’s gauge.\n" +
             "3. Again open the valve (V1) and adjust a discharge in the channel by adjusting the valve ( V2 ). Note down the following:\n" +
             "\t\t(a) Final Hook’s gauge reading when the hook (needle) touches the free stream surface\n" +
-            "\t\t(b) Time required for a 100 mm rise in water level in the measuring tank377\n" +
+            "\t\t(b) Time required for a 100 mm rise in water level in the measuring tank\n" +
             "4. Take 4/5 readings by repeating the aforementioned procedure for different discharges by adjusting the valves ( V1 and V2 ) at different positions.\n" +
             "5. Stop the motor and open the valve ( V2 ) to drain out the remaining water out of the channel.";
 
@@ -367,7 +367,7 @@ public class VNotch extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        observationDatabase.execSQL("DELETE FROM centerofpress");
+                        observationDatabase.execSQL("DELETE FROM vnotch");
                     }
                 })
                 .setNegativeButton("No", null)

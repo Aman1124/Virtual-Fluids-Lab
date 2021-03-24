@@ -184,6 +184,12 @@ public class Bernoulli extends AppCompatActivity {
             float d = c.getInt(index);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             resetButton.setVisibility(View.VISIBLE);
+            if (!tableStatus)
+                createObservationTable();
+            table.setVisibility(View.VISIBLE);
+            resetButton.setVisibility(View.VISIBLE);
+            simulation.setVisibility(View.INVISIBLE);
+//            Toast.makeText(Bernoulli.this, "LANDSCAPE", Toast.LENGTH_SHORT).show();
         }catch(Exception e){
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -416,11 +422,13 @@ public class Bernoulli extends AppCompatActivity {
         if (!tableStatus)
             createObservationTable();
         if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            Toast.makeText(Bernoulli.this, "LANDSCAPE", Toast.LENGTH_SHORT).show();
             table.setVisibility(View.VISIBLE);
             resetButton.setVisibility(View.VISIBLE);
             simulation.setVisibility(View.INVISIBLE);
         }
         if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            Toast.makeText(Bernoulli.this, "PORTRAIT", Toast.LENGTH_SHORT).show();
             table.setVisibility(View.INVISIBLE);
             resetButton.setVisibility(View.INVISIBLE);
             simulation.setVisibility(View.VISIBLE);
