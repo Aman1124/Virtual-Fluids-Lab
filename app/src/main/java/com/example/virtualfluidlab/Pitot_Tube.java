@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -26,8 +27,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VerticalSeekBar;
 
+import com.ajts.androidmads.library.SQLiteToExcel;
 import com.example.virtualfluidlab.view.MathJaxWebView;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Pitot_Tube extends AppCompatActivity {
@@ -219,6 +223,30 @@ public class Pitot_Tube extends AppCompatActivity {
                         .show();
             }
         }
+    }
+
+    public void exportAsExcel(View view){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "VFL");
+        if(!file.exists())
+            file.mkdirs();
+        SQLiteToExcel sqLiteToExcel = new SQLiteToExcel(this, "Observation", file.getAbsolutePath());
+        ArrayList<String> tables = new ArrayList<>();
+        tables.add("pitotcovel"); tables.add("pitotvelpro");
+        sqLiteToExcel.exportSpecificTables(tables,"Pitot_Tube.xls", new SQLiteToExcel.ExportListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(Pitot_Tube.this, "Exporting...", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCompleted(String filePath) {
+                Toast.makeText(Pitot_Tube.this, "Successfully exported to /Downloads/VFL/", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(Pitot_Tube.this, "An error occurred!!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
     }
 
     public void switchExpMode(View view){

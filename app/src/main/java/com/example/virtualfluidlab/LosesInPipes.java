@@ -7,10 +7,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ajts.androidmads.library.SQLiteToExcel;
+
+import java.io.File;
 
 public class LosesInPipes extends AppCompatActivity {
 
@@ -54,6 +60,28 @@ public class LosesInPipes extends AppCompatActivity {
 
     private void openObservation() {
         setTitle("Observation");
+    }
+
+    public void exportAsExcel(View view){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "VFL");
+        if(!file.exists())
+            file.mkdirs();
+        SQLiteToExcel sqLiteToExcel = new SQLiteToExcel(this, "Observation", file.getAbsolutePath());
+        sqLiteToExcel.exportSingleTable("losesinpipes","Loses_in_Pipes.xls", new SQLiteToExcel.ExportListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(LosesInPipes.this, "Exporting...", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCompleted(String filePath) {
+                Toast.makeText(LosesInPipes.this, "Successfully exported to /Downloads/VFL/", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(LosesInPipes.this, "An error occurred!!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override

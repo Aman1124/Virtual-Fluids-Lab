@@ -151,7 +151,7 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="Laboratory Procedure:"
-                android:textSize="27sp"/>
+                android:textSize="27sp" />
 
             <TextView
                 android:id="@+id/cop_procedurePara1"
@@ -427,49 +427,67 @@
             android:paddingRight="15dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TableLayout
-                android:id="@+id/cop_observationTable"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TableRow>
+                <TableLayout
+                    android:id="@+id/cop_observationTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_weight="0.2"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="S.No."
-                        android:textSize="20sp" />
+                    <TableRow>
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:fontFamily="@font/nunito_bold"
-                        android:gravity="center_horizontal"
-                        android:text="Weight (gm)"
-                        android:textSize="20sp" />
+                        <TextView
+                            android:layout_weight="0.2"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="S.No."
+                            android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:fontFamily="@font/nunito_bold"
-                        android:gravity="center_horizontal"
-                        android:text="Height (mm)"
-                        android:textSize="20sp" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Weight (gm)"
+                            android:textSize="20sp" />
 
-                </TableRow>
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Height (mm)"
+                            android:textSize="20sp" />
 
-            </TableLayout>
+                    </TableRow>
+
+                </TableLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:onClick="exportAsExcel"
+                    android:text="Export observation table"
+                    android:textColor="#2cc0f4"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </ScrollView>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset"
+            android:layout_margin="15dp"
             android:fontFamily="@font/nunito_bold"
             android:onClick="resetObsTable"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:text="Reset"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="15dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

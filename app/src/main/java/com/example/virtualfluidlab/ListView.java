@@ -5,10 +5,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -249,11 +253,16 @@ public class ListView extends AppCompatActivity implements NavigationView.OnNavi
         optionsLayout = findViewById(R.id.optionsLayout);
         action_menu = findViewById(R.id.action_menu_presenter);
 
+        if (ContextCompat.checkSelfPermission(ListView.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+            ActivityCompat.requestPermissions(ListView.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },101);
+
+        if (ContextCompat.checkSelfPermission(ListView.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+            ActivityCompat.requestPermissions(ListView.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, Integer.parseInt(Manifest.permission.READ_EXTERNAL_STORAGE));
+
+
 //        setTitle("Fluids Lab");
 //        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 //        getSupportActionBar().setCustomView(R.layout.actionbar_layout);
-
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +21,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TableLayout;
@@ -29,8 +31,10 @@ import android.widget.Toast;
 import android.widget.VerticalSeekBar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.ajts.androidmads.library.SQLiteToExcel;
 import com.example.virtualfluidlab.view.MathJaxWebView;
 
+import java.io.File;
 import java.util.Locale;
 import java.util.Random;
 
@@ -143,6 +147,28 @@ public class ReynoldsNumber extends AppCompatActivity {
                     .setMessage("No readings taken")
                     .show();
         }
+    }
+
+    public void exportAsExcel(View view){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "VFL");
+        if(!file.exists())
+            file.mkdirs();
+        SQLiteToExcel sqLiteToExcel = new SQLiteToExcel(this, "Observation", file.getAbsolutePath());
+        sqLiteToExcel.exportSingleTable("reynoldsnumber","Reynolds_Number.xls", new SQLiteToExcel.ExportListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(ReynoldsNumber.this, "Exporting...", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCompleted(String filePath) {
+                Toast.makeText(ReynoldsNumber.this, "Successfully exported to /Downloads/VFL/", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(ReynoldsNumber.this, "An error occurred!!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
     }
 
     public void startSimulation(){

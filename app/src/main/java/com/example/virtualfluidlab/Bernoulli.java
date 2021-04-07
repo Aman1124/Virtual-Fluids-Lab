@@ -18,6 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -37,6 +38,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ajts.androidmads.library.SQLiteToExcel;
+
+import java.io.File;
 import java.util.Locale;
 import java.util.TooManyListenersException;
 
@@ -55,6 +59,7 @@ public class Bernoulli extends AppCompatActivity {
     TextView height1, height2, height3, height4, height5, height6, height7;
     TextView heading1, heading2, para1, para2, para3;
     TextView flowRateText, observationCount;
+    TextView exportTable;
 
     ImageView labelledDiagram, bernoulliEquation, testSectionData;
     ImageView experimentSetup;
@@ -188,6 +193,7 @@ public class Bernoulli extends AppCompatActivity {
                 createObservationTable();
             table.setVisibility(View.VISIBLE);
             resetButton.setVisibility(View.VISIBLE);
+            exportTable.setVisibility(View.VISIBLE);
             simulation.setVisibility(View.INVISIBLE);
 //            Toast.makeText(Bernoulli.this, "LANDSCAPE", Toast.LENGTH_SHORT).show();
         }catch(Exception e){
@@ -290,7 +296,7 @@ public class Bernoulli extends AppCompatActivity {
             dataSNo -= 1; obsCount -= 1;
         }
         else if (tag == 2) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            openObservation();
         }
 
         observationCount.setText(String.format("%s of 10", obsCount));
@@ -402,6 +408,29 @@ public class Bernoulli extends AppCompatActivity {
         }
     }
 
+    public void exportAsExcel(View view){
+//        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "VFL");
+        if(!file.exists())
+            file.mkdirs();
+        SQLiteToExcel sqLiteToExcel = new SQLiteToExcel(this, "Observation", file.getAbsolutePath());
+        sqLiteToExcel.exportSingleTable("bernoulli", "Bernoulli.xls", new SQLiteToExcel.ExportListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(Bernoulli.this, "Exporting...", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCompleted(String filePath) {
+                Toast.makeText(Bernoulli.this, "Successfully exported to /Downloads/VFL/", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(Bernoulli.this, "An error occurred!!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         if(setupId == 1)
@@ -422,15 +451,17 @@ public class Bernoulli extends AppCompatActivity {
         if (!tableStatus)
             createObservationTable();
         if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
-            Toast.makeText(Bernoulli.this, "LANDSCAPE", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Bernoulli.this, "LANDSCAPE", Toast.LENGTH_SHORT).show();
             table.setVisibility(View.VISIBLE);
             resetButton.setVisibility(View.VISIBLE);
+            exportTable.setVisibility(View.VISIBLE);
             simulation.setVisibility(View.INVISIBLE);
         }
         if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-            Toast.makeText(Bernoulli.this, "PORTRAIT", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Bernoulli.this, "PORTRAIT", Toast.LENGTH_SHORT).show();
             table.setVisibility(View.INVISIBLE);
             resetButton.setVisibility(View.INVISIBLE);
+            exportTable.setVisibility(View.GONE);
             simulation.setVisibility(View.VISIBLE);
         }
         super.onConfigurationChanged(newConfig);
@@ -472,6 +503,8 @@ public class Bernoulli extends AppCompatActivity {
         height6 = findViewById(R.id.height6);
         height7 = findViewById(R.id.height7);
         observationCount = findViewById(R.id.observationCount);
+
+        exportTable = findViewById(R.id.bernoulli_exportTable);
 
         flowRateText = findViewById(R.id.flowRate);
         flowRateSeekBar = findViewById(R.id.flowRateSeekBar);

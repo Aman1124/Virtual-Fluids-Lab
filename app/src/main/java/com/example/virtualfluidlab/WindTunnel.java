@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,8 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.ajts.androidmads.library.SQLiteToExcel;
 
 import org.w3c.dom.Text;
+
+import java.io.File;
 
 public class WindTunnel extends AppCompatActivity {
 
@@ -140,6 +144,28 @@ public class WindTunnel extends AppCompatActivity {
 
     public void openObservation() {
         setTitle("Observation");
+    }
+
+    public void exportAsExcel(View view){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "VFL");
+        if(!file.exists())
+            file.mkdirs();
+        SQLiteToExcel sqLiteToExcel = new SQLiteToExcel(this, "Observation", file.getAbsolutePath());
+        sqLiteToExcel.exportSingleTable("windtunnel","Wind_Tunnel.xls", new SQLiteToExcel.ExportListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(WindTunnel.this, "Exporting...", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCompleted(String filePath) {
+                Toast.makeText(WindTunnel.this, "Successfully exported to /Downloads/VFL/", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(WindTunnel.this, "An error occurred!!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
     }
 
     public void startSimulation() {

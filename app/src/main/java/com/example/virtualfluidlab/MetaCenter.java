@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -23,10 +24,14 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.ajts.androidmads.library.SQLiteToExcel;
 import com.example.virtualfluidlab.view.MathJaxWebView;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
@@ -35,7 +40,7 @@ import java.util.Random;
 public class MetaCenter extends AppCompatActivity {
 
     ScrollView introduction, aboutSetup, procedure;
-    RelativeLayout  observation;
+    RelativeLayout observation;
     TextView aimText, theoryText1, theoryText2, theoryFormulaRef, aboutSetupText, procedureText1, procedureText2;
     MathJaxWebView theoryFormula, theoryFormula2;
     ImageView theoryImg;
@@ -160,7 +165,7 @@ public class MetaCenter extends AppCompatActivity {
 
     private void openObservation() {
         setTitle("Observation");
-        if(sharedPreferences.getInt("serialNo", 0) != 0) {
+        if (sharedPreferences.getInt("serialNo", 0) != 0) {
             observation.setVisibility(View.VISIBLE);
             createObsTable();
         } else {
@@ -170,6 +175,34 @@ public class MetaCenter extends AppCompatActivity {
                     .setMessage("No readings taken")
                     .show();
         }
+    }
+
+    public void exportAsExcel(View view) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "VFL");
+        if (!file.exists())
+            file.mkdirs();
+        SQLiteToExcel sqLiteToExcel = new SQLiteToExcel(this, "Observation", file.getAbsolutePath());
+        ArrayList<String> tables = new ArrayList<>();
+        tables.add("metacenter0");
+        tables.add("metacenter1");
+        tables.add("metacenter2");
+        sqLiteToExcel.exportSpecificTables(tables, "Meta-Center.xls", new SQLiteToExcel.ExportListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(MetaCenter.this, "Exporting...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCompleted(String filePath) {
+                Toast.makeText(MetaCenter.this, "Successfully exported to /Downloads/VFL/", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(MetaCenter.this, "An error occurred!!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
     }
 
     public void moveWeight(View view) {
@@ -216,7 +249,7 @@ public class MetaCenter extends AppCompatActivity {
         curr_progress = final_prog;
         Random random = new Random();
         err = random.nextInt(3);
-        if(!random.nextBoolean())
+        if (!random.nextBoolean())
             err *= -1;
         printSimData();
     }
@@ -250,7 +283,7 @@ public class MetaCenter extends AppCompatActivity {
         int tag = Integer.parseInt(view.getTag().toString());
         Log.i("Button Tag", String.valueOf(tag));
 
-        if(x_weight != 0) {
+        if (x_weight != 0) {
             char dir = x_weight > 0 ? 'f' : 'b';
             addRmvData(tag, weights, dir);
         }
@@ -259,7 +292,7 @@ public class MetaCenter extends AppCompatActivity {
 
     private void addRmvData(int tag, int index, char dir) {
         int id = 0;
-        if(dir == 'b')
+        if (dir == 'b')
             id = 1;
         int max;
         if (index == 0) max = 10;
@@ -271,8 +304,8 @@ public class MetaCenter extends AppCompatActivity {
             observationDatabase.execSQL("INSERT INTO metacenter" + index + dir + " (sn, x, yf) VALUES (" +
                     String.format(Locale.US, "%d, %d, %d)",
                             dataSNo, Math.abs(x_weight), y_dash[weights][(int) Math.abs(x_weight / 10f) - 1][id] + err));
-        } else if(tag == 0 && obsCount>0){
-            observationDatabase.execSQL("DELETE FROM metacenter"+ index + dir +" WHERE sn = " + (dataSNo));
+        } else if (tag == 0 && obsCount > 0) {
+            observationDatabase.execSQL("DELETE FROM metacenter" + index + dir + " WHERE sn = " + (dataSNo));
             dataSNo -= 1;
             obsCount -= 1;
         }
@@ -353,13 +386,13 @@ public class MetaCenter extends AppCompatActivity {
         });
     }
 
-    public void createObsTable(){
+    public void createObsTable() {
         loadObsData(0, obsTable1);
         loadObsData(1, obsTable2);
         loadObsData(2, obsTable3);
     }
 
-    private void loadObsData(int tableIndex, TableLayout tableLayout){
+    private void loadObsData(int tableIndex, TableLayout tableLayout) {
         int[][] data = new int[10][3];
         Cursor c = observationDatabase.rawQuery("SELECT * FROM metacenter" + tableIndex + "f", null);
         c.moveToFirst();
@@ -367,15 +400,15 @@ public class MetaCenter extends AppCompatActivity {
         int yIndex = c.getColumnIndex("yf");
         int index = 0;
         try {
-            for (int i = 0; i < 10; i++){
+            for (int i = 0; i < 10; i++) {
                 boolean found = false;
-                for(int j=0; j<10; j++){
-                    if(c.getInt(xIndex) == data[j][0]) {
+                for (int j = 0; j < 10; j++) {
+                    if (c.getInt(xIndex) == data[j][0]) {
                         data[j][1] = c.getInt(yIndex);
                         found = true;
                     }
                 }
-                if(!found){
+                if (!found) {
                     data[index][0] = c.getInt(xIndex);
                     data[index][1] = c.getInt(yIndex);
                     index += 1;
@@ -391,15 +424,15 @@ public class MetaCenter extends AppCompatActivity {
         xIndex = c.getColumnIndex("x");
         yIndex = c.getColumnIndex("yf");
         try {
-            for (int i = 0; i < 10; i++){
+            for (int i = 0; i < 10; i++) {
                 boolean found = false;
-                for(int j=0; j<10; j++){
-                    if(c.getInt(xIndex) == data[j][0]) {
+                for (int j = 0; j < 10; j++) {
+                    if (c.getInt(xIndex) == data[j][0]) {
                         data[j][2] = c.getInt(yIndex);
                         found = true;
                     }
                 }
-                if(!found){
+                if (!found) {
                     data[index][0] = c.getInt(xIndex);
                     data[index][2] = c.getInt(yIndex);
                     index += 1;
@@ -413,20 +446,21 @@ public class MetaCenter extends AppCompatActivity {
         Arrays.sort(data, new Comparator<int[]>() {
             @Override
             public int compare(int[] first, int[] second) {
-                if(first[0] > second[0]) return 1;
+                if (first[0] > second[0]) return 1;
                 else return -1;
             }
         });
 
-        for(int i=0;i<10;i++)
+        for (int i = 0; i < 10; i++)
             Log.i("TABLE" + tableIndex, Arrays.toString(data[i]));
 
         addRowsToTable(data, tableLayout);
+        createNewTable(tableIndex, data);
     }
 
-    private void addRowsToTable(int[][] data, TableLayout tableLayout){
+    private void addRowsToTable(int[][] data, TableLayout tableLayout) {
         for (int i = 0; i < 10; i++) {
-            if(data[i][0] != 0) {
+            if (data[i][0] != 0) {
                 TableRow row = new TableRow(MetaCenter.this);
                 for (int j = 0; j < 3; j++) {
                     int d = data[i][j];
@@ -443,7 +477,20 @@ public class MetaCenter extends AppCompatActivity {
         }
     }
 
-    public void resetObsTable(View view){
+    private void createNewTable(int tableIndex, int[][] data) {
+        observationDatabase.execSQL("CREATE TABLE IF NOT EXISTS metacenter" + tableIndex + " ( sn INT(2), x INT(3), yf INT(3), yb INT(3))");
+        int index = 1;
+        for (int i = 0; i < 10; i++) {
+            if (data[i][0] != 0) {
+                observationDatabase.execSQL("INSERT INTO metacenter" + tableIndex + " (sn, x, yf, yb) VALUES (" +
+                        String.format(Locale.US, "%d, %d, %d, %d)",
+                                index, data[i][0], data[i][1], data[i][2]));
+                index++;
+            }
+        }
+    }
+
+    public void resetObsTable(View view) {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Are you sure ?")
@@ -457,6 +504,9 @@ public class MetaCenter extends AppCompatActivity {
                         observationDatabase.execSQL("DELETE FROM metacenter1b");
                         observationDatabase.execSQL("DELETE FROM metacenter2f");
                         observationDatabase.execSQL("DELETE FROM metacenter2b");
+                        observationDatabase.execSQL("DELETE FROM metacenter0");
+                        observationDatabase.execSQL("DELETE FROM metacenter1");
+                        observationDatabase.execSQL("DELETE FROM metacenter2");
                     }
                 })
                 .setNegativeButton("No", null)

@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.ajts.androidmads.library.SQLiteToExcel;
 
+import java.io.File;
 import java.util.Locale;
 import java.util.Random;
 
@@ -137,9 +140,33 @@ public class VNotch extends AppCompatActivity {
         }
     }
 
+    public void exportAsExcel(View view){
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "VFL");
+        if(!file.exists())
+            file.mkdirs();
+        SQLiteToExcel sqLiteToExcel = new SQLiteToExcel(this, "Observation", file.getAbsolutePath());
+        sqLiteToExcel.exportSingleTable("vnotch","VNotch.xls", new SQLiteToExcel.ExportListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(VNotch.this, "Exporting...", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCompleted(String filePath) {
+                Toast.makeText(VNotch.this, "Successfully exported to /Downloads/VFL/", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(VNotch.this, "An error occurred!!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
+    }
+
     public void powerUp(View view) {
         if (!powerOn) {
 //            setupImage.setImageResource(R.drawable.v_notch_on);
+            on_anim.setProgress(0);
+            v1.setProgress(0);
             on_anim.setVisibility(View.VISIBLE);
             off_anim.setVisibility(View.INVISIBLE);
             powerOn = true;

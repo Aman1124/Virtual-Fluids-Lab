@@ -653,6 +653,7 @@
         </LinearLayout>
 
         <ScrollView
+            android:id="@+id/vNotch_obsScroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -705,6 +706,18 @@
             </TableLayout>
 
         </ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:onClick="exportAsExcel"
+            android:text="Export observation table"
+            android:textColor="#2cc0f4"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_below="@id/vNotch_obsScroll"/>
 
         <Button
             android:layout_width="wrap_content"
