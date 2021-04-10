@@ -104,7 +104,7 @@ public class ReynoldsNumber extends AppCompatActivity {
             "7. To access the readings close the simulation and press the Observation button.\n" +
             "8. Make sure to turn off the power before leaving the simulation.";
 
-    String observationNote = "For water at 20°C:\nDynamic viscosity, µ/ρ = 9.554e-06 m²/sec\n" +
+    String observationNote = "For water at 20°C:\nKinematic viscosity, µ/ρ = 9.554e-07 m²/sec\n" +
             "Diameter, D = 0.01m";
 
     public void openIntroduction(){
