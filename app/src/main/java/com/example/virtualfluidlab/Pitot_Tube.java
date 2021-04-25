@@ -492,6 +492,7 @@ public class Pitot_Tube extends AppCompatActivity {
             dataSNo -= 1; obsCount -= 1;
         }
         else if (tag == 2) {
+            power = false;
             simulation.setVisibility(View.INVISIBLE);
             openObservation();
         }
